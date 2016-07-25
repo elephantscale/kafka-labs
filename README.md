@@ -43,5 +43,5 @@ Labs
 
 3. [Kafka API]
    - [3.1 - Importing Project](labs/3.1-import-project.md)
-   - [3.2 - Running Storm Topology](labs/3.1-kafa-api.md)
+   - [3.2 - Kafka API](labs/3.2-kafka-api.md)
 

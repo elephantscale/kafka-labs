@@ -14,7 +14,7 @@ public class ClickstreamTest {
     String csv = ClickStreamGenerator.getClickstreamAsCsv();
     assertNotNull(csv);
     String [] tokens = csv.split(",");
-    assertEquals(8, tokens.length);
+    assertEquals(1, tokens.length);
   }
 
   @Test
