@@ -32,8 +32,12 @@ public class ClickstreamConsumer implements Runnable {
     int numMessages = 0;
     while (keepRunning) {
       ConsumerRecords<Integer, String> records = consumer.poll(1000);
-      // TODO-2 : iterate over 'records'  (substitute 'records' for ???)
-      for (ConsumerRecord<Integer, String> record : ???) {
+      
+      // TODO-2 : calculate how many records we have got
+      int count = 0;  // replace this with records.???  (hint : count)
+      System.out.println("Got " + count + " messages"); 
+      
+      for (ConsumerRecord<Integer, String> record : records) {
         numMessages++;
         System.out
             .println("Received message [" + numMessages + "] : " + record);

@@ -41,3 +41,7 @@ Labs
 
 2. [Kafka Utilities](labs/2-kafka-utils.md)
 
+3. [Kafka API]
+   - [3.1 - Importing Project](labs/3.1-import-project.md)
+   - [3.2 - Running Storm Topology](labs/3.1-kafa-api.md)
+

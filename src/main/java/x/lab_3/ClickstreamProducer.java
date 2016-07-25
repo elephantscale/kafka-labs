@@ -46,14 +46,15 @@ public class ClickstreamProducer implements Runnable {
       String clickstream = ClickStreamGenerator.getClickstreamAsCsv();
       //String clickstream = ClickStreamGenerator.getClickstreamAsJSON();
       
+      ProducerRecord<Integer, String> record = null;
+
       /* TODO-2 : let's construct a record
        *   ProducerRecord takes three parameters
        *   - first param : topic = this.topic
        *   - second param : key = numMessages  (our counter)
        *   - third param : value = clickstream
        */
-      ProducerRecord<Integer, String> record =
-          new ProducerRecord<>( ???,   ???,   ???);
+      //record =   new ProducerRecord<>( ???,   ???,   ???);
       t1 = System.nanoTime();
       producer.send(record);
       t2 = System.nanoTime();
@@ -93,14 +94,15 @@ public class ClickstreamProducer implements Runnable {
   // test driver
   public static void main(String[] args) throws Exception {
 
+    ClickstreamProducer producer = null;
+
     /* TODO-4 :  let's kick off the producer
      * ClickstreamProducer() takes three parameters
      * - first param : name of topic = "clickstream"
      * - second param : how many messages to send = 10 (start with 10 and increase later)
      * - third param : frequency, how often to send = 1000  (in milliseconds,  0 for no wait between sends)
      */
-    ClickstreamProducer producer =
-        new ClickstreamProducer(???,  ??? , ???);
+    // producer = new ClickstreamProducer(???,  ??? , ???);
 
     System.out.println("Producer starting.... : " + producer);
     Thread t1 = new Thread(producer);
