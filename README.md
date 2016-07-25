@@ -39,5 +39,5 @@ Labs
 
 1. [Installing Kafka](labs/1-installing-kafka.md)
 
-2. [Building topologies](labs/2-topology.md)
+2. [Kafka Utilities](labs/2-kafka-utils.md)
 
