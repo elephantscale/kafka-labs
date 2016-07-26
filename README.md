@@ -41,7 +41,9 @@ Labs
 
 2. [Kafka Utilities](labs/2-kafka-utils.md)
 
-3. [Kafka API]
+3. Kafka API
    - [3.1 - Importing Project](labs/3.1-import-project.md)
-   - [3.2 - Kafka API](labs/3.2-kafka-api.md)
+   - [3.2 - Simple Producer and Consumer](labs/3.2-kafka-api.md)
+   - [3.3 - Kafka API](labs/3.3-kafka-api.md)
 
+4. [Kafka Producer benchmarking](labs/4-producer-benchmark.md)
