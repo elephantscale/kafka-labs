@@ -47,3 +47,5 @@ Labs
    - [3.3 - Kafka API](labs/3.3-kafka-api.md)
 
 4. [Kafka Producer benchmarking](labs/4-producer-benchmark.md)
+
+5. [Seeking Within Partition](labs/5-seek.md)
