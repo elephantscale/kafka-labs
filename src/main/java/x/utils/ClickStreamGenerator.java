@@ -5,16 +5,6 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import com.google.gson.Gson;
 
-class Clickstream {
-  long timestamp;
-  String session;
-  String domain;
-  int cost;
-  String user;
-  String campaign;
-  String ip;
-  String action;
-}
 
 public class ClickStreamGenerator {
   static Random rand = new Random(100L);
