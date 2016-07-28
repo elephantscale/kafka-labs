@@ -54,7 +54,7 @@ On terminal-1  start `kafka-console-producer`
 
 On terminal-2 start `kafka-console-consumer`
 ```
-    $   ~/kafka/bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic test --from-beginning
+    $   ~/kafka/bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic test 
 ```
 
 **==> In producer terminal (1) type some data**  
@@ -68,5 +68,7 @@ Click on the image to see larger version.
 ## Step 5 : Try these
 Start consumer with `from-beginning` flag
 ```
-    $    ~/kafka/bin/kafka-console-consumer.sh --zookeeper localhost:2181 test --from-beginning
+    $    ~/kafka/bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic test --from-beginning
 ```
+
+**=> Is the consumer reading the data 'in-order' as we typed in producer terminal?  Why or why not? **  

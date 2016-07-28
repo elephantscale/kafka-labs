@@ -48,6 +48,12 @@ public class ClickstreamConsumer {
         
         // TODO-1  figure out a way to count domains
         // Hint : Use a HashMap
+        
+        /* Hint to print a hashmap use this:
+         *  System.out.println("Domain COunt is \n"
+            + Arrays.toString(map.entrySet().toArray()));
+         * 
+         */
 
       }
     }

@@ -8,6 +8,10 @@
 *.war
 *.ear
 target
+*.zip
+*.data
+*.csv
+*.json
 
 .classpath
 .project

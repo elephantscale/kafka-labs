@@ -36,7 +36,7 @@ public class ClickstreamProducer {
       
       // TODO-2 : send the clickstreamJSON data as value with DOMAIN as key
       ProducerRecord<String, String> record =
-          new ProducerRecord<>(TOPIC, "???",  "????");
+          new ProducerRecord<>(TOPIC, key,  "????");
       System.out.println("sending : " + record);
       producer.send(record);
 
