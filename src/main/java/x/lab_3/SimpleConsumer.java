@@ -24,7 +24,7 @@ public class SimpleConsumer {
     System.out.println("listening on test topic");
     while (keepRunning) {
       ConsumerRecords<Integer, String> records = consumer.poll(1000);
-      //System.out.println("Got " + records.count() + " messages");
+      System.out.println("Got " + records.count() + " messages");
       for (ConsumerRecord<Integer, String> record : records) {
         System.out.println("Received message : " + record);
       }
