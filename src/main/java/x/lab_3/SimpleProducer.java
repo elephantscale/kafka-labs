@@ -7,8 +7,11 @@ import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class SimpleProducer {
+	private static final Logger logger = LogManager.getLogger();
 
   public static void main(String[] args) throws Exception {
     Properties props = new Properties();
@@ -27,7 +30,7 @@ public class SimpleProducer {
     ProducerRecord<Integer, String> record =
         new ProducerRecord<>(topic, key, value);
     // option 1 : fire and forget
-    System.out.println("sending : " + record);
+    logger.debug("sending : " + record);
     producer.send(record);
 
     /*
@@ -47,6 +50,7 @@ public class SimpleProducer {
 }
 
 class KafkaCallback implements Callback {
+	private static final Logger logger = LogManager.getLogger();
 
   @Override
   public void onCompletion(RecordMetadata meta, Exception ex) {
@@ -54,6 +58,6 @@ class KafkaCallback implements Callback {
       ex.printStackTrace();
 
     if (meta != null) // success
-      System.out.println("send success");
+      logger.debug("send success");
   }
 }

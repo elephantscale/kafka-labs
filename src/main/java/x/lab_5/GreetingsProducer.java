@@ -1,13 +1,15 @@
 package x.lab_5;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Properties;
 
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class GreetingsProducer {
+	private static final Logger logger = LogManager.getLogger();
+	
   public static final String TOPIC = "greetings";
 
   public static void main(String[] args) throws Exception {
@@ -29,7 +31,7 @@ public class GreetingsProducer {
       String value =  "Hello world";
       ProducerRecord<Integer, String> record =
           new ProducerRecord<>(TOPIC, key, value);
-      System.out.println("sending : " + record);
+      logger.debug("sending : " + record);
       producer.send(record);
     }
     producer.close();

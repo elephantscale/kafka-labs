@@ -6,8 +6,12 @@ import java.util.Properties;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class ClickstreamConsumer implements Runnable {
+	
+	private static final Logger logger = LogManager.getLogger();
 
   private final String topic;
   private final KafkaConsumer<Integer, String> consumer;
@@ -35,19 +39,19 @@ public class ClickstreamConsumer implements Runnable {
       
       // TODO-2 : calculate how many records we have got
       int count = 0;  // replace this with records.???  (hint : count)
-      System.out.println("Got " + count + " messages"); 
+      logger.debug("Got " + count + " messages"); 
       
       for (ConsumerRecord<Integer, String> record : records) {
         numMessages++;
-        System.out
-            .println("Received message [" + numMessages + "] : " + record);
+        logger.debug("Received message [" + numMessages + "] : " + record);
 
         // System.out.println("Received message: (" + record.key() + ", " +
         // record.value() + ") at offset " + record.offset());
       }
     }
 
-    System.out.println(this + " received " + numMessages);
+    //logger.info(this + " received " + numMessages);
+    logger.info("Received " + numMessages);
 
     // TODO-3 : close consumer
     // consumer.???
@@ -71,10 +75,10 @@ public class ClickstreamConsumer implements Runnable {
     ClickstreamConsumer consumer = new ClickstreamConsumer("???");
 
     Thread t1 = new Thread(consumer);
-    System.out.println("starting consumer... : " + consumer);
+    logger.info("starting consumer... : " + consumer);
     t1.start();
     t1.join();
-    System.out.println("consumer shutdown.");
+    logger.info("consumer shutdown.");
 
   }
 

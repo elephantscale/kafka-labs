@@ -4,6 +4,8 @@ import java.util.Properties;
 
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.google.gson.Gson;
 
@@ -11,6 +13,7 @@ import x.utils.ClickStreamGenerator;
 import x.utils.Clickstream;
 
 public class ClickstreamProducer {
+	private static final Logger logger = LogManager.getLogger();
   public final static String TOPIC = "clickstream2";
 
   public static void main(String[] args) throws Exception {
@@ -37,7 +40,7 @@ public class ClickstreamProducer {
       // TODO-2 : send the clickstreamJSON data as value with DOMAIN as key
       ProducerRecord<String, String> record =
           new ProducerRecord<>(TOPIC, key,  "????");
-      System.out.println("sending : " + record);
+      logger.debug("sending : " + record);
       producer.send(record);
 
     }

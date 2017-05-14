@@ -6,8 +6,11 @@ import java.util.Properties;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class SimpleConsumer {
+	private static final Logger logger = LogManager.getLogger();
 
   public static void main(String[] args) throws Exception {
     Properties props = new Properties();
@@ -21,12 +24,12 @@ public class SimpleConsumer {
     consumer.subscribe(Arrays.asList("test")); // subscribe to topics
 
     boolean keepRunning = true;
-    System.out.println("listening on test topic");
+    logger.info("listening on test topic");
     while (keepRunning) {
       ConsumerRecords<Integer, String> records = consumer.poll(1000);
-      System.out.println("Got " + records.count() + " messages");
+      logger.debug("Got " + records.count() + " messages");
       for (ConsumerRecord<Integer, String> record : records) {
-        System.out.println("Received message : " + record);
+        logger.debug("Received message : " + record);
       }
     }
     consumer.close();

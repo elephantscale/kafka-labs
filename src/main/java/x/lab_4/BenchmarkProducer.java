@@ -7,6 +7,8 @@ import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import x.utils.ClickStreamGenerator;
 
@@ -15,6 +17,7 @@ enum SendMode {
 }
 
 public class BenchmarkProducer implements Runnable, Callback {
+	private static final Logger logger = LogManager.getLogger();
 
   private final String topic;
   private final int maxMessages;
@@ -75,7 +78,7 @@ public class BenchmarkProducer implements Runnable, Callback {
       }
       t2 = System.nanoTime();
 
-      System.out.println(
+      logger.debug(
           "sent : [" + record + "]  in " + (t2 - t1) / 10e6 + " milli secs");
       // TimeUnit.NANOSECONDS.toMillis(t2 - t1) + " ms");
 
@@ -84,7 +87,7 @@ public class BenchmarkProducer implements Runnable, Callback {
     producer.close(); // close connection
 
     // print summary
-    System.out.println(
+    logger.info(
         "== " + toString() + " done.  " + numMessages + " messages sent in "
             + (end - start) / 10e6 + " milli secs.  Throughput : "
             + numMessages * 10e9 / (end - start) + " msgs / sec");
@@ -101,11 +104,11 @@ public class BenchmarkProducer implements Runnable, Callback {
   @Override
   public void onCompletion(RecordMetadata meta, Exception ex) {
     if (ex != null) {
-      System.out.println("Callback :  Error during async send");
+      logger.error("Callback :  Error during async send");
       ex.printStackTrace();
     }
     if (meta != null) {
-      System.out.println("Callback : Success sending message " + meta);
+      logger.debug("Callback : Success sending message " + meta);
     }
 
   }
@@ -116,11 +119,11 @@ public class BenchmarkProducer implements Runnable, Callback {
     for (SendMode sendMode : SendMode.values()) {
       BenchmarkProducer producer =
           new BenchmarkProducer("clickstream", 100, sendMode);
-      System.out.println("== Producer starting.... : " + producer);
+      logger.info("== Producer starting.... : " + producer);
       Thread t1 = new Thread(producer);
       t1.start();
       t1.join(); // wait for thread to complete
-      System.out.println("== Producer done.");
+      logger.info("== Producer done.");
     }
 
   }

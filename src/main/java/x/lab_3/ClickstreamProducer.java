@@ -4,10 +4,13 @@ import java.util.Properties;
 
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import x.utils.ClickStreamGenerator;
 
 public class ClickstreamProducer implements Runnable {
+	private static final Logger logger = LogManager.getLogger();
 
   private final String topic;
   private final int maxMessages;
@@ -59,8 +62,7 @@ public class ClickstreamProducer implements Runnable {
       producer.send(record);
       t2 = System.nanoTime();
 
-      System.out.println("sent : [" + record + "]  in " + (t2 - t1) / 10e6
-          + " milli secs");
+      logger.debug("sent : [" + record + "]  in " + (t2 - t1) + " nano secs");
       // TimeUnit.NANOSECONDS.toMillis(t2 - t1) + " ms");
 
       try {
@@ -75,7 +77,7 @@ public class ClickstreamProducer implements Runnable {
     // producer.???();
 
     // print summary
-    System.out.println("\n== " + toString() + " done.  " + numMessages + " messages sent in "
+    logger.info("\n== " + toString() + " done.  " + numMessages + " messages sent in "
         + (end - start) / 10e6 + " milli secs.  Throughput : "
         + numMessages * 10e9 / (end - start) + " msgs / sec");
 
@@ -104,11 +106,11 @@ public class ClickstreamProducer implements Runnable {
      */
     // producer = new ClickstreamProducer(???,  ??? , ???);
 
-    System.out.println("Producer starting.... : " + producer);
+    logger.info("Producer starting.... : " + producer);
     Thread t1 = new Thread(producer);
     t1.start();
     t1.join(); // wait for thread to complete
-    System.out.println("Producer done.");
+    logger.info("Producer done.");
 
   }
 

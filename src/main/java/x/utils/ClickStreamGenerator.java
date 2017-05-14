@@ -3,10 +3,14 @@ package x.utils;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.google.gson.Gson;
 
 
 public class ClickStreamGenerator {
+	private static final Logger logger = LogManager.getLogger();
   static Random rand = new Random(100L);
 
   private static long START_TIME = 1451635200 * 1000L; // 2015-01-01 00:00:00 in
@@ -57,11 +61,11 @@ public class ClickStreamGenerator {
 
   public static void main(String[] args) {
     for (int i = 0; i < 10; i++) {
-      System.out.println(getClickstreamAsCsv());
+      logger.info(getClickstreamAsCsv());
     }
 
     for (int i = 0; i < 10; i++) {
-      System.out.println(getClickstreamAsJSON());
+      logger.info(getClickstreamAsJSON());
     }
   }
 

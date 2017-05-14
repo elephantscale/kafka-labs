@@ -2,18 +2,20 @@ package x.lab_6;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Properties;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.google.gson.Gson;
 
 import x.utils.Clickstream;
 
 public class ClickstreamConsumer {
+	private static final Logger logger = LogManager.getLogger();
 
   public static void main(String[] args) throws Exception {
     Properties props = new Properties();
@@ -31,9 +33,9 @@ public class ClickstreamConsumer {
     boolean keepRunning = true;
     while (keepRunning) {
       ConsumerRecords<String, String> records = consumer.poll(1000);
-      // System.out.println("Got " + records.count() + " messages");
+      logger.debug ("Got " + records.count() + " messages");
       for (ConsumerRecord<String, String> record : records) {
-        System.out.println("Received message : " + record);
+        logger.debug("Received message : " + record);
         
         // TODO-1 : extract the JSON string from record
         // Hint : record.value()
@@ -50,7 +52,7 @@ public class ClickstreamConsumer {
         // Hint : Use a HashMap
         
         /* Hint to print a hashmap use this:
-         *  System.out.println("Domain COunt is \n"
+         *  logger.info("Domain COunt is \n"
             + Arrays.toString(map.entrySet().toArray()));
          * 
          */

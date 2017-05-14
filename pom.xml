@@ -12,7 +12,7 @@
 	<properties>
 		<!-- <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding> -->
 		<java.version>1.8</java.version>
-		<kafka.version>0.10.0.0</kafka.version>
+		<kafka.version>0.10.2.1</kafka.version>
 	</properties>
 
 	<repositories>
@@ -68,18 +68,28 @@
 			<!-- http://mvnrepository.com/artifact/io.dropwizard.metrics/metrics-core -->
 			<groupId>io.dropwizard.metrics</groupId>
 			<artifactId>metrics-core</artifactId>
-			<version>3.1.2</version>
+			<version>3.2.2</version>
 		</dependency>
 		<dependency>
 			<groupId>io.dropwizard.metrics</groupId>
 			<artifactId>metrics-servlets</artifactId>
-			<version>3.1.2</version>
+			<version>3.2.2</version>
 		</dependency>
 		<dependency>
 			<groupId>io.confluent</groupId>
 			<artifactId>kafka-avro-serializer</artifactId>
 			<version>1.0</version>
 		</dependency>
+		<dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.8.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.8.2</version>
+        </dependency>
 	</dependencies>
 
 	<build>
