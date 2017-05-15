@@ -12,7 +12,8 @@ import org.apache.logging.log4j.Logger;
 
 import com.google.gson.Gson;
 
-import x.utils.Clickstream;
+import x.utils.ClickstreamData;
+import x.utils.ClickstreamProducer;
 
 public class ClickstreamConsumer {
 	private static final Logger logger = LogManager.getLogger();
@@ -43,7 +44,7 @@ public class ClickstreamConsumer {
         
         // TODO-2 : parse JSON string using GSON library
         // Hint : take a look at ClickStreamProducer around line 30
-        Clickstream clickstream = null;
+        ClickstreamData clickstream = null;
 
         // TODO-3 : extract the domain attribute
         String domain = "???";

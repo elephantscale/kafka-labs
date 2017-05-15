@@ -30,8 +30,8 @@ public class ClickStreamGenerator {
   public static String[] ACTIONS =
       new String[] { "blocked", "viewed", "clicked" };
 
-  private static Clickstream getClickStream() {
-    Clickstream clickstream = new Clickstream();
+  private static ClickstreamData getClickStream() {
+    ClickstreamData clickstream = new ClickstreamData();
     clickstream.timestamp = currentTime.addAndGet(INC);
     clickstream.user = "user_" + (rand.nextInt(MAX_USERS) + 1);
     clickstream.session = "session_" + (rand.nextInt(MAX_SESSIONS) + 1);
@@ -45,7 +45,7 @@ public class ClickStreamGenerator {
 
   public static String getClickstreamAsCsv() {
 
-    Clickstream clickstream = getClickStream();
+    ClickstreamData clickstream = getClickStream();
 
     return clickstream.timestamp + "," + clickstream.ip + "," + clickstream.user
         + "," + clickstream.action + "," + clickstream.domain + ","
@@ -54,7 +54,7 @@ public class ClickStreamGenerator {
   }
 
   public static String getClickstreamAsJSON() {
-    Clickstream clickstream = getClickStream();
+    ClickstreamData clickstream = getClickStream();
     String s = gson.toJson(clickstream);
     return s;
   }

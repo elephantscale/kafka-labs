@@ -23,7 +23,7 @@ public class ClickstreamTest {
     assertNotNull(json);
     
     Gson gson = new Gson();
-    Clickstream c = gson.fromJson(json, Clickstream.class);
+    ClickstreamData c = gson.fromJson(json, ClickstreamData.class);
     assertNotNull(c);
     assertNotNull(c.ip);
     assertNotNull(c.user);

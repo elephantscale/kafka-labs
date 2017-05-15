@@ -1,4 +1,4 @@
-package x.lab_6;
+package x.utils;
 
 import java.util.Properties;
 
@@ -8,9 +8,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.google.gson.Gson;
-
-import x.utils.ClickStreamGenerator;
-import x.utils.Clickstream;
 
 public class ClickstreamProducer {
 	private static final Logger logger = LogManager.getLogger();
@@ -31,8 +28,8 @@ public class ClickstreamProducer {
 
     for (int i = 0; i < 10; i++) {
       String clickstreamJSON = ClickStreamGenerator.getClickstreamAsJSON();
-      Clickstream clickstream =
-          gson.fromJson(clickstreamJSON, Clickstream.class);
+      ClickstreamData clickstream =
+          gson.fromJson(clickstreamJSON, ClickstreamData.class);
       
       // TODO-1 : what is the key ?
       String key = "???";

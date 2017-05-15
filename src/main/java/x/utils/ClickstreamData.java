@@ -1,6 +1,6 @@
 package x.utils;
 
-public class Clickstream {
+public class ClickstreamData {
   public long timestamp;
   public String session;
   public String domain;

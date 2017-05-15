@@ -1,5 +1,5 @@
 // thanks to : https://gist.github.com/fjavieralba/7930018
-package x.utils;
+package x.utils.archived;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
