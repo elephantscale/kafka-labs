@@ -61,11 +61,12 @@ public class ClickStreamGenerator {
 
   public static void main(String[] args) {
     for (int i = 0; i < 10; i++) {
-      logger.info(getClickstreamAsCsv());
+      System.out.println(getClickstreamAsCsv());
     }
+    System.out.println("\n\n");
 
     for (int i = 0; i < 10; i++) {
-      logger.info(getClickstreamAsJSON());
+      System.out.println(getClickstreamAsJSON());
     }
   }
 
