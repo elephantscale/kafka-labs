@@ -11,7 +11,6 @@ import com.google.gson.Gson;
 
 public class ClickstreamProducer {
 	private static final Logger logger = LogManager.getLogger();
-  public final static String TOPIC = "clickstream2";
 
   public static void main(String[] args) throws Exception {
     Properties props = new Properties();
@@ -36,7 +35,7 @@ public class ClickstreamProducer {
       
       // TODO-2 : send the clickstreamJSON data as value with DOMAIN as key
       ProducerRecord<String, String> record =
-          new ProducerRecord<>(TOPIC, key,  "????");
+          new ProducerRecord<>(MyConfig.TOPIC_CLICKSTREAM, key,  "????");
       logger.debug("sending : " + record);
       producer.send(record);
 
