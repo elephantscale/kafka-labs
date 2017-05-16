@@ -57,3 +57,7 @@ Labs
   - [7.2 - Streaming - Filter](labs/7.2-streaming-filter.md)
   - [7.3 - Streaming - Map](labs/7.3-streaming-map.md)
   - [7.4 - Streaming - GroupBy](labs/7.4-streaming-groupby.md)
+
+8. [Metrics Intro](labs/8-metrics-intro.md)
+
+9. [Kafka Metrics - traffic stats](labs/9-kafka-metrics.md)
