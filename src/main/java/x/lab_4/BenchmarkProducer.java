@@ -80,7 +80,7 @@ public class BenchmarkProducer implements Runnable, Callback {
       t2 = System.nanoTime();
 
       logger.debug(
-          "sent : [" + record + "]  in " + (t2 - t1) / 10e6 + " milli secs");
+          "sent : [" + record + "]  in " + (t2 - t1) + " nano secs");
       // TimeUnit.NANOSECONDS.toMillis(t2 - t1) + " ms");
 
     }
