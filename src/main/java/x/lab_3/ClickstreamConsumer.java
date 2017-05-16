@@ -24,7 +24,7 @@ public class ClickstreamConsumer implements Runnable {
     props.put("bootstrap.servers", "???");
     props.put("group.id", "group1");
     props.put("key.deserializer",
-        "org.apache.kafka.common.serialization.StringDeserializer");
+        "org.apache.kafka.common.serialization.IntegerDeserializer");
     props.put("value.deserializer",
         "org.apache.kafka.common.serialization.StringDeserializer");
     this.consumer = new KafkaConsumer<>(props);
