@@ -1,4 +1,4 @@
-package x.lab_6;
+package x.lab6_domain_count;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -15,7 +15,7 @@ import com.google.gson.Gson;
 import x.utils.ClickstreamData;
 import x.utils.ClickstreamProducer;
 
-public class ClickstreamConsumer {
+public class DomainCountConsumer {
 	private static final Logger logger = LogManager.getLogger();
 
   public static void main(String[] args) throws Exception {

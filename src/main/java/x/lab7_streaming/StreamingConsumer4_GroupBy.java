@@ -73,9 +73,12 @@ public class StreamingConsumer4_GroupBy {
 		//// we have to explicity state the K,V serdes in groupby, as the types are changing
 		////   -    groupByKey (Serdes.String(),   Serdes.Integer())
 		////   -    count("actionCount") : this is the storage to keep counts
+		
+		/*
 		final KTable<String, Long> actionCount = actionStream.
-									groupByKey(Serdes.String(), Serdes.Integer())
-									.count("actionCount");
+									groupByKey(??? key Serde ??? , ??? value serde ??? )
+									.count("??? storage ??? ");
+									*/
 		
 		//// TODO-2 : print out action counts with name/prefix : KTable-ACtionCount
 		// actionCount.???
