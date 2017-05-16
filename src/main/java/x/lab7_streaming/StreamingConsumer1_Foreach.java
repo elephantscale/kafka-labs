@@ -20,7 +20,7 @@ import com.codahale.metrics.Meter;
 import x.utils.MyConfig;
 import x.utils.MyMetricsRegistry;
 
-public class StreamingConsumer1_Print {
+public class StreamingConsumer1_Foreach {
 	private static final Logger logger = LogManager.getLogger();
 
 	public static void main(String[] args) {
