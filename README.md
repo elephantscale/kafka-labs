@@ -51,3 +51,9 @@ Labs
 5. [Seeking Within Partition](labs/5-seek.md)
 
 6. [Domain Count](labs/6-domain-count.md)
+
+7. Kafka Streaming
+  - [7.1 - Streaming - Intro](labs/7.1-streaming-intro.md)
+  - [7.2 - Streaming - Filter](labs/7.2-streaming-filter.md)
+  - [7.3 - Streaming - Map](labs/7.3-streaming-map.md)
+  - [7.4 - Streaming - GroupBy](labs/7.4-streaming-groupby.md)
