@@ -11,6 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import x.utils.ClickStreamGenerator;
+import x.utils.MyConfig;
 
 enum SendMode {
   SYNC, ASYNC, FIRE_AND_FORGET
@@ -118,7 +119,7 @@ public class BenchmarkProducer implements Runnable, Callback {
 
     for (SendMode sendMode : SendMode.values()) {
       BenchmarkProducer producer =
-          new BenchmarkProducer("clickstream", 10000, sendMode);
+          new BenchmarkProducer(MyConfig.TOPIC_BENCHMARK, 10000, sendMode);
       logger.info("== Producer starting.... : " + producer);
       Thread t1 = new Thread(producer);
       t1.start();

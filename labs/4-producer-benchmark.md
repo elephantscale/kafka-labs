@@ -1,6 +1,6 @@
 <link rel='stylesheet' href='../assets/css/main.css'/>
 
-[<< back to main index](../README.md) 
+[<< back to main index](../README.md)
 
 Lab 4: Producer Benchmarking
 ===========================
@@ -8,12 +8,16 @@ Lab 4: Producer Benchmarking
 ### Overview
 Understand different send methods in producer
 
-### Depends On 
+### Depends On
 lab 3
 
 ### Run time
 30 mins
 
+## Step 1 : Create a benchmark topic
+```bash
+  $  ~/kafka/bin/kafka-topics.sh  --zookeeper localhost:2181  --create --topic benchmark --replication-factor 1  --partitions 2
+```
 
 ## Step 1 : Producer
 * Inspect file : `src/main/java/x/lab_4/BenchmarkProducer.java`  
@@ -22,7 +26,7 @@ lab 3
 
 
 ## Step 2 : Run the producer
-In Eclipse, 
+In Eclipse,
 * Right click on 'src/main/java/x/lab_3/BenchmarkProducer.java'
 * Run as 'Java Application'
 
