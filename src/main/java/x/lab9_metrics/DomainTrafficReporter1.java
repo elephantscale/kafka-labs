@@ -1,7 +1,6 @@
 package x.lab9_metrics;
 
 import java.util.Properties;
-import java.util.UUID;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.Serdes;
@@ -19,15 +18,18 @@ import com.codahale.metrics.Meter;
 import x.utils.MyConfig;
 import x.utils.MyMetricsRegistry;
 
-public class TrafficReporter1 {
+public class DomainTrafficReporter1 {
 	private static final Logger logger = LogManager.getLogger();
+	
+	private static long eventsReceived = 0;
 
 	public static void main(String[] args) {
 
 		Properties config = new Properties();
 		// "bootstrap.servers" = "localhost:9092"
 		config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, MyConfig.DEFAULT_BOOTSTRAP_SERVERS);
-		config.put(StreamsConfig.APPLICATION_ID_CONFIG, "clickstream-traffic-reporter1");
+		config.put(StreamsConfig.APPLICATION_ID_CONFIG, "domain-traffic-reporter1");
+//		config.put(ConsumerConfig.GROUP_ID_CONFIG, "traffic-reporter1");
 		config.put(StreamsConfig.KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
 		config.put(StreamsConfig.VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
 		// Records should be flushed every 10 seconds. This is less than the
@@ -37,16 +39,6 @@ public class TrafficReporter1 {
 		// For illustrative purposes we disable record caches
 		config.put(StreamsConfig.CACHE_MAX_BYTES_BUFFERING_CONFIG, 0);
 
-		boolean readFromBeginning = true;
-		if (readFromBeginning) {
-			// the following will make sure I am reading from beginning all the
-			// time
-			config.put(ConsumerConfig.GROUP_ID_CONFIG, UUID.randomUUID().toString());
-			config.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
-
-		} else {
-			config.put(ConsumerConfig.GROUP_ID_CONFIG, "traffic-reporter1");
-		}
 
 		final KStreamBuilder builder = new KStreamBuilder();
 
@@ -57,14 +49,20 @@ public class TrafficReporter1 {
 		// process each record and report traffic
 		clickstream.foreach(new ForeachAction<String, String>() {
 			public void apply(String key, String value) {
-				logger.debug("key:" + key + ", value:" + value);
+				eventsReceived++;
+				logger.debug("Received event # " + eventsReceived + ", key:" + key + ", value:" + value);
 
+			
 				// since dots have special meaning in metrics, convert dots in
 				// domain names into underscore
 				// so facebook.com --> facebook_com
 				String domain2 = key.replace(".", "_");
 
-				//# TODO-1 report metrics
+				//# TODO-1 : mark 'traffic2.total'
+				// Meter meterTotalTraffic = MyMetricsRegistry.metrics.meter("???");
+				// meterTotalTraffic.???
+
+				//# TODO-2 report metrics
 				//#    - use 'MyMetricsRegistry.metrics.counter()  API to get a counter
 				//#    - for the name of the counter use  : traffic + domain2
 				//#    - call 'inc' method on counter  (counter.inc())
@@ -72,11 +70,12 @@ public class TrafficReporter1 {
 				// Counter counter = MyMetricsRegistry.metrics.???("????");
 				// counter.???
 
-				//# TODO-2 :  report metrics2
+				//# TODO-3 :  report metrics2
 				//#   - get a meter with name 'traffic2 + domain2'
 				//#   - call 'mark' method on meter
 				// Meter meter = MyMetricsRegistry.metrics.???("???");
 				// meter.???
+
 			}
 		});
 
