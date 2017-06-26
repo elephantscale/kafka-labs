@@ -17,18 +17,18 @@ public class SimpleConsumer {
     props.put("bootstrap.servers", "localhost:9092");
     props.put("group.id", "group1");
     props.put("key.deserializer",
-        "org.apache.kafka.common.serialization.IntegerDeserializer");
+        "org.apache.kafka.common.serialization.StringDeserializer");
     props.put("value.deserializer",
         "org.apache.kafka.common.serialization.StringDeserializer");
-    KafkaConsumer<Integer, String> consumer = new KafkaConsumer<>(props);
+    KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
     consumer.subscribe(Arrays.asList("test")); // subscribe to topics
 
     boolean keepRunning = true;
     logger.info("listening on test topic");
     while (keepRunning) {
-      ConsumerRecords<Integer, String> records = consumer.poll(1000);
+      ConsumerRecords<String, String> records = consumer.poll(1000);
       logger.debug("Got " + records.count() + " messages");
-      for (ConsumerRecord<Integer, String> record : records) {
+      for (ConsumerRecord<String, String> record : records) {
         logger.debug("Received message : " + record);
       }
     }

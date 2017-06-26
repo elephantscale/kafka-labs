@@ -10,6 +10,8 @@ import org.apache.kafka.common.TopicPartition;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import x.utils.MyConfig;
+
 public class JumpingConsumer {
 	private static final Logger logger = LogManager.getLogger();
 
@@ -22,12 +24,12 @@ public class JumpingConsumer {
     props.put("value.deserializer",
         "org.apache.kafka.common.serialization.StringDeserializer");
     KafkaConsumer<Integer, String> consumer = new KafkaConsumer<>(props);
-    consumer.subscribe(Collections.singletonList(GreetingsProducer.TOPIC)); // subscribe to
+    consumer.subscribe(Collections.singletonList(MyConfig.TOPIC_GREETINGS)); // subscribe to
                                                                 // topics
 
-    logger.info("listening on  topic : " + GreetingsProducer.TOPIC);
+    logger.info("listening on  topic : " + MyConfig.TOPIC_GREETINGS);
     
-    TopicPartition partition = new TopicPartition(GreetingsProducer.TOPIC, 0);
+    TopicPartition partition = new TopicPartition(MyConfig.TOPIC_GREETINGS, 0);
 
     int read = 0;
     while (read < 5) {

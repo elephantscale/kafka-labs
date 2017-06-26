@@ -14,7 +14,7 @@ public class ClickstreamConsumer implements Runnable {
 	private static final Logger logger = LogManager.getLogger();
 
   private final String topic;
-  private final KafkaConsumer<Integer, String> consumer;
+  private final KafkaConsumer<String, String> consumer;
   private boolean keepRunning = true;
 
   public ClickstreamConsumer(String topic) {
@@ -24,7 +24,7 @@ public class ClickstreamConsumer implements Runnable {
     props.put("bootstrap.servers", "???");
     props.put("group.id", "group1");
     props.put("key.deserializer",
-        "org.apache.kafka.common.serialization.IntegerDeserializer");
+        "org.apache.kafka.common.serialization.StringDeserializer");
     props.put("value.deserializer",
         "org.apache.kafka.common.serialization.StringDeserializer");
     this.consumer = new KafkaConsumer<>(props);
@@ -35,13 +35,13 @@ public class ClickstreamConsumer implements Runnable {
   public void run() {
     int numMessages = 0;
     while (keepRunning) {
-      ConsumerRecords<Integer, String> records = consumer.poll(1000);
+      ConsumerRecords<String, String> records = consumer.poll(1000);
       
       // TODO-2 : calculate how many records we have got
       int count = 0;  // replace this with records.???  (hint : count)
       logger.debug("Got " + count + " messages"); 
       
-      for (ConsumerRecord<Integer, String> record : records) {
+      for (ConsumerRecord<String, String> record : records) {
         numMessages++;
         logger.debug("Received message [" + numMessages + "] : " + record);
 

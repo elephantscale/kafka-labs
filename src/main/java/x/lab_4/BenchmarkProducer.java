@@ -25,7 +25,7 @@ public class BenchmarkProducer implements Runnable, Callback {
   private final SendMode sendMode;
   private final Properties props;
 
-  private final KafkaProducer<Integer, String> producer;
+  private final KafkaProducer<String, String> producer;
 
   // topic, how many messages to send, and send mode
   public BenchmarkProducer(String topic, int maxMessages, SendMode sendMode) {
@@ -37,7 +37,7 @@ public class BenchmarkProducer implements Runnable, Callback {
     this.props.put("bootstrap.servers", "localhost:9092");
     this.props.put("client.id", "BenchmarkProducer");
     this.props.put("key.serializer",
-        "org.apache.kafka.common.serialization.IntegerSerializer");
+        "org.apache.kafka.common.serialization.StringSerializer");
     this.props.put("value.serializer",
         "org.apache.kafka.common.serialization.StringSerializer");
     this.producer = new KafkaProducer<>(props);
@@ -53,8 +53,8 @@ public class BenchmarkProducer implements Runnable, Callback {
       numMessages++;
       String clickstream = ClickStreamGenerator.getClickstreamAsCsv();
       // String clickstream = ClickStreamGenerator.getClickstreamAsJSON();
-      ProducerRecord<Integer, String> record =
-          new ProducerRecord<>(this.topic, numMessages, clickstream);
+      ProducerRecord<String, String> record =
+          new ProducerRecord<>(this.topic, "" + numMessages, clickstream);
       t1 = System.nanoTime();
       try {
         /* TODO - send events the correct way

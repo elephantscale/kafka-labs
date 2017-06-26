@@ -18,7 +18,7 @@ public class ClickstreamProducer implements Runnable {
   private final Properties props;
   private boolean keepRunning;
 
-  private final KafkaProducer<Integer, String> producer;
+  private final KafkaProducer<String, String> producer;
 
   // topic, how many messages to send, and how often (in milliseconds)
   public ClickstreamProducer(String topic, int maxMessages, int frequency) {
@@ -32,7 +32,7 @@ public class ClickstreamProducer implements Runnable {
     this.props.put("bootstrap.servers", "???");
     this.props.put("client.id", "ClickstreamProducer");
     this.props.put("key.serializer",
-        "org.apache.kafka.common.serialization.IntegerSerializer");
+        "org.apache.kafka.common.serialization.StringSerializer");
     this.props.put("value.serializer",
         "org.apache.kafka.common.serialization.StringSerializer");
     this.producer = new KafkaProducer<>(props);
@@ -49,7 +49,7 @@ public class ClickstreamProducer implements Runnable {
       String clickstream = ClickStreamGenerator.getClickstreamAsCsv();
       //String clickstream = ClickStreamGenerator.getClickstreamAsJSON();
       
-      ProducerRecord<Integer, String> record = null;
+      ProducerRecord<String, String> record = null;
 
       /* TODO-2 : let's construct a record
        *   ProducerRecord takes three parameters

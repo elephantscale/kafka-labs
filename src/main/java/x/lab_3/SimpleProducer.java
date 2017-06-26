@@ -10,6 +10,8 @@ import org.apache.kafka.clients.producer.RecordMetadata;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import x.utils.MyConfig;
+
 public class SimpleProducer {
 	private static final Logger logger = LogManager.getLogger();
 
@@ -18,16 +20,16 @@ public class SimpleProducer {
     props.put("bootstrap.servers", "localhost:9092");
     props.put("client.id", "SimpleProducer");
     props.put("key.serializer",
-        "org.apache.kafka.common.serialization.IntegerSerializer");
+        "org.apache.kafka.common.serialization.StringSerializer");
     props.put("value.serializer",
         "org.apache.kafka.common.serialization.StringSerializer");
 
-    KafkaProducer<Integer, String> producer = new KafkaProducer<>(props);
+    KafkaProducer<String, String> producer = new KafkaProducer<>(props);
 
-    String topic = "test";
-    Integer key = new Integer(1);
+    String topic = MyConfig.TOPIC_TEST; // "test"
+    String key = new Integer(1).toString();
     String value = "Hello world";
-    ProducerRecord<Integer, String> record =
+    ProducerRecord<String, String> record =
         new ProducerRecord<>(topic, key, value);
     // option 1 : fire and forget
     logger.debug("sending : " + record);
