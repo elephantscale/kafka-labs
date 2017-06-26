@@ -82,3 +82,12 @@ Invoke `console-producer` and `console-consumer` without any arguments to find o
     $    ~/kafka/bin/kafka-console-consumer.sh
 
 ```
+
+## [Optional] Delete a topic
+Create a topic called `x`.  
+Delete it.
+
+Hint : look through the options in `kafka-topics.sh`
+```bash
+  $   ~/kafka/bin/kafka-topics.sh
+```
