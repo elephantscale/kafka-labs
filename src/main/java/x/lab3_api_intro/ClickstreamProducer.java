@@ -1,4 +1,4 @@
-package x.lab_3;
+package x.lab3_api_intro;
 
 import java.util.Properties;
 

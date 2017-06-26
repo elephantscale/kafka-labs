@@ -1,4 +1,4 @@
-package x.lab_4;
+package x.lab4_benchmark;
 
 
 import java.util.Properties;

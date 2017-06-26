@@ -1,4 +1,4 @@
-package x.lab_5;
+package x.lab5_seeking;
 
 import java.util.Properties;
 

@@ -27,7 +27,7 @@ lab 3
 
 ## Step 2 : Run the producer
 In Eclipse,
-* Right click on 'src/main/java/x/lab_3/BenchmarkProducer.java'
+* Right click on 'src/main/java/x/lab4_benchmark/BenchmarkProducer.java'
 * Run as 'Java Application'
 
 In Eclipse console, you should see output as follows:
