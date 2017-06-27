@@ -54,7 +54,7 @@ public class ClickstreamProducer implements Runnable {
       /* TODO-2 : let's construct a record
        *   ProducerRecord takes three parameters
        *   - first param : topic = this.topic
-       *   - second param : key = numMessages  (our counter)
+       *   - second param : key = "" + numMessages  (our counter)
        *   - third param : value = clickstream
        */
       //record =   new ProducerRecord<>( ???,   ???,   ???);

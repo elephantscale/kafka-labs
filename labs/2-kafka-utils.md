@@ -54,7 +54,7 @@ On terminal-1  start `kafka-console-producer`
 
 On terminal-2 start `kafka-console-consumer`
 ```
-    $   ~/kafka/bin/kafka-console-consumer.sh --bootstrap-servers localhost:9092 --topic test
+    $   ~/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test
 ```
 
 **==> In producer terminal (1) type some data**  
@@ -72,6 +72,7 @@ Start consumer with `from-beginning` flag
 ```
 
 **=> Is the consumer reading the data 'in-order' as we typed in producer terminal?  Why or why not?**  
+
 
 ## Step 6: Find out options for console-producer and console-consumer
 Invoke `console-producer` and `console-consumer` without any arguments to find out all the options.

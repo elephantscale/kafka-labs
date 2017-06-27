@@ -79,3 +79,9 @@
 .hljs-selector-class {
   color: #007700;
 }
+.lang-q,
+.lang-question {
+    color: #622569;
+    /*background-color: #F6D8CE;*/
+    font-weight: bold;
+}
