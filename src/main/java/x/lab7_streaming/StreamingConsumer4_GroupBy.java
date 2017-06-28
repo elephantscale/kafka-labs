@@ -18,6 +18,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 import x.utils.ClickstreamData;
 import x.utils.MyConfig;
@@ -58,13 +59,18 @@ public class StreamingConsumer4_GroupBy {
 		final KStream<String, Integer> actionStream = clickstream
 				.map(new KeyValueMapper<String, String, KeyValue<String, Integer>>() {
 					public KeyValue<String, Integer> apply(String key, String value) {
-						ClickstreamData clickstream = gson.fromJson(value, ClickstreamData.class);
+						try {
+							ClickstreamData clickstream = gson.fromJson(value, ClickstreamData.class);
 //						logger.debug("map() : got : " + value);
-						String action = (clickstream.action != null) && (!clickstream.action.isEmpty())
-								? clickstream.action : "unknown";
-						KeyValue<String, Integer> actionKV = new KeyValue<>(action, 1);
+							String action = (clickstream.action != null) && (!clickstream.action.isEmpty())
+									? clickstream.action : "unknown";
+							KeyValue<String, Integer> actionKV = new KeyValue<>(action, 1);
 //						logger.debug("map() : returning : " + actionKV);
-						return actionKV;
+							return actionKV;
+						} catch (Exception ex) {
+							logger.error(ex);
+							return new KeyValue<String, Integer>("unknown", 1);
+						}
 					}
 				});
 		actionStream.print("KStream-Action");

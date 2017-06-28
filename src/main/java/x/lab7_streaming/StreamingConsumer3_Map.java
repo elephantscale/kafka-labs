@@ -18,6 +18,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 import x.utils.ClickstreamData;
 import x.utils.MyConfig;
@@ -62,22 +63,27 @@ public class StreamingConsumer3_Map {
 		final KStream<String, Integer> actionStream = clickstream
 				.map(new KeyValueMapper<String, String, KeyValue<String, Integer>>() {
 					public KeyValue<String, Integer> apply(String key, String value) {
-						ClickstreamData clickstream = gson.fromJson(value, ClickstreamData.class);
-						logger.debug("map() : got : " + value);
-						
-						// TODO-1 : extract action from 'clickstream' data (clickstream.action)
-						String action = "???";
-						
-						// TODO-2 : set action to "unknown" if clickstream.action is null
-						action = "???";
-						
-						KeyValue<String, Integer> actionKV = null;
-						// TODO-3 : construct a new KeyValue as follows
-						//    key = action
-						//    value = 1
-						// KeyValue<String, Integer> actionKV = new KeyValue<>(???, ???);
-						logger.debug("map() : returning : " + actionKV);
-						return actionKV;
+						try {
+							ClickstreamData clickstream = gson.fromJson(value, ClickstreamData.class);
+							logger.debug("map() : got : " + value);
+							
+							// TODO-1 : extract action from 'clickstream' data (clickstream.action)
+							String action = "???";
+							
+							// TODO-2 : set action to "unknown" if clickstream.action is null
+							action = "???";
+							
+							KeyValue<String, Integer> actionKV = null;
+							// TODO-3 : construct a new KeyValue as follows
+							//    key = action
+							//    value = 1
+							// KeyValue<String, Integer> actionKV = new KeyValue<>(???, ???);
+							logger.debug("map() : returning : " + actionKV);
+							return actionKV;
+						} catch (Exception ex) {
+							logger.error(ex);
+							return new KeyValue<String, Integer>("unknwon", 1);
+						}
 					}
 				});
 		actionStream.print("KStream-Action");
