@@ -61,7 +61,7 @@ public class BenchmarkProducer implements Runnable, Callback {
          *  - fire and forget : producer.send(record)
          *  - sync : producer.send(record).get()  // wait for reply
          *  - async : producer.send (record, this)   // provide call back
-         * 
+         *
          */
         switch (this.sendMode) {
         case FIRE_AND_FORGET:
@@ -79,8 +79,8 @@ public class BenchmarkProducer implements Runnable, Callback {
       }
       t2 = System.nanoTime();
 
-      logger.debug(
-          "sent : [" + record + "]  in " + (t2 - t1) + " nano secs");
+      //logger.debug(
+      //    "sent : [" + record + "]  in " + (t2 - t1) + " nano secs");
       // TimeUnit.NANOSECONDS.toMillis(t2 - t1) + " ms");
 
     }
@@ -109,7 +109,7 @@ public class BenchmarkProducer implements Runnable, Callback {
       ex.printStackTrace();
     }
     if (meta != null) {
-      logger.debug("Callback : Success sending message " + meta);
+      // logger.debug("Callback : Success sending message " + meta);
     }
 
   }

@@ -13,8 +13,12 @@ Count Domain based stats of clickstream
 ### Run time
 20 mins
 
+## Step 1 : Create a 'clickstream' topic
+```bash
+    $   ~/kafka/bin/kafka-topics.sh  --zookeeper localhost:2181  --create --topic clickstream --replication-factor 1  --partitions 2
+```
 
-## Step 1 : Clickstream Producer
+## Step 2 : Clickstream Producer
 * Inspect file and make any fixes : `src/main/java/x/utils/ClickstreamProducer.java`  
 * Run the producer in Eclipse, Right click on the file and run as 'Java Application'
 * Make sure it is sending messages as follows
@@ -25,7 +29,7 @@ Count Domain based stats of clickstream
   key=facebook.com, value={"timestamp":1451635200005,"session":"session_251","domain":"facebook.com","cost":91,"user":"user_16","campaign":"campaign_5","ip":"ip_67","action":"clicked"}
   ```
 
-## Step 2 :  DomainCount Consumer
+## Step 3 :  DomainCount Consumer
 This consumer will keep an running total of domain count seen in clickstream.
 
 * Inspect file : `src/main/java/x/lab6_domain_count/DomainCountConsumer.java`  
@@ -34,7 +38,7 @@ Use reference Java API [for Consumer](https://kafka.apache.org/0100/javadoc/inde
 
 
 
-## Step 3 :Run
+## Step 4 :Run
 * Run the `lab6_domain_count.DomainCountConsumer` in Eclipse,
 * Run the `utils.ClickStreamProducer` in Eclipse,
 * Expected output

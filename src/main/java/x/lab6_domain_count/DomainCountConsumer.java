@@ -34,37 +34,41 @@ public class DomainCountConsumer {
     Map<String, Integer> domainCount = new HashMap<>();
     Gson gson = new Gson();
     boolean keepRunning = true;
-    while (keepRunning) {
-      ConsumerRecords<String, String> records = consumer.poll(1000);
-      logger.debug ("Got " + records.count() + " messages");
-      for (ConsumerRecord<String, String> record : records) {
-        logger.debug("Received message : " + record);
-        
-        // TODO-1 : extract the JSON string from record
-        // Hint : record.value()
-        String clickstreamJSON = "";
-        
-        // TODO-2 : parse JSON string using GSON library
-        // Hint : take a look at ClickStreamProducer around line 30
-        ClickstreamData clickstream = null;
+		while (keepRunning) {
+			ConsumerRecords<String, String> records = consumer.poll(1000);
+			logger.debug ("Got " + records.count() + " messages");
+			for (ConsumerRecord<String, String> record : records) {
+				try{
+					logger.debug("Received message : " + record);
 
-        // TODO-3 : extract the domain attribute
-        // get it from key : record.key()
-        // or get it from clickstream JSON object
-        String domain = "???";
-        
-        // TODO-1  figure out a way to count domains
-        // Hint : Use a HashMap
-        // int currentCount = domainCount.getOrDefault(domain, 0);
-        // update the count
-        // domainCount.put (domain, ??? + 1);
-        
-        // pretty print hashmap
-           logger.info("Domain Count is \n"
-            + Arrays.toString(domainCount.entrySet().toArray()));
-         
-      }
-    }
+					// TODO-1 : extract the JSON string from record
+					// Hint : record.value()
+					String clickstreamJSON = "";
+
+					ClickstreamData clickstream =
+					gson.fromJson(record.value(), ClickstreamData.class);
+
+					// TODO-2 : extract the domain attribute
+					// get it from key : record.key()
+					// or get it from clickstream  object
+					String domain = "???";
+
+					// TODO-3  figure out a way to count domains
+					// Hint : Use a HashMap
+					// int currentCount = domainCount.getOrDefault(domain, 0);
+					// update the count
+					// domainCount.put (domain, ??? + 1);
+
+					// pretty print hashmap
+					logger.info("Domain Count is \n"
+					+ Arrays.toString(domainCount.entrySet().toArray()));
+
+				}
+				catch (Exception ex) {
+					logger.error(ex);
+				}
+			} // end for
+		} // end while
     consumer.close();
   }
 }

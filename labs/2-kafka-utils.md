@@ -40,7 +40,7 @@ Verify:
     $   ~/kafka/bin/kafka-topics.sh --zookeeper localhost:2181 --describe --topic test
 ```
 
-## Step 3 : Inspecet Kafka Manager UI
+## Step 3 : Inspect Kafka Manager UI
 
 <img src="../assets/images/2b.png" style="border: 5px solid grey ; max-width:100%;"  />
 
@@ -68,7 +68,7 @@ Click on the image to see larger version.
 ## Step 5 : Try these
 Start consumer with `from-beginning` flag
 ```
-    $    ~/kafka/bin/kafka-console-consumer.sh --bootstrap-servers localhost:9092 --topic test --from-beginning
+    $    ~/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning
 ```
 
 **=> Is the consumer reading the data 'in-order' as we typed in producer terminal?  Why or why not?**  
