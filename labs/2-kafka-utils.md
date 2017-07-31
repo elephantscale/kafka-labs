@@ -66,7 +66,16 @@ Click on the image to see larger version.
 
 
 ## Step 5 : Try these
-Start consumer with `from-beginning` flag
+**Q==> Type the following in Producer window quickly.  Check the output on consumer.  How are they ordered?  Can you explain why?**
+```
+1
+2
+3
+4
+5
+```
+
+**==> Start consumer with `from-beginning` flag**
 ```
     $    ~/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning
 ```

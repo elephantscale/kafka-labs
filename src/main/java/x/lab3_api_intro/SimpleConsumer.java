@@ -27,6 +27,7 @@ public class SimpleConsumer {
     logger.info("listening on test topic");
     while (keepRunning) {
       ConsumerRecords<String, String> records = consumer.poll(1000);
+      if (records.count() == 0) continue;
       logger.debug("Got " + records.count() + " messages");
       for (ConsumerRecord<String, String> record : records) {
         logger.debug("Received message : " + record);
