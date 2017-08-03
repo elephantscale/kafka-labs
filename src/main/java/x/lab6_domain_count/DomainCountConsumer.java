@@ -36,6 +36,7 @@ public class DomainCountConsumer {
     boolean keepRunning = true;
 		while (keepRunning) {
 			ConsumerRecords<String, String> records = consumer.poll(1000);
+            if (record.count() == 0) continue;
 			logger.debug ("Got " + records.count() + " messages");
 			for (ConsumerRecord<String, String> record : records) {
 				try{
@@ -46,7 +47,7 @@ public class DomainCountConsumer {
 					String clickstreamJSON = "";
 
 					ClickstreamData clickstream =
-					gson.fromJson(record.value(), ClickstreamData.class);
+					gson.fromJson(clickstreamJSON, ClickstreamData.class);
 
 					// TODO-2 : extract the domain attribute
 					// get it from key : record.key()
