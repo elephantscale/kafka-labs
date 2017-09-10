@@ -12,7 +12,7 @@
 	<properties>
 		<!-- <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding> -->
 		<java.version>1.8</java.version>
-		<kafka.version>0.11.0.0</kafka.version>
+		<kafka.version>0.10.2.1</kafka.version>
 	</properties>
 
 	<repositories>
@@ -49,6 +49,17 @@
 			<classifier>test</classifier>
 			<version>${kafka.version}</version>
 			<scope>test</scope>
+			<exclusions>
+            <!--  kafka pulls in an older version of log4j-12, we are using log4j2 -->
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>log4j</groupId>
+                    <artifactId>log4j</artifactId>
+                </exclusion>
+            </exclusions>
 		</dependency>
 		<dependency>
 			<!-- https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients -->
