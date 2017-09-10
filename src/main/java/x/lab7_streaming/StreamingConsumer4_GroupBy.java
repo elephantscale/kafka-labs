@@ -14,8 +14,8 @@ import org.apache.kafka.streams.kstream.KStream;
 import org.apache.kafka.streams.kstream.KStreamBuilder;
 import org.apache.kafka.streams.kstream.KTable;
 import org.apache.kafka.streams.kstream.KeyValueMapper;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
@@ -24,7 +24,7 @@ import x.utils.ClickstreamData;
 import x.utils.MyConfig;
 
 public class StreamingConsumer4_GroupBy {
-	private static final Logger logger = LogManager.getLogger();
+	private static final Logger logger = LoggerFactory.getLogger(StreamingConsumer4_GroupBy.class);
 
 	public static void main(String[] args) {
 
@@ -68,7 +68,7 @@ public class StreamingConsumer4_GroupBy {
 //						logger.debug("map() : returning : " + actionKV);
 							return actionKV;
 						} catch (Exception ex) {
-							logger.error(ex);
+							logger.error("",ex);
 							return new KeyValue<String, Integer>("unknown", 1);
 						}
 					}

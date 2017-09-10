@@ -4,13 +4,13 @@ import java.util.Properties;
 
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import x.utils.ClickStreamGenerator;
 
 public class ClickstreamProducer implements Runnable {
-	private static final Logger logger = LogManager.getLogger();
+	private static final Logger logger = LoggerFactory.getLogger(ClickstreamProducer.class);
 
   private final String topic;
   private final int maxMessages;

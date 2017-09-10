@@ -7,8 +7,8 @@ import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import x.utils.ClickStreamGenerator;
 import x.utils.MyConfig;
@@ -18,7 +18,7 @@ enum SendMode {
 }
 
 public class BenchmarkProducer implements Runnable, Callback {
-	private static final Logger logger = LogManager.getLogger();
+	private static final Logger logger = LoggerFactory.getLogger(BenchmarkProducer.class);
 
   private final String topic;
   private final int maxMessages;

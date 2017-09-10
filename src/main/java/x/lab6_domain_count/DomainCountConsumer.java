@@ -8,8 +8,8 @@ import java.util.Properties;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.gson.Gson;
 
@@ -18,7 +18,7 @@ import x.utils.ClickstreamProducer;
 import x.utils.MyConfig;
 
 public class DomainCountConsumer {
-	private static final Logger logger = LogManager.getLogger();
+	private static final Logger logger = LoggerFactory.getLogger(DomainCountConsumer.class);
 
   public static void main(String[] args) throws Exception {
     Properties props = new Properties();
@@ -36,7 +36,7 @@ public class DomainCountConsumer {
     boolean keepRunning = true;
 		while (keepRunning) {
 			ConsumerRecords<String, String> records = consumer.poll(1000);
-            if (record.count() == 0) continue;
+      if (records.count() == 0) continue;
 			logger.debug ("Got " + records.count() + " messages");
 			for (ConsumerRecord<String, String> record : records) {
 				try{
@@ -66,7 +66,7 @@ public class DomainCountConsumer {
 
 				}
 				catch (Exception ex) {
-					logger.error(ex);
+					logger.error("", ex);
 				}
 			} // end for
 		} // end while

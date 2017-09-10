@@ -11,8 +11,8 @@ import org.apache.kafka.streams.StreamsConfig;
 import org.apache.kafka.streams.kstream.ForeachAction;
 import org.apache.kafka.streams.kstream.KStream;
 import org.apache.kafka.streams.kstream.KStreamBuilder;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.codahale.metrics.Counter;
 import com.codahale.metrics.Meter;
@@ -21,7 +21,7 @@ import x.utils.MyConfig;
 import x.utils.MyMetricsRegistry;
 
 public class StreamingConsumer1_Foreach {
-	private static final Logger logger = LogManager.getLogger();
+	private static final Logger logger = LoggerFactory.getLogger(StreamingConsumer1_Foreach.class);
 
 	public static void main(String[] args) {
 

@@ -9,8 +9,8 @@ import org.apache.kafka.streams.StreamsConfig;
 import org.apache.kafka.streams.kstream.ForeachAction;
 import org.apache.kafka.streams.kstream.KStream;
 import org.apache.kafka.streams.kstream.KStreamBuilder;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.codahale.metrics.Meter;
 
@@ -19,7 +19,7 @@ import x.utils.MyMetricsRegistry;
 import x.utils.MyUtils;
 
 public class ConsumerWithMetrics {
-	private static final Logger logger = LogManager.getLogger();
+	private static final Logger logger = LoggerFactory.getLogger(ConsumerWithMetrics.class);
 	
 	// TODO-1 : get a meter with name 'consumer.events'
 	private static final Meter meterConsumerEvents = MyMetricsRegistry.metrics.meter("???");

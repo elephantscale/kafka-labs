@@ -5,8 +5,8 @@ import java.util.Properties;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.codahale.metrics.Meter;
 import com.google.gson.Gson;
@@ -18,7 +18,7 @@ import x.utils.MyMetricsRegistry;
 import x.utils.MyUtils;
 
 public class ProducerWithMetrics {
-	private static final Logger logger = LogManager.getLogger();
+	private static final Logger logger = LoggerFactory.getLogger(ProducerWithMetrics.class);
 	
 	// TODO-1 : get a meter with name 'producer.events'
    private static final Meter meterProducerEvents = MyMetricsRegistry.metrics.meter("???");
