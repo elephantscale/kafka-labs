@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class ClickstreamConsumer implements Runnable {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(ClickstreamConsumer.class);
 
   private final String topic;
@@ -36,11 +36,12 @@ public class ClickstreamConsumer implements Runnable {
     int numMessages = 0;
     while (keepRunning) {
       ConsumerRecords<String, String> records = consumer.poll(1000);
-      
+
       // TODO-2 : calculate how many records we have got
       int count = 0;  // replace this with records.???  (hint : count)
-      logger.debug("Got " + count + " messages"); 
-      
+      if (count == 0) continue;
+      logger.debug("Got " + count + " messages");
+
       for (ConsumerRecord<String, String> record : records) {
         numMessages++;
         logger.debug("Received message [" + numMessages + "] : " + record);

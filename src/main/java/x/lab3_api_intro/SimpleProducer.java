@@ -31,35 +31,11 @@ public class SimpleProducer {
     String value = "Hello world";
     ProducerRecord<String, String> record =
         new ProducerRecord<>(topic, key, value);
-    // option 1 : fire and forget
     logger.debug("sending : " + record);
     producer.send(record);
-
-    /*
-    // option 2 : sync
-    Future<RecordMetadata> future = producer.send(record);
-    RecordMetadata recordMetaData = future.get();
-    producer.send(record).get();
-
-    // option 3 : async
-    producer.send(record, new KafkaCallback());
-    */
 
     producer.close();
 
   }
 
-}
-
-class KafkaCallback implements Callback {
-	private static final Logger logger = LoggerFactory.getLogger(KafkaCallback.class);
-
-  @Override
-  public void onCompletion(RecordMetadata meta, Exception ex) {
-    if (ex != null) // error
-      ex.printStackTrace();
-
-    if (meta != null) // success
-      logger.debug("send success");
-  }
 }

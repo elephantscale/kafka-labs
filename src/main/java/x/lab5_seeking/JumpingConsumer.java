@@ -20,7 +20,7 @@ public class JumpingConsumer {
     props.put("bootstrap.servers", "localhost:9092");
     props.put("group.id", "group1");
     props.put("key.deserializer",
-        "org.apache.kafka.common.serialization.IntegerDeserializer");
+        "org.apache.kafka.common.serialization.StringDeserializer");
     props.put("value.deserializer",
         "org.apache.kafka.common.serialization.StringDeserializer");
     KafkaConsumer<Integer, String> consumer = new KafkaConsumer<>(props);
@@ -28,7 +28,7 @@ public class JumpingConsumer {
                                                                 // topics
 
     logger.info("listening on  topic : " + MyConfig.TOPIC_GREETINGS);
-    
+
     TopicPartition partition = new TopicPartition(MyConfig.TOPIC_GREETINGS, 0);
 
     int read = 0;
@@ -41,12 +41,12 @@ public class JumpingConsumer {
         logger.debug("Received message : " + record);
         break; // only process first message
       }
-      
+
       /* TODO- go to specific offsets
        *    - read the first message
        *    - read the last message
        *    - read message at offset 5
-       *    
+       *
        *  Reference : look at various seek options available here
        *  https://kafka.apache.org/0100/javadoc/index.html?org/apache/kafka/clients/consumer/KafkaConsumer.html
        */
@@ -55,8 +55,8 @@ public class JumpingConsumer {
 
       // logger.debug ("seeking to end of partition " + partition);
       // ???
-      
-      
+
+
       // logger.debug ("seeking to position #5 of " + partition);
       // ???
 
