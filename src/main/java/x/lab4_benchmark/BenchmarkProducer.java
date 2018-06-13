@@ -119,7 +119,7 @@ public class BenchmarkProducer implements Runnable, Callback {
 
     for (SendMode sendMode : SendMode.values()) {
       BenchmarkProducer producer =
-          new BenchmarkProducer(MyConfig.TOPIC_BENCHMARK, 10000, sendMode);
+          new BenchmarkProducer(MyConfig.TOPIC_BENCHMARK, 100000, sendMode);
       logger.info("== Producer starting.... : " + producer);
       Thread t1 = new Thread(producer);
       t1.start();
