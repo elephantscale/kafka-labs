@@ -16,8 +16,8 @@ import org.slf4j.LoggerFactory;
 
 import x.utils.MyConfig;
 
-public class StreamingConsumer1_Foreach {
-	private static final Logger logger = LoggerFactory.getLogger(StreamingConsumer1_Foreach.class);
+public class StreamingConsumer2_Foreach {
+	private static final Logger logger = LoggerFactory.getLogger(StreamingConsumer2_Foreach.class);
 
 	public static void main(String[] args) {
 

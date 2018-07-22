@@ -20,18 +20,16 @@ import com.google.gson.Gson;
 import x.utils.ClickstreamData;
 import x.utils.MyConfig;
 
-public class StreamingConsumer4_GroupBy {
-	private static final Logger logger = LoggerFactory.getLogger(StreamingConsumer4_GroupBy.class);
+public class StreamingConsumer4_Map {
+	private static final Logger logger = LoggerFactory.getLogger(StreamingConsumer4_Map.class);
 
 	public static void main(String[] args) {
 
 		Properties config = new Properties();
 		// "bootstrap.servers" = "localhost:9092"
 		config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, MyConfig.DEFAULT_BOOTSTRAP_SERVERS);
-		config.put(StreamsConfig.APPLICATION_ID_CONFIG, "kafka-streaming-consumer4");
+		config.put(StreamsConfig.APPLICATION_ID_CONFIG, "kafka-streaming-consumer3");
 		config.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
-		// config.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG,
-		// Serdes.Integer().getClass().getName());
 		config.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
 		// Records should be flushed every 10 seconds. This is less than the
 		// default
@@ -42,20 +40,22 @@ public class StreamingConsumer4_GroupBy {
 
 		final StreamsBuilder builder = new StreamsBuilder();
 
-		 //# TODO-1 : construct KStream
+	   
+		//# TODO-1 : construct KStream
 	    //#     param 1 : topic name  : "clickstream"
 	    final KStream<String, String> clickstream = builder.stream("???");
 		
 		clickstream.print(Printed.toSysOut());
 
+		// we are transforming the data using a MAP operation
 		// input::
 		// key=domain,
 		// value =
 		// {"timestamp":1451635200005,"session":"session_251","domain":"facebook.com","cost":91,"user":"user_16","campaign":"campaign_5","ip":"ip_67","action":"clicked"}
 		//
-		// mapped output
+		// mapped output:
 		// key = action
-		// value = 1
+		// value = 1 (used for counting / aggregating later)
 		final Gson gson = new Gson();
 		final KStream<String, Integer> actionStream = clickstream
 				.map(new KeyValueMapper<String, String, KeyValue<String, Integer>>() {
@@ -63,48 +63,38 @@ public class StreamingConsumer4_GroupBy {
 						try {
 							ClickstreamData clickstream = gson.fromJson(value, ClickstreamData.class);
 							logger.debug("map() : got : " + value);
+							
+							//# TODO-2 : extract action from 'clickstream' data (clickstream.action)
+							String action = "???";
+							
+							//# TODO-3 : set action to "unknown" if clickstream.action is null
+							action = "???";
+							
+							//# Hint : to be fool proof the following is recommended
+							/*
 							String action = (clickstream.action != null) && (!clickstream.action.isEmpty())
 									? clickstream.action
 									: "unknown";
-							KeyValue<String, Integer> actionKV = new KeyValue<>(action, 1);
+							*/
+							
+							KeyValue<String, Integer> actionKV = null;
+							
+							//# TODO-4 : construct a new KeyValue as follows
+							//    key = action
+							//    value = 1
+							// KeyValue<String, Integer> actionKV = new KeyValue<>(???, ???);
+							
 							logger.debug("map() : returning : " + actionKV);
 							return actionKV;
 						} catch (Exception ex) {
-							// logger.error("",ex);
-							logger.error("Invalid JSON : \n" + value);
+							logger.error("", ex);
 							return new KeyValue<String, Integer>("unknown", 1);
 						}
 					}
 				});
-		actionStream.print(Printed.toSysOut());
-
-		// Now aggregate and count actions
-		// we have to explicity state the K,V serdes in groupby, as the types are
-		// changing
-
-		//# TODO-1 : aggregate
-		//#   param1 : key type :  Serdes.String()
-		//#   param2 : value type :  Serdes.Integer()
-		/*
-		KGroupedStream<String, Integer> grouped = actionStream.groupByKey(Serialized.with(
-					Serdes.String(), // key
-					Serdes.Integer()) // value
-					);
-		*/
 		
-		//# TODO-2 : count grouped stream
-		//# Hint : grouped.count()
-		/*
-		
-		final KTable<String, Long> actionCount = grouped.???();
-		actionCount.toStream().print(Printed.toSysOut());
-		*/
-
-		//# BONUS lab 1 : 
-		// lets write the data into another topic
-		/* 
-		  actionCount.to(Serdes.String(), Serdes.Long(), MyConfig.TOPIC_ACTION_COUNT);
-		 */
+		//#  TODO-5 : Print out the action stream
+		// actionStream.print(???);
 
 		// start the stream
 		final KafkaStreams streams = new KafkaStreams(builder.build(), config);

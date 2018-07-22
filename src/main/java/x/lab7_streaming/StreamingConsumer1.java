@@ -14,8 +14,8 @@ import org.slf4j.LoggerFactory;
 
 import x.utils.MyConfig;
 
-public class StreamConsumer2 {
-	private static final Logger logger = LoggerFactory.getLogger(StreamConsumer2.class);
+public class StreamingConsumer1 {
+	private static final Logger logger = LoggerFactory.getLogger(StreamingConsumer1.class);
 	
 
 	public static void main(String[] args) {

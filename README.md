@@ -55,9 +55,10 @@ Labs
 
 7. Kafka Streaming
   - [7.1 - Streaming - Intro](labs/7.1-streaming-intro.md)
-  - [7.2 - Streaming - Filter](labs/7.2-streaming-filter.md)
-  - [7.3 - Streaming - Map](labs/7.3-streaming-map.md)
-  - [7.4 - Streaming - GroupBy](labs/7.4-streaming-groupby.md)
+  - [7.2 - Streaming - Foreach](labs/7.2-streaming-foreach.md)
+  - [7.3 - Streaming - Filter](labs/7.3-streaming-filter.md)
+  - [7.4 - Streaming - Map](labs/7.4-streaming-map.md)
+  - [7.5 - Streaming - GroupBy](labs/7.5-streaming-groupby.md)
 
 8. [Metrics Intro](labs/8-metrics-intro.md)
 
