@@ -9,8 +9,8 @@ import org.slf4j.LoggerFactory;
 
 import com.google.gson.Gson;
 
-public class ClickstreamProducer {
-	private static final Logger logger = LoggerFactory.getLogger(ClickstreamProducer.class);
+public class ClickstreamProducerJSON {
+	private static final Logger logger = LoggerFactory.getLogger(ClickstreamProducerJSON.class);
 
   public static void main(String[] args) throws Exception {
     Properties props = new Properties();
