@@ -46,8 +46,8 @@ public class ClickstreamProducer implements Runnable {
     long start = System.nanoTime();
     while (this.keepRunning && (numMessages < this.maxMessages)) {
       numMessages++;
-      String clickstream = ClickStreamGenerator.getClickstreamAsCsv();
-      //String clickstream = ClickStreamGenerator.getClickstreamAsJSON();
+//      String clickstream = ClickStreamGenerator.getClickstreamAsCsv();
+      String clickstream = ClickStreamGenerator.getClickstreamAsJSON();
       
       ProducerRecord<String, String> record = null;
 
