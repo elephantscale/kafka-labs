@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 import com.google.gson.Gson;
 
 import x.utils.ClickstreamData;
-import x.utils.ClickstreamProducerJSON;
+import x.utils.ClickstreamProducer;
 import x.utils.MyConfig;
 
 public class DomainCountConsumer {

@@ -37,7 +37,7 @@ Workflow:
 * Design dashboards in Grafana to track metrics
 
 ## Bonus Lab:
-Can you instrument `src/main/java/x/utils/ClickstreamProducerJSON.java` to publish metrics?
+Can you instrument `src/main/java/x/utils/ClickStreamProducer.java` to publish metrics?
 
 
 ## Class Discussion

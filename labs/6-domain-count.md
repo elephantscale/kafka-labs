@@ -19,7 +19,7 @@ Count Domain based stats of clickstream
 ```
 
 ## Step 2 : Clickstream Producer
-* Inspect file and make any fixes : `src/main/java/x/utils/ClickstreamProducerJSON.java`  
+* Inspect file and make any fixes : `src/main/java/x/utils/ClickStreamProducer.java`  
 * Run the producer in Eclipse, Right click on the file and run as 'Java Application'
 * Make sure it is sending messages as follows
   - key : Domain
