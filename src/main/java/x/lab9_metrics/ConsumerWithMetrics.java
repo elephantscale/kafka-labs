@@ -5,10 +5,10 @@ import java.util.Properties;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.KafkaStreams;
+import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.StreamsConfig;
 import org.apache.kafka.streams.kstream.ForeachAction;
 import org.apache.kafka.streams.kstream.KStream;
-import org.apache.kafka.streams.kstream.KStreamBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,8 +32,8 @@ public class ConsumerWithMetrics {
 		config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, MyConfig.DEFAULT_BOOTSTRAP_SERVERS);
 		config.put(StreamsConfig.APPLICATION_ID_CONFIG, "clickstream-traffic-reporter1");
 		config.put(ConsumerConfig.GROUP_ID_CONFIG, "traffic-reporter1");
-		config.put(StreamsConfig.KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
-		config.put(StreamsConfig.VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
+		config.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
+		config.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
 		// Records should be flushed every 10 seconds. This is less than the
 		// default
 		// in order to keep this example interactive.
@@ -42,10 +42,9 @@ public class ConsumerWithMetrics {
 		config.put(StreamsConfig.CACHE_MAX_BYTES_BUFFERING_CONFIG, 0);
 
 
-		final KStreamBuilder builder = new KStreamBuilder();
+		final StreamsBuilder builder = new StreamsBuilder();
 
-		final KStream<String, String> clickstream = builder.stream(Serdes.String(), Serdes.String(),
-				MyConfig.TOPIC_CLICKSTREAM);
+		 final KStream<String, String> clickstream = builder.stream(MyConfig.TOPIC_CLICKSTREAM);
 		// clickstream.print();
 
 		// process each record and report traffic
@@ -62,7 +61,7 @@ public class ConsumerWithMetrics {
 		});
 
 		// start the stream
-		final KafkaStreams streams = new KafkaStreams(builder, config);
+		final KafkaStreams streams = new KafkaStreams(builder.build(), config);
 		streams.cleanUp();
 		streams.start();
 

@@ -1,12 +1,9 @@
 package x.lab3_api_intro;
 
 import java.util.Properties;
-import java.util.concurrent.Future;
 
-import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
-import org.apache.kafka.clients.producer.RecordMetadata;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

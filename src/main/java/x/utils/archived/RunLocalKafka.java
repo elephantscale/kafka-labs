@@ -8,7 +8,7 @@ public class RunLocalKafka {
   private static final int ZKPORT = 2181;
   private static final String KAFKA_HOST = "127.0.0.1";
   private static final String KAFKA_PORT = "9092";
-  private static final String TOPIC = "test";
+//  private static final String TOPIC = "test";
 
   public static void main(String[] args) throws Exception {
 

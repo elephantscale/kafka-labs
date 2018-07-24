@@ -27,6 +27,9 @@ public class Scratch {
       } catch (CommitFailedException e) {
         e.printStackTrace();
       }
+      finally {
+    	  	consumer.close();
+      }
     }
 
   }
