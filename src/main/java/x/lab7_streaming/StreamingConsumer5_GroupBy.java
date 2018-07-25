@@ -12,6 +12,7 @@ import org.apache.kafka.streams.StreamsConfig;
 import org.apache.kafka.streams.kstream.KStream;
 import org.apache.kafka.streams.kstream.KeyValueMapper;
 import org.apache.kafka.streams.kstream.Printed;
+import org.apache.kafka.streams.kstream.Produced;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -101,9 +102,10 @@ public class StreamingConsumer5_GroupBy {
 		*/
 
 		//# BONUS lab 1 : 
-		// lets write the data into another topic
+		//# lets write the data into another topic
+		//# Hint : param 1 : name of queue : "actionCount"
 		/* 
-		  actionCount.to(Serdes.String(), Serdes.Long(), MyConfig.TOPIC_ACTION_COUNT);
+		actionCount.toStream().to("???", Produced.with(Serdes.String(), Serdes.Long()));
 		 */
 
 		// start the stream

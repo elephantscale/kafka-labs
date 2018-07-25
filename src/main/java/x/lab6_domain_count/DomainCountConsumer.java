@@ -41,25 +41,25 @@ public class DomainCountConsumer {
 				try{
 					logger.debug("Received message : " + record);
 
-					// TODO-1 : extract the JSON string from record
-					// Hint : record.value()
+					//# TODO-1 : extract the JSON string from record
+					//# Hint : record.value()
 					String clickstreamJSON = "";
 
 					ClickstreamData clickstream =
 					gson.fromJson(clickstreamJSON, ClickstreamData.class);
 
-					// TODO-2 : extract the domain attribute
-					// get it from key : record.key()
-					// or get it from clickstream  object
+					//# TODO-2 : extract the domain attribute
+					//# get it from key : record.key()
+					//# or get it from clickstream  object
 					String domain = "???";
 
-					// TODO-3  figure out a way to count domains
-					// Hint : Use a HashMap
+					//# TODO-3  figure out a way to count domains
+					//# Hint : Use a HashMap
 					// int currentCount = domainCount.getOrDefault(domain, 0);
-					// update the count
+					//# update the count
 					// domainCount.put (domain, ??? + 1);
 
-					// pretty print hashmap
+					//# pretty print hashmap
 					logger.info("Domain Count is \n"
 					+ Arrays.toString(domainCount.entrySet().toArray()));
 

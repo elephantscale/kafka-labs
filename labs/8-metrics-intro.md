@@ -37,7 +37,7 @@ Instructor will explain the following files and do a demo.
     - show Console reports
     - show VisualVM (jvisualvm)
     - show Graphite UI
-    - show Grafana UI
+    - show Grafana UI (user : admin, password : our usual pw)
 
 ## Step 4: Students to run `MetricsDemo`
 * Run metrics-demo  application
