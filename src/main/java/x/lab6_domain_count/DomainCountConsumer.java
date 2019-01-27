@@ -4,10 +4,12 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+import java.time.Duration;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
+//import org.joda.time.Duration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,7 +36,7 @@ public class DomainCountConsumer {
     Gson gson = new Gson();
     boolean keepRunning = true;
 		while (keepRunning) {
-			ConsumerRecords<String, String> records = consumer.poll(1000);
+			ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(0));
       if (records.count() == 0) continue;
 			logger.debug ("Got " + records.count() + " messages");
 			for (ConsumerRecord<String, String> record : records) {

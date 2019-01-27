@@ -1,6 +1,5 @@
-package x.lab3_api_intro;
+package x.lab4_benchmark;
 
-import java.time.Duration;
 import java.util.Arrays;
 import java.util.Properties;
 
@@ -9,16 +8,17 @@ import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import java.time.Duration;
 
-public class ClickstreamConsumer implements Runnable {
+public class CompressedConsumer implements Runnable {
 
-	private static final Logger logger = LoggerFactory.getLogger(ClickstreamConsumer.class);
+	private static final Logger logger = LoggerFactory.getLogger(CompressedConsumer.class);
 
   private final String topic;
   private final KafkaConsumer<String, String> consumer;
   private boolean keepRunning = true;
 
-  public ClickstreamConsumer(String topic) {
+  public CompressedConsumer(String topic) {
     this.topic = topic;
     Properties props = new Properties();
     // TODO-1 : set servers to  "localhost:9092"
@@ -36,11 +36,12 @@ public class ClickstreamConsumer implements Runnable {
   public void run() {
     int numMessages = 0;
     while (keepRunning) {
-    	//TODO increase time milis time from 0 to desirable number
-      ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(0));
+    //pass the time with java.Time.Duration object as parameter
+      ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(1000));
 
       // TODO-2 : calculate how many records we have got
-      int count = 0;  // replace this with records.???  (hint : count)
+      // replace this with records.???  (hint : count)
+      int count = 0;  
       if (count == 0) continue;
       logger.debug("Got " + count + " messages");
 
@@ -58,7 +59,6 @@ public class ClickstreamConsumer implements Runnable {
 
     // TODO-3 : close consumer
     // consumer.???
-    consumer.close();
   }
 
   public void stop() {
@@ -76,7 +76,7 @@ public class ClickstreamConsumer implements Runnable {
      *    ClickstreamConsumer takes only one parameter
      *    name of topic to listen to.  Set it to "clickstream"
      */
-    ClickstreamConsumer consumer = new ClickstreamConsumer("???");
+    CompressedConsumer consumer = new CompressedConsumer("???");
 
     Thread t1 = new Thread(consumer);
     logger.info("starting consumer... : " + consumer);

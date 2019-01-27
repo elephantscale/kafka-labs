@@ -9,6 +9,7 @@ import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.TopicPartition;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import java.time.Duration;
 
 import x.utils.MyConfig;
 
@@ -33,7 +34,8 @@ public class JumpingConsumer {
 
     int read = 0;
     while (read < 5) {
-      ConsumerRecords<Integer, String> records = consumer.poll(1000);
+    	//TODO increase time milis time from 0 to desirable number
+      ConsumerRecords<Integer, String> records = consumer.poll(Duration.ofMillis(0));
       long position = consumer.position(partition);
       logger.debug ("position " + position);
       for (ConsumerRecord<Integer, String> record : records) {

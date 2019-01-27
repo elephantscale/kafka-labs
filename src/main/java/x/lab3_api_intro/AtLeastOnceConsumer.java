@@ -10,17 +10,22 @@ import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ClickstreamConsumer implements Runnable {
+public class AtLeastOnceConsumer implements Runnable {
 
-	private static final Logger logger = LoggerFactory.getLogger(ClickstreamConsumer.class);
+	private static final Logger logger = LoggerFactory.getLogger(AtLeastOnceConsumer.class);
 
   private final String topic;
   private final KafkaConsumer<String, String> consumer;
   private boolean keepRunning = true;
 
-  public ClickstreamConsumer(String topic) {
+  public AtLeastOnceConsumer(String topic) {
     this.topic = topic;
     Properties props = new Properties();
+    /*
+     * To implement AtLeast Once processing, we need to turn off auto-commit
+     * and manually commit the offsets
+     */
+
     // TODO-1 : set servers to  "localhost:9092"
     props.put("bootstrap.servers", "???");
     props.put("group.id", "group1");
@@ -28,6 +33,9 @@ public class ClickstreamConsumer implements Runnable {
         "org.apache.kafka.common.serialization.StringDeserializer");
     props.put("value.deserializer",
         "org.apache.kafka.common.serialization.StringDeserializer");
+
+    // TODO-2: Set enable.auto.commit to false
+      // props.put(?);
     this.consumer = new KafkaConsumer<>(props);
     this.consumer.subscribe(Arrays.asList(this.topic));
   }
@@ -36,29 +44,28 @@ public class ClickstreamConsumer implements Runnable {
   public void run() {
     int numMessages = 0;
     while (keepRunning) {
-    	//TODO increase time milis time from 0 to desirable number
+
+      // TODO-3 : set poll interval to a suitable value - NOT 0
       ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(0));
 
-      // TODO-2 : calculate how many records we have got
-      int count = 0;  // replace this with records.???  (hint : count)
+      // TODO-4 : find how many records we have got
+      int count = 0 ;  // replace this with records.???
       if (count == 0) continue;
       logger.debug("Got " + count + " messages");
 
       for (ConsumerRecord<String, String> record : records) {
         numMessages++;
-        logger.debug("Received message [" + numMessages + "] : " + record);
-
-        // System.out.println("Received message: (" + record.key() + ", " +
-        // record.value() + ") at offset " + record.offset());
+        logger.debug("Received message [" + numMessages + "] : " + record);        
       }
+      // TODO-4: call consumer.commitSync() to manually commit the offset
+
     }
 
     //logger.info(this + " received " + numMessages);
     logger.info("Received " + numMessages);
 
-    // TODO-3 : close consumer
+    // TODO-5 : close consumer
     // consumer.???
-    consumer.close();
   }
 
   public void stop() {
@@ -68,15 +75,15 @@ public class ClickstreamConsumer implements Runnable {
 
   @Override
   public String toString() {
-    return "ClickstreamConsumer (topic=" + this.topic + ")";
+    return "AtLeastOnceConsumer (topic=" + this.topic + ")";
   }
 
   public static void main(String[] args) throws Exception {
-    /* TODO-4 : create a consumer
-     *    ClickstreamConsumer takes only one parameter
+    /* TODO-5 : create a consumer
+     *    AtleastonceConsumer takes only one parameter
      *    name of topic to listen to.  Set it to "clickstream"
      */
-    ClickstreamConsumer consumer = new ClickstreamConsumer("???");
+    AtLeastOnceConsumer consumer = new AtLeastOnceConsumer("???");
 
     Thread t1 = new Thread(consumer);
     logger.info("starting consumer... : " + consumer);

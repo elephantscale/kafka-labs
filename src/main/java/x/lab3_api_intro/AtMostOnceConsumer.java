@@ -10,24 +10,32 @@ import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ClickstreamConsumer implements Runnable {
+public class AtMostOnceConsumer implements Runnable {
 
-	private static final Logger logger = LoggerFactory.getLogger(ClickstreamConsumer.class);
+	private static final Logger logger = LoggerFactory.getLogger(AtMostOnceConsumer.class);
 
   private final String topic;
   private final KafkaConsumer<String, String> consumer;
   private boolean keepRunning = true;
 
-  public ClickstreamConsumer(String topic) {
+  public AtMostOnceConsumer(String topic) {
     this.topic = topic;
     Properties props = new Properties();
+    /*
+     * To implement At Most Once processing, we need to set auto-commit to a small value
+     */
     // TODO-1 : set servers to  "localhost:9092"
+
     props.put("bootstrap.servers", "???");
     props.put("group.id", "group1");
     props.put("key.deserializer",
         "org.apache.kafka.common.serialization.StringDeserializer");
     props.put("value.deserializer",
         "org.apache.kafka.common.serialization.StringDeserializer");
+
+    // TODO-2 : Set �enable.auto.commit� to true
+    // TODO-2a : Set �auto.commit.interval.ms� to a lower timeframe.
+
     this.consumer = new KafkaConsumer<>(props);
     this.consumer.subscribe(Arrays.asList(this.topic));
   }
@@ -36,11 +44,12 @@ public class ClickstreamConsumer implements Runnable {
   public void run() {
     int numMessages = 0;
     while (keepRunning) {
-    	//TODO increase time milis time from 0 to desirable number
+    	//TODO-3 : increase time milis time from 0 to desirable number
       ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(0));
-
-      // TODO-2 : calculate how many records we have got
-      int count = 0;  // replace this with records.???  (hint : count)
+   // TODO-2 : 
+   // calculate how many records we have got
+   // replace this with records.???  (hint : count) 
+      int count = 0;  
       if (count == 0) continue;
       logger.debug("Got " + count + " messages");
 
@@ -56,9 +65,8 @@ public class ClickstreamConsumer implements Runnable {
     //logger.info(this + " received " + numMessages);
     logger.info("Received " + numMessages);
 
-    // TODO-3 : close consumer
+    // TODO-4 : close consumer
     // consumer.???
-    consumer.close();
   }
 
   public void stop() {
@@ -72,11 +80,11 @@ public class ClickstreamConsumer implements Runnable {
   }
 
   public static void main(String[] args) throws Exception {
-    /* TODO-4 : create a consumer
-     *    ClickstreamConsumer takes only one parameter
+    /* TODO-5 : create a consumer
+     *    AtmostonceConsumer takes only one parameter
      *    name of topic to listen to.  Set it to "clickstream"
      */
-    ClickstreamConsumer consumer = new ClickstreamConsumer("???");
+    AtMostOnceConsumer consumer = new AtMostOnceConsumer("???");
 
     Thread t1 = new Thread(consumer);
     logger.info("starting consumer... : " + consumer);

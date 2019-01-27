@@ -2,6 +2,7 @@ package x.lab3_api_intro;
 
 import java.util.Arrays;
 import java.util.Properties;
+import java.time.Duration;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
@@ -14,6 +15,7 @@ public class SimpleConsumer {
 
   public static void main(String[] args) throws Exception {
     Properties props = new Properties();
+    Duration MillisDuration = Duration.ofMillis(1000);
     props.put("bootstrap.servers", "localhost:9092");
     props.put("group.id", "group1");
     props.put("key.deserializer",
@@ -26,7 +28,7 @@ public class SimpleConsumer {
     boolean keepRunning = true;
     logger.info("listening on test topic");
     while (keepRunning) {
-      ConsumerRecords<String, String> records = consumer.poll(1000);
+      ConsumerRecords<String, String> records = consumer.poll(MillisDuration);
       if (records.count() == 0) continue;
       logger.debug("Got " + records.count() + " messages");
       for (ConsumerRecord<String, String> record : records) {

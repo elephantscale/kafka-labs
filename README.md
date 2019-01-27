@@ -35,31 +35,54 @@ We recommend using a 'programmer's editor' to view these files. These editors ha
 
 * For Linux : [Sublime](http://www.sublimetext.com/), GEdit, Vim
 ----
-Labs
-----
 
-1. [Installing Kafka](labs/1-installing-kafka.md)
+# Labs
 
-2. [Kafka Utilities](labs/2-kafka-utils.md)
+### 1 - Install
+[1 - Installing Kafka](labs/1-installing-kafka.md)
 
-3. Kafka API
-   - [3.1 - Importing Project](labs/3.1-import-project.md)
-   - [3.2 - Simple Producer and Consumer](labs/3.2-kafka-api.md)
-   - [3.3 - Kafka API](labs/3.3-kafka-api.md)
+### 2 - Kafka Utils
+[2 - Kafka Utilities](labs/2-kafka-utils.md)
 
-4. [Kafka Producer benchmarking](labs/4-producer-benchmark.md)
+### 3 - Kafka API
+- [3.1 - Importing Project](labs/3.1-import-project.md)
+- [3.2 - Simple Producer and Consumer](labs/3.2-kafka-api.md)
+- [3.3 - Kafka API](labs/3.3-kafka-api.md)
+- [3.4 - Atleast-Once API](labs/3.4-atleastApi.md)
+- [3.4 - Atmost-Once API](labs/3.5-atmostApi.md)
 
-5. [Seeking Within Partition](labs/5-seek.md)
+### 4. Kafka Producer benchmarking
+- [4.1 - Kafka Producer benchmarking](labs/4.1-producer-benchmark.md)
+- [4.2 - Kafka Producer  compression benchmarking](labs/4.2-producer-compress.md)
 
-6. [Domain Count](labs/6-domain-count.md)
+### 5 - Seeking
+[5 - Seeking Within Partition](labs/5-seek.md)
 
-7. Kafka Streaming
-  - [7.1 - Streaming - Intro](labs/7.1-streaming-intro.md)
-  - [7.2 - Streaming - Foreach](labs/7.2-streaming-foreach.md)
-  - [7.3 - Streaming - Filter](labs/7.3-streaming-filter.md)
-  - [7.4 - Streaming - Map](labs/7.4-streaming-map.md)
-  - [7.5 - Streaming - GroupBy](labs/7.5-streaming-groupby.md)
+### 6 - Workshop 1 - Domain Count
+[6 - Domain Count](labs/6-domain-count.md)
 
-8. [Metrics Intro](labs/8-metrics-intro.md)
+### 7 - Kafka Streams
+- [7.1 - Streams - Intro](labs/7.1-streaming-intro.md)
+- [7.2 - Streams - Foreach](labs/7.2-streaming-foreach.md)
+- [7.3 - Streams - Filter](labs/7.3-streaming-filter.md)
+- [7.4 - Streams - Map](labs/7.4-streaming-map.md)
+- [7.5 - Streams - GroupBy](labs/7.5-streaming-groupby.md)
+- [7.6 - Streams - Window](labs/7.6-streaming-window.md)
 
-9. [Kafka Metrics - traffic stats](labs/9-kafka-metrics.md)
+### 8 - Confluent Platform
+- [8.1 - Install Confluent](labs/8.1-install-confluent.md)
+- [8.2 - Schema with Avro](labs/8.2-avro-schema.md)
+- [8.3 - KSQL](labs/8.3-ksql-intro.md)
+
+### 9 -  Metrics
+- [9.1 - Metrics Intro](labs/9.1-metrics-intro.md)
+- [9.2 - Kafka Metrics - traffic stats](labs/9.2-kafka-metrics.md)
+
+### 10 - Kafka Connect
+- [10 - Kafka Connect](labs/10-kafka-connect.md)
+
+### 11 - Workshop 2  - Design Exercise (Group Exercise)
+Instructor will provide details
+
+### 12 - Workshop 3 - Implementation Exercise (Group Exercise)
+Instructor will provide details

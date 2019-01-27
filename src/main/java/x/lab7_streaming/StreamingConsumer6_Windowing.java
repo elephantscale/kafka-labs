@@ -16,16 +16,24 @@ import org.apache.kafka.streams.kstream.KTable;
 import org.apache.kafka.streams.kstream.KeyValueMapper;
 import org.apache.kafka.streams.kstream.Printed;
 import org.apache.kafka.streams.kstream.Produced;
+
+import org.apache.kafka.streams.kstream.TimeWindowedKStream;
+import org.apache.kafka.streams.kstream.TimeWindows;
+import org.apache.kafka.streams.kstream.Windowed;
+import org.apache.kafka.streams.kstream.internals.TimeWindow;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.apache.kafka.streams.kstream.TimeWindows;
+
 
 import com.google.gson.Gson;
+import java.time.Duration;
 
 import x.utils.ClickstreamData;
 import x.utils.MyConfig;
 
-public class StreamingConsumer5_GroupBy {
-	private static final Logger logger = LoggerFactory.getLogger(StreamingConsumer5_GroupBy.class);
+public class StreamingConsumer6_Windowing {
+	private static final Logger logger = LoggerFactory.getLogger(StreamingConsumer6_Windowing.class);
 
 	public static void main(String[] args) {
 
@@ -46,9 +54,9 @@ public class StreamingConsumer5_GroupBy {
 
 		final StreamsBuilder builder = new StreamsBuilder();
 
-		 //# TODO-1 : construct KStream
-	    //#     param 1 : topic name  : "clickstream"
-	    final KStream<String, String> clickstream = builder.stream("???");
+		 //  construct KStream
+	    //  param 1 : topic name  : "clickstream"
+	    final KStream<String, String> clickstream = builder.stream("clickstream");
 		
 		clickstream.print(Printed.toSysOut());
 
@@ -87,27 +95,26 @@ public class StreamingConsumer5_GroupBy {
 		// changing
 
 		//# TODO-1 : aggregate
+		
 		//#   param1 : key type :  Serdes.String()
 		//#   param2 : value type :  Serdes.Integer()
-		//groupByKey accepts grouped object with String serd as key and Integer serde as value
-		/*
-		KGroupedStream<String, Integer> grouped = actionStream.groupByKey(Grouped.with(Serdes.String(), Serdes.Integer()));
-		*/
 		
-		//# TODO-2 : count grouped stream
-		//# Hint : grouped.count()
+		KGroupedStream<String, Integer> grouped = actionStream.groupByKey(
+				Grouped.with(Serdes.String(), Serdes.Integer()));
+
+		//TODO - 2
+		//fix the windows interval and create the window frame TimeWindows.of(Duration.ofMinutes(1))
+
+		//TimeWindowedKStream<String,Integer> windowedStream = grouped.windowedBy(??));
+
+		
+		//# TODO-3 : count windowed stream
+		//# Hint : windowedstream.count()
 		
 		/*
-		final KTable<String, Long> actionCount = grouped.count();
+		final KTable<Windowed<String>, Long> actionCount = windowedStream.???();
 		actionCount.toStream().print(Printed.toSysOut());
 		*/
-
-		//# BONUS lab 1 : 
-		//# lets write the data into another topic
-		//# Hint : param 1 : name of queue : "actionCount"
-		/*
-		actionCount.toStream().to("???", Produced.with(Serdes.String(), Serdes.Long()));
-		 */
 
 		// start the stream
 		final KafkaStreams streams = new KafkaStreams(builder.build(), config);
