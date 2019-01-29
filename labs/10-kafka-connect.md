@@ -18,15 +18,16 @@ Write data from a local file to a Kafka topic
 
 ## Step 2: Creating a Topic to Write to
 
-In this lab we create the my-connect-test topic.
-
-    $KAFKA_HOME/bin/kafka-topics.sh \
+In this lab we create the my-connect-test topic. Make sure KAFKA_HOME is set.
+````bash
+$ export KAFKA_HOME=$HOME/kafka
+$ $KAFKA_HOME/bin/kafka-topics.sh \
       --create \
       --zookeeper localhost:2181 \
       --replication-factor 1 \
       --partitions 1 \
       --topic my-connect-test
-
+````
 ## Step 3: Creating a Source Config File
 
 Since we are reading the contents of a local file and writing to Kafka, this file is considered our “source”. Therefore we will use the FileSource connector. We must create a configuration file to use with this connector. For this most part you can copy the example available in $KAFKA_HOME/config/connect-file-source.properties. Below is an example of our my-file-source.properties file
@@ -64,18 +65,22 @@ You can find a sample config file for standalone workers in $KAFKA_HOME/config/c
     
 The main change in this example in comparison to the default is the key.converter and value.converter settings. Since our file contains simple text, we use the StringConverter types.
 
-## Step 5: Running Kafka Connect
-
-	
-    $KAFKA_HOME/bin/connect-standalone.sh my-standalone.properties my-file-source.properties
-    
-Our input file /tmp/my-test.txt will be read in a single process to the Kafka my-connect-test topic. Here is a look at the file contents:
+## Step 5: Create the input source file
+Create a file /tmp/my-test.txt and add in several lines of text. Here is an example:
 
     this is line 1
     this is line 2
     this is line 3
 
-## Step 6: Reading from the Kafka Topic
+
+## Step 6: Running Kafka Connect
+````bash
+$  $KAFKA_HOME/bin/connect-standalone.sh $KAFKA_HOME/config/my-standalone.properties $KAFKA_HOME/config/my-file-source.properties
+````
+
+Our input file /tmp/my-test.txt will be read in a single process to the Kafka my-connect-test topic. 
+
+## Step 7: Reading from the Kafka Topic
 
 If we read from the Kafka topic that we created earlier, we should see the 3 lines in the source file that were written to Kafka:
 
