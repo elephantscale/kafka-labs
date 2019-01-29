@@ -239,7 +239,7 @@
                             <goal>schema</goal>
                         </goals>
                         <configuration>
-                            <sourceDirectory>${project.basedir}/src/main/resources/x/lab8-avro</sourceDirectory>
+                            <sourceDirectory>${project.basedir}/src/main/resources/x/lab8_avro</sourceDirectory>
                             <includes>
                                 <include>Clickinfo.avsc</include>
                             </includes>
