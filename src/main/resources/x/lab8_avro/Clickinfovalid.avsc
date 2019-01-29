@@ -1,4 +1,4 @@
-{"namespace": "x.lab8Avro",
+{"namespace": "x.lab8_avro",
  "type": "record",
  "name": "Clickinfo",
  "fields": [
