@@ -49,7 +49,7 @@ We recommend using a 'programmer's editor' to view these files. These editors ha
 - [3.2 - Simple Producer and Consumer](labs/3.2-kafka-api.md)
 - [3.3 - Kafka API](labs/3.3-kafka-api.md)
 - [3.4 - Atleast-Once API](labs/3.4-atleastApi.md)
-- [3.4 - Atmost-Once API](labs/3.5-atmostApi.md)
+- [3.5 - Atmost-Once API](labs/3.5-atmostApi.md)
 
 ### 4. Kafka Producer benchmarking
 - [4.1 - Kafka Producer benchmarking](labs/4.1-producer-benchmark.md)
