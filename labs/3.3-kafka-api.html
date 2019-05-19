@@ -1,0 +1,68 @@
+<p><link rel='stylesheet' href='../assets/css/main.css'/></p>
+<p><a href="../README.html">&lt;&lt; back to main index</a></p>
+<h1 id="lab-3.3-working-with-kafka-api">Lab 3.3 : Working With Kafka API</h1>
+<h3 id="overview">Overview</h3>
+<p>Use Producer / Consumer API</p>
+<h3 id="depends-on">Depends On</h3>
+<p>None</p>
+<h3 id="run-time">Run time</h3>
+<p>40 mins</p>
+<h2 id="step-1-create-a-clickstream-topic">Step 1 : Create a ‘clickstream’ topic</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" data-line-number="1">    $   <span class="ex">~/kafka/bin/kafka-topics.sh</span>  --zookeeper localhost:2181  --create --topic clickstream --replication-factor 1  --partitions 2</a></code></pre></div>
+<h2 id="step-2-open-a-console-consumer">Step 2 : Open a console consumer</h2>
+<p>In a terminal</p>
+<pre><code>    $  ~/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic clickstream</code></pre>
+<h2 id="step-3-producer">Step 3 : Producer</h2>
+<ul>
+<li>Inspect file : <code>src/main/java/x/lab3_api_intro/ClickstreamProducer.java</code><br />
+</li>
+<li>Fix all TODO items, using Eclipse (or any other editor).</li>
+</ul>
+<h2 id="step-4-run-the-producer">Step 4 : Run the producer</h2>
+<p>In Eclipse, * Right click on ‘src/main/java/x/lab3_api_intro/ClickstreamProducer.java’ * Run as ‘Java Application’</p>
+<p>In Eclipse console, you should see output as follows:</p>
+<pre class="console"><code>Producer starting.... : ClickstreamProducer (topic=clickstream, maxMessages=10, freq=1000 ms)
+
+sending : ProducerRecord(topic=clickstream, partition=null, headers=RecordHeaders(headers = [], isReadOnly = false), key=facebook.com, value={&quot;timestamp&quot;:1451635200005,&quot;session&quot;:&quot;session_251&quot;,&quot;domain&quot;:&quot;facebook.com&quot;,&quot;cost&quot;:91,&quot;user&quot;:&quot;user_16&quot;,&quot;campaign&quot;:&quot;campaign_5&quot;,&quot;ip&quot;:&quot;ip_67&quot;,&quot;action&quot;:&quot;clicked&quot;}, timestamp=null)
+
+
+sending : ProducerRecord(topic=clickstream, partition=null, headers=RecordHeaders(headers = [], isReadOnly = false), key=foxnews.com, value={&quot;timestamp&quot;:1451635200010,&quot;session&quot;:&quot;session_224&quot;,&quot;domain&quot;:&quot;foxnews.com&quot;,&quot;cost&quot;:17,&quot;user&quot;:&quot;user_89&quot;,&quot;campaign&quot;:&quot;campaign_4&quot;,&quot;ip&quot;:&quot;ip_57&quot;,&quot;action&quot;:&quot;viewed&quot;}, timestamp=null)</code></pre>
+<h2 id="step-5-monitor-kafka-console-consumer">Step 5 : Monitor Kafka console consumer</h2>
+<p>The messages should show up in Kafka console terminal !<br />
+Yay !!</p>
+<h2 id="step-6-consumer">Step 6 : Consumer</h2>
+<ul>
+<li>Edit file <code>src/main/java/x/lab3_api_intro/ClickstreamConsumer.java</code><br />
+</li>
+<li>Fix all TODO items, using Eclipse (or any other editor).</li>
+</ul>
+<h2 id="step-7-run-consumer-and-producer-from-eclipse">Step 7 : Run Consumer and Producer from Eclipse</h2>
+<ul>
+<li>Right click on <code>src/main/java/x/lab3_api_intro/ClickstreamConsumer.java</code></li>
+<li>Run as ‘Java Application’</li>
+<li>Right click on ‘src/main/java/x/lab3_api_intro/ClickstreamProducer.java’</li>
+<li>Run as ‘Java Application’</li>
+</ul>
+<p><strong>=&gt; In Eclipse, monitor output from two of these programs</strong><br />
+Hint : you may need to switch to Debug view</p>
+<p><strong>=&gt; Also what is happening in Kafka console consumer?</strong></p>
+<h2 id="step-8-run-multiple-consumers">Step 8 : Run multiple consumers</h2>
+<ul>
+<li>Run <code>src/main/java/x/lab3_api_intro/ClickstreamConsumer.java</code></li>
+<li>Again run <code>src/main/java/x/lab3_api_intro/ClickstreamConsumer.java</code></li>
+<li>Verify two consumer apps are running in Eclipse</li>
+<li>Run ‘src/main/java/x/lab3_api_intro/ClickstreamProducer.java’</li>
+<li>Verify the messages are split between two consumers</li>
+</ul>
+<p><strong>Run three consumers and see which ones are getting data. Can you explain the behavior?</strong></p>
+<h2 id="step-9-run-the-code-in-terminal">Step 9 : Run the code in terminal</h2>
+<p>So far we have been using Eclipse. Let’s try to compile and run the code with maven.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" data-line-number="1">    $   <span class="bu">cd</span>   ~/kafka-labs</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">    $   <span class="ex">mvn</span>  clean package  -DskipTests</a></code></pre></div>
+<p>This will build our project and create a jar file @ <code>target/kafka-labs-1.0.jar</code></p>
+<p>Try this to start the consumer</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb5-1" data-line-number="1">    $   <span class="ex">mvn</span> exec:java  -Dexec.mainClass=x.lab3_api_intro.ClickstreamConsumer</a></code></pre></div>
+<p>Open another terminal and start the producer</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb6-1" data-line-number="1">    $  <span class="ex">mvn</span> exec:java  -Dexec.mainClass=x.lab3_api_intro.ClickstreamProducer</a></code></pre></div>
+<p>Watch the consoles of both producer and consumer</p>

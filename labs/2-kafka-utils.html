@@ -1,0 +1,51 @@
+<p><link rel='stylesheet' href='../assets/css/main.css'/></p>
+<p><a href="../README.html">&lt;&lt; back to main index</a></p>
+<h1 id="lab-2-kafka-command-line-utilities">Lab 2 : Kafka Command Line Utilities</h1>
+<h3 id="overview">Overview</h3>
+<p>Use Kafka Command line utils</p>
+<h3 id="depends-on">Depends On</h3>
+<p>None</p>
+<h3 id="run-time">Run time</h3>
+<p>10 mins</p>
+<h2 id="step-1-open-two-terminals-to-your-kafka-node">Step 1 : Open two terminals to your Kafka node</h2>
+<p><img src="../assets/images/2a.png" style="border: 5px solid grey ; max-width:100%;"  /></p>
+<h2 id="step-2-create-topics">Step 2 : Create Topics</h2>
+<p>Inspect current topics</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" data-line-number="1">    $   <span class="ex">~/kafka/bin/kafka-topics.sh</span> --zookeeper localhost:2181 --list</a></code></pre></div>
+<p>Let’s create a <code>test</code> topic</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" data-line-number="1">    $   <span class="ex">~/kafka/bin/kafka-topics.sh</span>  --zookeeper localhost:2181  --create --topic test --replication-factor 1  --partitions 2</a></code></pre></div>
+<p>Verify:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" data-line-number="1">    $   <span class="ex">~/kafka/bin/kafka-topics.sh</span> --zookeeper localhost:2181 --list</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">    $   <span class="ex">~/kafka/bin/kafka-topics.sh</span> --zookeeper localhost:2181 --describe --topic test</a></code></pre></div>
+<h2 id="step-3-inspect-kafka-manager-ui">Step 3 : Inspect Kafka Manager UI</h2>
+<p><img src="../assets/images/2b.png" style="border: 5px solid grey ; max-width:100%;"  /></p>
+<h2 id="step-4-lets-send-some-messages">Step 4 : Let’s send some messages</h2>
+<p>On terminal-1 start <code>kafka-console-producer</code></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" data-line-number="1">    $    <span class="ex">~/kafka/bin/kafka-console-producer.sh</span> --broker-list localhost:9092 --topic test</a></code></pre></div>
+<p>On terminal-2 start <code>kafka-console-consumer</code></p>
+<pre><code>    $   ~/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test</code></pre>
+<p><strong>==&gt; In producer terminal (1) type some data</strong></p>
+<p><strong>==&gt; Watch the output on consumer terminal (2)</strong></p>
+<p>Click on the image to see larger version. <a href="../assets/images/2c.png"><img src="../assets/images/2c.png" style="border: 5px solid grey ; max-width:100%;"  /></a></p>
+<h2 id="step-5-try-these">Step 5 : Try these</h2>
+<p><strong>Q==&gt; Type the following in Producer window quickly. Check the output on consumer. How are they ordered? Can you explain why?</strong></p>
+<pre><code>1
+2
+3
+4
+5</code></pre>
+<p><strong>==&gt; Start consumer with <code>from-beginning</code> flag</strong></p>
+<pre><code>    $    ~/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning</code></pre>
+<p><strong>=&gt; Is the consumer reading the data ‘in-order’ as we typed in producer terminal? Why or why not?</strong></p>
+<h2 id="step-6-find-out-options-for-console-producer-and-console-consumer">Step 6: Find out options for console-producer and console-consumer</h2>
+<p>Invoke <code>console-producer</code> and <code>console-consumer</code> without any arguments to find out all the options.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb8-1" data-line-number="1">    $    <span class="ex">~/kafka/bin/kafka-console-producer.sh</span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">    $    <span class="ex">~/kafka/bin/kafka-console-consumer.sh</span></a></code></pre></div>
+<h2 id="optional-delete-a-topic">[Optional] Delete a topic</h2>
+<p>Create a topic called <code>x</code>.<br />
+Delete it.</p>
+<p>Hint : look through the options in <code>kafka-topics.sh</code></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb9-1" data-line-number="1">  $   <span class="ex">~/kafka/bin/kafka-topics.sh</span></a></code></pre></div>

@@ -1,0 +1,32 @@
+<p><link rel='stylesheet' href='../assets/css/main.css'/></p>
+<p><a href="../README.html">&lt;&lt; back to main index</a></p>
+<h1 id="lab-7.1-kafka-streaming---intro">Lab 7.1: Kafka Streaming - intro</h1>
+<h3 id="overview">Overview</h3>
+<p>Setup a Kafka streaming application</p>
+<h3 id="depends-on">Depends On</h3>
+<h3 id="run-time">Run time</h3>
+<p>20 mins</p>
+<h2 id="step-1-clickstream-producer">Step 1 : Clickstream Producer</h2>
+<p>File : <code>src/main/java/x/utils/ClickStreamProducer.java</code></p>
+<p>We will continue use this producer * Inspect file and make any fixes * Run the producer in Eclipse, Right click on the file and run as ‘Java Application’ * Make sure it is sending messages as follows - key : Domain - value : clickstream data - example : <code>key=facebook.com, value={&quot;timestamp&quot;:1451635200005,&quot;session&quot;:&quot;session_251&quot;,&quot;domain&quot;:&quot;facebook.com&quot;,&quot;cost&quot;:91,&quot;user&quot;:&quot;user_16&quot;,&quot;campaign&quot;:&quot;campaign_5&quot;,&quot;ip&quot;:&quot;ip_67&quot;,&quot;action&quot;:&quot;clicked&quot;}</code></p>
+<h2 id="step-2-streaming-consumer-1">Step 2 : Streaming Consumer 1</h2>
+<p>This consumer will read and print a KafkaStream.</p>
+<p>File : <code>src/main/java/x/lab7_streaming/StreamingConsumer1.java</code></p>
+<ul>
+<li>Inspect the file and fix the TODO items.<br />
+Use reference <a href="https://kafka.apache.org/0102/javadoc/index.html">Kafka Java API</a></li>
+</ul>
+<h2 id="step-3-run">Step 3 :Run</h2>
+<ul>
+<li>Run the <code>lab7_streaming/StreamingConsumer1</code> in Eclipse,</li>
+<li>Run the <code>utils.ClickStreamProducer</code> in Eclipse,</li>
+<li>Expected output</li>
+</ul>
+<pre class="console"><code>[INFO ] 2018-07-22 14:15:41.248 [main] StreamingConsumer1:main(48) - kstreams starting on clickstream
+
+[KSTREAM-SOURCE-0000000000]: facebook.com, {&quot;timestamp&quot;:1451635200005,&quot;session&quot;:&quot;session_251&quot;,&quot;domain&quot;:&quot;facebook.com&quot;,&quot;cost&quot;:91,&quot;user&quot;:&quot;user_16&quot;,&quot;campaign&quot;:&quot;campaign_5&quot;,&quot;ip&quot;:&quot;ip_67&quot;,&quot;action&quot;:&quot;clicked&quot;}
+
+[KSTREAM-SOURCE-0000000000]: foxnews.com, {&quot;timestamp&quot;:1451635200010,&quot;session&quot;:&quot;session_224&quot;,&quot;domain&quot;:&quot;foxnews.com&quot;,&quot;cost&quot;:17,&quot;user&quot;:&quot;user_89&quot;,&quot;campaign&quot;:&quot;campaign_4&quot;,&quot;ip&quot;:&quot;ip_57&quot;,&quot;action&quot;:&quot;viewed&quot;}
+
+[KSTREAM-SOURCE-0000000000]: facebook.com, {&quot;timestamp&quot;:1451635200015,&quot;session&quot;:&quot;session_160&quot;,&quot;domain&quot;:&quot;facebook.com&quot;,&quot;cost&quot;:73,&quot;user&quot;:&quot;user_53&quot;,&quot;campaign&quot;:&quot;campaign_1&quot;,&quot;ip&quot;:&quot;ip_20&quot;,&quot;action&quot;:&quot;blocked&quot;}
+</code></pre>

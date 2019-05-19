@@ -1,0 +1,46 @@
+<p><link rel='stylesheet' href='../assets/css/main.css'/></p>
+<p><a href="../README.html">&lt;&lt; back to main index</a></p>
+<h1 id="lab-3.2-simple-producer-consumer">Lab 3.2 : Simple Producer / Consumer</h1>
+<h3 id="overview">Overview</h3>
+<p>Run simple Producer / Consumer</p>
+<h3 id="depends-on">Depends On</h3>
+<p>None</p>
+<h3 id="run-time">Run time</h3>
+<p>30 mins</p>
+<h2 id="step-1-open-a-console-consumer">Step 1 : Open a console consumer</h2>
+<p>In a terminal</p>
+<pre><code>    $  ~/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test</code></pre>
+<h2 id="step-2-simple-producer">Step 2 : Simple Producer</h2>
+<ul>
+<li>Inspect file : <code>src/main/java/x/lab3_api_intro/SimpleProducer.java</code>.<br />
+</li>
+<li>Run the Producer In Eclipse,
+<ul>
+<li>Right click on ‘src/main/java/x/lab3_api_intro/SimpleProducer.java’</li>
+<li>Run as ‘Java Application’</li>
+</ul></li>
+</ul>
+<p>In Eclipse console, you should see output as follows:</p>
+<pre class="console"><code>sending : ProducerRecord(topic=test, partition=null, key=1, value=Hello world, timestamp=null)</code></pre>
+<h2 id="step-3-monitor-kafka-console-consumer">Step 3 : Monitor Kafka console consumer</h2>
+<p>The messages should show up in Kafka console terminal !<br />
+Yay !!</p>
+<h2 id="step-4-consumer">Step 4 : Consumer</h2>
+<ul>
+<li>Inspect file <code>src/main/java/x/lab3_api_intro/SimpleConsumer.java</code><br />
+</li>
+<li>Run the Consumer In Eclipse,
+<ul>
+<li>Right click on ‘src/main/java/x/lab3_api_intro/SimpleProducer.java’</li>
+<li>Run as ‘Java Application’</li>
+</ul></li>
+</ul>
+<p>This will keep running.</p>
+<h2 id="step-6-run-the-producer-again">Step 6 : Run the Producer again</h2>
+<ul>
+<li>Right click on <code>src/main/java/x/lab3_api_intro/SimpleProducer.java</code></li>
+<li>Run as ‘Java Application’</li>
+</ul>
+<p><strong>=&gt; In Eclipse, monitor output from two of these programs</strong><br />
+Hint : you may need to switch to Debug view</p>
+<p><strong>=&gt; Also what is happening in Kafka console consumer?</strong></p>
