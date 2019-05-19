@@ -34,8 +34,8 @@ public class AtLeastOnceConsumer implements Runnable {
     props.put("value.deserializer",
         "org.apache.kafka.common.serialization.StringDeserializer");
 
-    // TODO-2: Set enable.auto.commit to false
-      // props.put(?);
+    // TODO-2: Set 'enable.auto.commit' to 'false'
+    props.put("???", "???");
     this.consumer = new KafkaConsumer<>(props);
     this.consumer.subscribe(Arrays.asList(this.topic));
   }

@@ -7,10 +7,6 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-//import x.utils.ClickStreamGenerator;
-/*
- * 
- * */
  import x.utils.ClickStreamGenerator;
 
 import x.utils.MyConfig;
@@ -47,6 +43,7 @@ public class CompressedProducer implements Runnable {
     // TODO-2: set compression type to gzip
     // TODO-2a: Compare the performance by trying it with multiple codecs such as gzip,snappy,lz4
     // See documentation for values to give to this property
+    // https://kafka.apache.org/documentation/#configuration
 
     this.props.put("compression.type", "?");
 

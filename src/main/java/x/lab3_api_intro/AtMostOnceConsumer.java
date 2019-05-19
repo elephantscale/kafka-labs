@@ -33,8 +33,10 @@ public class AtMostOnceConsumer implements Runnable {
     props.put("value.deserializer",
         "org.apache.kafka.common.serialization.StringDeserializer");
 
-    // TODO-2 : Set �enable.auto.commit� to true
-    // TODO-2a : Set �auto.commit.interval.ms� to a lower timeframe.
+    // TODO-2 : Set 'enable.auto.commit' to true
+    props.put("???", "???");
+    // TODO-2a : Set 'auto.commit.interval.ms' to a lower timeframe.
+    props.put("???", "???");
 
     this.consumer = new KafkaConsumer<>(props);
     this.consumer.subscribe(Arrays.asList(this.topic));
