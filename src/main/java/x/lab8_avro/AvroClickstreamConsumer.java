@@ -1,3 +1,4 @@
+/*
 package x.lab8_avro;
 
 import io.confluent.kafka.serializers.AbstractKafkaAvroSerDeConfig;
@@ -46,3 +47,4 @@ public class AvroClickstreamConsumer {
         }
     }
 }
+*/
