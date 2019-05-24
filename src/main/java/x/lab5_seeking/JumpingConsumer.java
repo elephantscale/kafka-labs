@@ -34,8 +34,7 @@ public class JumpingConsumer {
 
     int read = 0;
     while (read < 5) {
-    	//TODO increase time milis time from 0 to desirable number
-      ConsumerRecords<Integer, String> records = consumer.poll(Duration.ofMillis(0));
+      ConsumerRecords<Integer, String> records = consumer.poll(Duration.ofMillis(100));
       long position = consumer.position(partition);
       logger.debug ("position " + position);
       for (ConsumerRecord<Integer, String> record : records) {
