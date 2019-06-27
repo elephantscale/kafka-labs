@@ -39,8 +39,7 @@ public class ClickstreamConsumer implements Runnable {
 			// TODO increase time milis time from 0 to desirable number
 			ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(0));
 
-			// TODO-2 : calculate how many records we have got
-			int count = 0; // replace this with records.??? (hint : count)
+			int count = records.count();
 			if (count == 0)
 				continue;
 			logger.debug("Got " + count + " messages");

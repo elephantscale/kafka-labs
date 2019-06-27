@@ -111,7 +111,7 @@ public class BenchmarkProducer implements Runnable, Callback {
 
 		for (SendMode sendMode : SendMode.values()) {
 			// TODO : once the code is working, increase the number of events to a million (1000000)
-			BenchmarkProducer producer = new BenchmarkProducer(MyConfig.TOPIC_BENCHMARK, 10000, sendMode);
+			BenchmarkProducer producer = new BenchmarkProducer(MyConfig.TOPIC_BENCHMARK, 100000, sendMode);
 			logger.info("== Producer starting.... : " + producer);
 			Thread t1 = new Thread(producer);
 			t1.start();

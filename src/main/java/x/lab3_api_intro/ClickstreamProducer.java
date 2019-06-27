@@ -55,21 +55,22 @@ public class ClickstreamProducer implements Runnable {
 			String value = clickstreamJSON;
 
 			/*
-			 * // TODO-2 : un-comment this block
-			 * 
-			 * // TODO-2 : let's construct a record
-			 * 
-			 * // ProducerRecord takes three parameters // - first param : topic =
-			 * this.topic // - second param : key = the key just contructed // - third param
-			 * : value = the value just constructored
-			 * 
-			 * ProducerRecord<String, String> record = new ProducerRecord<>( ???, ???, ???);
-			 * 
-			 * t1 = System.nanoTime(); producer.send(record); t2 = System.nanoTime();
-			 * 
-			 * logger.debug("sent : [" + record + "]  in " + formatter.format(t2 - t1) +
-			 * " nano secs\n"); // TimeUnit.NANOSECONDS.toMillis(t2 - t1) + " ms");
-			 */
+			 // TODO-2 : un-comment this block
+			 
+			// TODO-3 : let's construct a record
+			 
+			// ProducerRecord takes three parameters 
+            //      - first param : topic = this.topic 
+            //      - second param : key = the key just contructed  (key)
+            //      - third param : value = the value just constructored (value)
+			 
+			ProducerRecord<String, String> record = new ProducerRecord<>( ???, ???, ???);
+			
+			t1 = System.nanoTime(); producer.send(record); t2 = System.nanoTime();
+			 
+			logger.debug("sent : [" + record + "]  in " + formatter.format(t2 - t1) +
+			 " nano secs\n"); // TimeUnit.NANOSECONDS.toMillis(t2 - t1) + " ms");
+			*/
 
 			try {
 				if (this.frequency > 0)
@@ -103,20 +104,21 @@ public class ClickstreamProducer implements Runnable {
 	public static void main(String[] args) throws Exception {
 
 		/*
-		 * TODO : uncomment this block
-		 * 
-		 * // TODO-4 : let's kick off the producer // ClickstreamProducer() takes three
-		 * parameters // - first param : name of topic = "clickstream" // - second param
-		 * : how many messages to send = 10 (start with 10 and increase later) // -
-		 * third param : frequency, how often to send = 1000 (in milliseconds, 0 for no
-		 * wait between sends)
-		 * 
-		 * // ClickstreamProducer producer = new ClickstreamProducer(???, ??? , ???);
-		 * 
-		 * logger.info("Producer starting.... : " + producer); Thread t1 = new
-		 * Thread(producer); t1.start(); t1.join(); // wait for thread to complete
-		 * logger.info("Producer done.");
-		 */
+		// TODO : uncomment this block
+		 
+		// TODO-4 : let's kick off the producer 
+        // ClickstreamProducer() takes three parameters 
+        //      - first param : name of topic = "clickstream" 
+        //      - second param : how many messages to send = 10 (start with 10 and increase later) 
+        //      - third param : frequency, how often to send = 1000 (in milliseconds, 0 for no wait between sends)
+		
+		ClickstreamProducer producer = new ClickstreamProducer(???, ??? , ???);
+		 
+		logger.info("Producer starting.... : " + producer); Thread t1 = new
+		Thread(producer); t1.start(); t1.join(); // wait for thread to complete
+		logger.info("Producer done.");
+		
+        */
 	}
 
 }
