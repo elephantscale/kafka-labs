@@ -48,9 +48,9 @@ public class BenchmarkProducer implements Runnable, Callback {
 		int numMessages = 0;
 		long t1, t2;
 		long start = System.nanoTime();
+		String clickstream = ClickStreamGenerator.getClickstreamAsCsv();
 		while ((numMessages < this.maxMessages)) {
 			numMessages++;
-			String clickstream = ClickStreamGenerator.getClickstreamAsCsv();
 			// String clickstream = ClickStreamGenerator.getClickstreamAsJSON();
 			ProducerRecord<String, String> record = new ProducerRecord<>(this.topic, "" + numMessages, clickstream);
 			t1 = System.nanoTime();

@@ -33,7 +33,16 @@ public class CompressedProducer implements Runnable {
 		// TODO : start with your own kafka "localhost:9092"
 		// once the program is working, pair up with another student
 		// change the host to point to their kafka node! :-)
-		// recommend using 'internal IP' address of their machine if you know it
+		// recommend using 'internal IP' address of their machine
+        // Here is how you find the internal IP : 
+        //      from the SSH session, issue the following command 
+        //              ifconfig 
+        //      look at the output for 'eth0' section.
+        //  Here is sample output, and my internal ip address is 11.222.333.444 
+        // (fake don't use this IP address)
+        //         eth0      Link encap:Ethernet  HWaddr 02:f1:6e:7d:9e:de
+        //                   inet addr:11.222.333.444  Bcast:172.31.47.255  Mask:255.255.240.0
+        
 		this.props.put("bootstrap.servers", "localhost:9092");
 		this.props.put("client.id", "CompressedProducer");
 
@@ -57,12 +66,12 @@ public class CompressedProducer implements Runnable {
 		long totalMsgSize1 = 0L, totalKeySize1 = 0L, totalValueSize1 = 0L;
 		int keySize1 = -1;
 		int valueSize1 = -1;
+		String clickstreamJSON = ClickStreamGenerator.getClickstreamAsJSON();
+		String value = clickstreamJSON;
 		while (this.keepRunning && (numMessages < this.maxMessages)) {
 			numMessages++;
-			String clickstreamJSON = ClickStreamGenerator.getClickstreamAsJSON();
 
 			String key = "" + numMessages;
-			String value = clickstreamJSON;
 			
 			keySize1 = key.getBytes().length;
 			valueSize1 = value.getBytes().length;
