@@ -2,8 +2,7 @@
 
 [<< back to main index](../README.md) 
 
-Lab 1 : Install Kafka
-=====================
+# Lab 1 : Install Kafka
 
 ### Overview
 Install and run Kafka
@@ -12,11 +11,9 @@ Install and run Kafka
 None
 
 ### Run time
-10 mins
+1 hr
 
-----------
-STEP 0: To Instructor
-----------
+## STEP 0: To Instructor
 Walk through this project on screen first.
 
 ## Step 1 : Login to your Kafka node

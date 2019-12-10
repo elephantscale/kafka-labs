@@ -3,6 +3,10 @@
 # Kafka Labs
 Welcome to Kafka labs bundle.
 
+### Tips
+Copy-Paste Shortcuts on Jupyter terminal
+- On Windows try : `Shift + Insert`
+- On Windows try : `Shift + Right Click`
 
 # Labs
 
