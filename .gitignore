@@ -13,6 +13,15 @@ target
 *.data
 *.csv
 *.json
+*.html
+*.html
+*.html
+*.html
+*.html
+*.html
+*.html
+*.html
+*.html
 
 .classpath
 .project
