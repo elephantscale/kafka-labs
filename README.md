@@ -52,7 +52,7 @@ Copy-Paste Shortcuts on Jupyter terminal
 - [9.2 - Kafka Metrics - traffic stats](labs/9.2-kafka-metrics.md)
 
 ### 10 - Kafka Connect
-- [10 - Kafka Connect](labs/10-kafka-connect.md)
+- [10 - Kafka Connect](labs/10.1-kafka-connect.md)
 
 ### 11 - Workshop 2  - Design Exercise (Group Exercise)
 Instructor will provide details
