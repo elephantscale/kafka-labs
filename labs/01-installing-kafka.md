@@ -24,8 +24,8 @@ Instructor will provide the details.
 
 
 ## Step 2 : Run Zookeeper
-Follow   [1.1-zookeeper.md](1.1-zookeeper.md)
+Follow   [1.1-zookeeper.md](01.1-zookeeper.md)
 
 
 ## Step 3 : Run Kafka
-Follow   [1.2-kafka.md](1.2-kafka.md)
+Follow   [1.2-kafka.md](01.2-kafka.md)
