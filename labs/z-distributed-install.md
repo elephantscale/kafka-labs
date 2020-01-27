@@ -5,7 +5,7 @@ ssh into server1
 - start zookeeper 
 
 - untar kafka 
-- edit  ~/kafka/conf/server.properties 
+- edit  ~/dev/kafka/conf/server.properties 
      broker.id=0
      # use internal ip for zk
      zookeeper.connect=ZK_SERVER_INTERNAL:2181
@@ -20,7 +20,7 @@ ssh into server1
     scp -r ~/kafka   server2:
     
 - ssh into server2 
-    - edit  ~/kafka/conf/server.properties
+    - edit  ~/dev/kafka/conf/server.properties
         broker.id=1
     
     - start kafka on server2 
@@ -31,7 +31,7 @@ ssh into server1
     scp -r ~/kafka   server3:
     
 - ssh into server3 
-    - edit  ~/kafka/conf/server.properties
+    - edit  ~/dev/kafka/conf/server.properties
         broker.id=2
     
     - start kafka on server3

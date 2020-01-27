@@ -15,7 +15,7 @@ Count Domain based stats of clickstream
 
 ## Step 1 : Create a 'clickstream' topic
 ```bash
-    $   ~/kafka/bin/kafka-topics.sh  --zookeeper localhost:2181  --create --topic clickstream --replication-factor 1  --partitions 2
+    $   ~/dev/kafka/bin/kafka-topics.sh  --zookeeper localhost:2181  --create --topic clickstream --replication-factor 1  --partitions 2
 ```
 
 ## Step 2 : Clickstream Producer
