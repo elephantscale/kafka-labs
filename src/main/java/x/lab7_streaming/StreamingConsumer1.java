@@ -23,8 +23,8 @@ public class StreamingConsumer1 {
 		Properties config = new Properties();
 		// "bootstrap.servers" = "localhost:9092"
 	    config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, MyConfig.DEFAULT_BOOTSTRAP_SERVERS);
-	    config.put("group.id", "clickstream-consumer2");
-	    config.put(StreamsConfig.APPLICATION_ID_CONFIG, "clickstream-consumer2");
+	    config.put("group.id", "streaming1");
+	    config.put(StreamsConfig.APPLICATION_ID_CONFIG, "streaming1.consumer1");
 	    config.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
 	    config.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
 	    // Records should be flushed every 10 seconds. This is less than the default

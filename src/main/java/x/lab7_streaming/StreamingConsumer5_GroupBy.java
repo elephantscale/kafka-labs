@@ -32,6 +32,8 @@ public class StreamingConsumer5_GroupBy {
 		Properties config = new Properties();
 		// "bootstrap.servers" = "localhost:9092"
 		config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, MyConfig.DEFAULT_BOOTSTRAP_SERVERS);
+		config.put("group.id", "streaming5");
+		config.put(StreamsConfig.APPLICATION_ID_CONFIG, "streaming5.consumer1");
 		config.put(StreamsConfig.APPLICATION_ID_CONFIG, "kafka-streaming-consumer4");
 		config.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
 		// config.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG,
