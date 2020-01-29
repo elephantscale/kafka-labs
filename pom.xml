@@ -213,6 +213,9 @@
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
+                    <excludes>
+                           <exclude>**/.ipynb_checkpoints/*</exclude>
+                    </excludes>
                 </configuration>
             </plugin>
             <plugin>
