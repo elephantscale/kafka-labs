@@ -1,4 +1,4 @@
-package x.lab5_seeking;
+package x.lab5_offsets;
 
 import java.util.Properties;
 

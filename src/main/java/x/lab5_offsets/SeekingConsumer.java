@@ -1,4 +1,4 @@
-package x.lab5_seeking;
+package x.lab5_offsets;
 
 import java.util.Collections;
 import java.util.Properties;
@@ -13,24 +13,24 @@ import java.time.Duration;
 
 import x.utils.MyConfig;
 
-public class JumpingConsumer {
-	private static final Logger logger = LoggerFactory.getLogger(JumpingConsumer.class);
+public class SeekingConsumer {
+	private static final Logger logger = LoggerFactory.getLogger(SeekingConsumer.class);
+	private static final String TOPIC = "clickstream";
 
   public static void main(String[] args) throws Exception {
     Properties props = new Properties();
     props.put("bootstrap.servers", "localhost:9092");
-    props.put("group.id", "group1");
+    props.put("group.id", "seeking1");
     props.put("key.deserializer",
         "org.apache.kafka.common.serialization.StringDeserializer");
     props.put("value.deserializer",
         "org.apache.kafka.common.serialization.StringDeserializer");
     KafkaConsumer<Integer, String> consumer = new KafkaConsumer<>(props);
-    consumer.subscribe(Collections.singletonList(MyConfig.TOPIC_GREETINGS)); // subscribe to
-                                                                // topics
+    consumer.subscribe(Collections.singletonList(TOPIC)); // subscribe
 
-    logger.info("listening on  topic : " + MyConfig.TOPIC_GREETINGS);
+    logger.info("listening on  topic : " + TOPIC);
 
-    TopicPartition partition = new TopicPartition(MyConfig.TOPIC_GREETINGS, 0);
+    TopicPartition partition = new TopicPartition(TOPIC, 0);
 
     int read = 0;
     while (read < 5) {

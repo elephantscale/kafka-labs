@@ -1,4 +1,4 @@
-package x.lab3_api_intro;
+package x.lab5_offsets;
 
 import java.text.NumberFormat;
 import java.time.Duration;

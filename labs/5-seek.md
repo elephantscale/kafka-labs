@@ -15,15 +15,15 @@ Seek within partition
 
 
 ## Step 1 : Producer
-* Inspect file : `src/main/java/x/lab5_seeking/GreetingsProducer.java`  
+* Inspect file : `src/main/java/x/lab3_api_intro/ClickstreamProducer.java`  
 * Run the producer in Eclipse,
-    * Right click on `src/main/java/x/lab5_seeking/GreetingsProducer.java`  
+    * Right click on file
     * Run as 'Java Application'
 
-## Step 2 : Jumping Consumer
-* Inspect file : `src/main/java/x/lab5_seeking/JumpingConsumer.java`  
+## Step 2 : Seeking Consumer
+* Inspect file : `src/main/java/x/lab5_offsets/SeekingConsumer.java`  
 * Fix the TODO items
 Use reference Java API [for Consumer](https://kafka.apache.org/0100/javadoc/index.html?org/apache/kafka/clients/consumer/KafkaConsumer.html)
 * Run the producer in Eclipse,
-    * Right click on `src/main/java/x/lab5_seeking/JumpingConsumer.java`  
+    * Right click on file
     * Run as 'Java Application'
