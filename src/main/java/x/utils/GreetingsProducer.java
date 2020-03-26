@@ -1,4 +1,4 @@
-package x.lab5_offsets;
+package x.utils;
 
 import java.util.Properties;
 
@@ -11,8 +11,8 @@ import x.utils.MyConfig;
 
 public class GreetingsProducer {
 	private static final Logger logger = LoggerFactory.getLogger(GreetingsProducer.class);
-	
- 
+
+
   public static void main(String[] args) throws Exception {
     Properties props = new Properties();
     props.put("bootstrap.servers", "localhost:9092");

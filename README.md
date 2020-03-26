@@ -10,8 +10,8 @@ Copy-Paste Shortcuts on Jupyter terminal
 
 # Labs
 
-### 1 - Install
-* [1.1 - Installing Kafka](labs/1-installing-kafka.md)
+### 1 - Install Kafka
+* [1 - Installing Kafka](labs/1-installing-kafka.md)
 
 ### 2 - Kafka Utils
 * [2.1 - Kafka Utilities](labs/2.1-kafka-utils.md)
@@ -21,15 +21,14 @@ Copy-Paste Shortcuts on Jupyter terminal
 * [3.1 - Importing Project](labs/3.1-import-project.md)
 * [3.2 - Simple Producer and Consumer](labs/3.2-kafka-api.md)
 * [3.3 - Kafka API](labs/3.3-kafka-api.md)
-* [3.4 - Atleast-Once API](labs/3.4-atleastApi.md)
-* [3.5 - Atmost-Once API](labs/3.5-atmostApi.md)
 
 ### 4. Kafka Producer benchmarking
 * [4.1 - Kafka Producer benchmarking](labs/4.1-producer-benchmark.md)
 * [4.2 - Kafka Producer  compression benchmarking](labs/4.2-producer-compress.md)
 
-### 5 - Seeking
-* [5.1 - Seeking Within Partition](labs/5-seek.md)
+### 5 - Offset Management
+* [5.1 - Manual offset](labs/5.1-manual-offset.md)
+* [5.2 - Seeking Within Partition](labs/5.2-seek.md)
 
 ### 6 - Workshop 1 - Domain Count
 * [6.1 - Domain Count](labs/6-domain-count.md)
