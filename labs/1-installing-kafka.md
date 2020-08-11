@@ -1,8 +1,12 @@
 <link rel='stylesheet' href='../assets/css/main.css'/>
 
-[<< back to main index](../README.md) 
+[<< back to main index](../README.md)
 
 # Lab 1 : Install Kafka
+
+## Note
+**New docker VM already has Kafka installed.  The following instructions are for reference only**
+
 
 ### Overview
 Install and run Kafka
@@ -13,6 +17,7 @@ None
 ### Run time
 1 hr
 
+
 ## STEP 0: To Instructor
 Walk through this project on screen first.
 
@@ -20,7 +25,6 @@ Walk through this project on screen first.
 * Login using SSH
 * And login via web UI
 Instructor will provide the details.
-
 
 
 ## Step 2 : Run Zookeeper
