@@ -4,10 +4,6 @@
 
 # Lab 1 : Install Kafka
 
-## Note
-**New docker VM already has Kafka installed.  The following instructions are for reference only**
-
-
 ### Overview
 Install and run Kafka
 
