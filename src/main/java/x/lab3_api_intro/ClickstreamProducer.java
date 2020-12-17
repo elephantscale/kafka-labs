@@ -66,7 +66,9 @@ public class ClickstreamProducer implements Runnable {
 			 
 			ProducerRecord<String, String> record = new ProducerRecord<>( ???, ???, ???);
 			
-			t1 = System.nanoTime(); producer.send(record); t2 = System.nanoTime();
+			t1 = System.nanoTime(); 
+			producer.send(record); 
+			t2 = System.nanoTime();
 			 
 			logger.debug("sent : [" + record + "]  in " + formatter.format(t2 - t1) +
 			 " nano secs\n"); // TimeUnit.NANOSECONDS.toMillis(t2 - t1) + " ms");
