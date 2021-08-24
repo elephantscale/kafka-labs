@@ -15,7 +15,6 @@ public class SimpleConsumer {
 
 	public static void main(String[] args) throws Exception {
 		Properties props = new Properties();
-		Duration MillisDuration = Duration.ofMillis(1000);
 		props.put("bootstrap.servers", "localhost:9092");
 		props.put("group.id", "group1");
 		props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
@@ -24,6 +23,7 @@ public class SimpleConsumer {
 		consumer.subscribe(Arrays.asList("test")); // subscribe to topics
 
 		boolean keepRunning = true;
+		Duration MillisDuration = Duration.ofMillis(1000);
 		logger.info("listening on test topic");
 		while (keepRunning) {
 			ConsumerRecords<String, String> records = consumer.poll(MillisDuration);

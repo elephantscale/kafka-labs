@@ -16,6 +16,7 @@ public class ClickstreamConsumer implements Runnable {
 	private static final Logger logger = LoggerFactory.getLogger(ClickstreamConsumer.class);
 
 	private final String topic;
+	private final String goupId = "group1";
 	private final KafkaConsumer<String, String> consumer;
 	private boolean keepRunning = true;
 	NumberFormat formatter = NumberFormat.getInstance();
@@ -25,7 +26,7 @@ public class ClickstreamConsumer implements Runnable {
 		Properties props = new Properties();
 		// TODO-1 : set servers to "localhost:9092"
 		props.put("bootstrap.servers", "???");
-		props.put("group.id", "group1");
+		props.put("group.id", this.goupId);
 		props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
 		props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
 		this.consumer = new KafkaConsumer<>(props);
@@ -66,7 +67,7 @@ public class ClickstreamConsumer implements Runnable {
 
 	@Override
 	public String toString() {
-		return "ClickstreamConsumer (topic=" + this.topic + ")";
+		return "ClickstreamConsumer (topic=" + this.topic + ", group=" + this.goupId +  ")";
 	}
 
 	public static void main(String[] args) throws Exception {

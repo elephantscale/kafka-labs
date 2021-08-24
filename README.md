@@ -15,7 +15,7 @@ Copy-Paste Shortcuts on Jupyter terminal
 
 ### 2 - Kafka Utils
 * [2.1 - Kafka Utilities](labs/2.1-kafka-utils.md)
-* [2.2 - Kafka Utilities](labs/2.2-kafka-utils.md)
+* [2.2 - Kafka Utilities part 2](labs/2.2-kafka-utils.md)
 
 ### 3 - Kafka API
 * [3.1 - Importing Project](labs/3.1-import-project.md)
