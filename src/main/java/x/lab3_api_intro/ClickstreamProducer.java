@@ -4,7 +4,9 @@ import java.text.NumberFormat;
 import java.util.Properties;
 
 import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.common.serialization.StringSerializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,11 +34,13 @@ public class ClickstreamProducer implements Runnable {
 
 		this.props = new Properties();
 		// TODO-1 : set the broker to 'localhost:9092'
-		this.props.put("bootstrap.servers", "???");
-
-		this.props.put("client.id", "ClickstreamProducer");
-		this.props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-		this.props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+	    props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "???");
+	    
+	    props.put(ProducerConfig.CLIENT_ID_CONFIG, "ClickstreamProducer");
+	    props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,
+	    		StringSerializer.class.getName());
+	    props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,
+	    		StringSerializer.class.getName());		
 		this.producer = new KafkaProducer<>(props);
 	}
 
@@ -54,17 +58,13 @@ public class ClickstreamProducer implements Runnable {
 			String key = "" + numMessages;
 			String value = clickstreamJSON;
 
-			/*
-			 // TODO-2 : un-comment this block
-			 
-			// TODO-3 : let's construct a record
-			 
+			// TODO-2 : let's construct a record
 			// ProducerRecord takes three parameters 
-            //      - first param : topic = this.topic 
-            //      - second param : key = the key just contructed  (key)
-            //      - third param : value = the value just constructored (value)
+                        //      - first param : topic = this.topic 
+                        //      - second param : key = the key just contructed  (key)
+                        //      - third param : value = the value just constructored (value)
 			 
-			ProducerRecord<String, String> record = new ProducerRecord<>( ???, ???, ???);
+			ProducerRecord<String, String> record = new ProducerRecord<>( "???", "???", "???");
 			
 			t1 = System.nanoTime(); 
 			producer.send(record); 
@@ -72,7 +72,6 @@ public class ClickstreamProducer implements Runnable {
 			 
 			logger.debug("sent : [" + record + "]  in " + formatter.format(t2 - t1) +
 			 " nano secs\n"); // TimeUnit.NANOSECONDS.toMillis(t2 - t1) + " ms");
-			*/
 
 			try {
 				if (this.frequency > 0)
@@ -104,23 +103,19 @@ public class ClickstreamProducer implements Runnable {
 
 	// test driver
 	public static void main(String[] args) throws Exception {
-
-		/*
-		// TODO : uncomment this block
-		 
-		// TODO-4 : let's kick off the producer 
+		ClickstreamProducer producer = null;
+		
+		// TODO-4 : create a new producer with the following params
         // ClickstreamProducer() takes three parameters 
         //      - first param : name of topic = "clickstream" 
         //      - second param : how many messages to send = 10 (start with 10 and increase later) 
-        //      - third param : frequency, how often to send = 1000 (in milliseconds, 0 for no wait between sends)
+        //      - third param : frequency, how often to send = 100 (in milliseconds, 0 for no wait between sends)
 		
-		ClickstreamProducer producer = new ClickstreamProducer(???, ??? , ???);
+		//producer = 	new ClickstreamProducer(???, ??? , ???);
 		 
 		logger.info("Producer starting.... : " + producer); Thread t1 = new
 		Thread(producer); t1.start(); t1.join(); // wait for thread to complete
 		logger.info("Producer done.");
-		
-        */
 	}
 
 }

@@ -5,18 +5,21 @@ import java.time.Duration;
 import java.util.Arrays;
 import java.util.Properties;
 
+import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.fasterxml.jackson.databind.deser.std.StringDeserializer;
+
 public class ClickstreamConsumer implements Runnable {
 
 	private static final Logger logger = LoggerFactory.getLogger(ClickstreamConsumer.class);
 
 	private final String topic;
-	private final String goupId = "group1";
+	private final String groupId = "clickstream1";
 	private final KafkaConsumer<String, String> consumer;
 	private boolean keepRunning = true;
 	NumberFormat formatter = NumberFormat.getInstance();
@@ -25,10 +28,13 @@ public class ClickstreamConsumer implements Runnable {
 		this.topic = topic;
 		Properties props = new Properties();
 		// TODO-1 : set servers to "localhost:9092"
-		props.put("bootstrap.servers", "???");
-		props.put("group.id", this.goupId);
-		props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
-		props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
+		props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "???");
+
+		props.put(ConsumerConfig.CLIENT_ID_CONFIG, "Clickstream-consumer");
+		props.put(ConsumerConfig.GROUP_ID_CONFIG, this.groupId);
+		props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+		props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+
 		this.consumer = new KafkaConsumer<>(props);
 		this.consumer.subscribe(Arrays.asList(this.topic));
 	}
@@ -37,8 +43,7 @@ public class ClickstreamConsumer implements Runnable {
 	public void run() {
 		int numMessages = 0;
 		while (keepRunning) {
-			// TODO increase time milis time from 0 to desirable number
-			ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(0));
+			ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(1000));
 
 			int count = records.count();
 			if (count == 0)
@@ -52,11 +57,7 @@ public class ClickstreamConsumer implements Runnable {
 			}
 		}
 
-		// logger.info(this + " received " + numMessages);
 		logger.info("Received " + formatter.format(numMessages));
-
-		// TODO-3 : close consumer
-		// consumer.???
 		consumer.close();
 	}
 
@@ -67,12 +68,12 @@ public class ClickstreamConsumer implements Runnable {
 
 	@Override
 	public String toString() {
-		return "ClickstreamConsumer (topic=" + this.topic + ", group=" + this.goupId +  ")";
+		return "ClickstreamConsumer (topic=" + this.topic + ", group=" + this.groupId + ")";
 	}
 
 	public static void main(String[] args) throws Exception {
 		/*
-		 * TODO-4 : create a consumer ClickstreamConsumer takes only one parameter name
+		 * TODO-2 : create a consumer ClickstreamConsumer takes only one parameter name
 		 * of topic to listen to. Set it to "clickstream"
 		 */
 		ClickstreamConsumer consumer = new ClickstreamConsumer("???");
