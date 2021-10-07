@@ -24,7 +24,8 @@ public class StreamingConsumer3_Filter {
 		// "bootstrap.servers" = "localhost:9092"
 		config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, MyConfig.DEFAULT_BOOTSTRAP_SERVERS);
 		config.put("group.id", "streaming3");
-		config.put(StreamsConfig.APPLICATION_ID_CONFIG, "streaming3.consumer1");
+		config.put(StreamsConfig.APPLICATION_ID_CONFIG, "kafka-streams-filter");
+		config.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "latest");
 		config.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
 		config.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
 		// Records should be flushed every 10 seconds. This is less than the

@@ -23,20 +23,16 @@ public class ManualOffsetConsumer implements Runnable {
   public ManualOffsetConsumer(String topic) {
     this.topic = topic;
     Properties props = new Properties();
-    /*
-     * To implement AtLeast Once processing, we need to turn off auto-commit
-     * and manually commit the offsets
-     */
-
     props.put("bootstrap.servers", "localhost:9092");
     props.put("group.id", "group_manual_offset");
+    props.put("auto.offset.reset", "earliest");
     props.put("key.deserializer",
         "org.apache.kafka.common.serialization.StringDeserializer");
     props.put("value.deserializer",
         "org.apache.kafka.common.serialization.StringDeserializer");
 
     // TODO-1: Set 'enable.auto.commit' to 'false'
-    props.put("???", "???");
+    props.put("enable.auto.commit", "???");
     this.consumer = new KafkaConsumer<>(props);
     this.consumer.subscribe(Arrays.asList(this.topic));
   }
@@ -96,7 +92,7 @@ public class ManualOffsetConsumer implements Runnable {
   }
 
   public static void main(String[] args) throws Exception {
-    ManualOffsetConsumer consumer = new ManualOffsetConsumer("clickstream");
+    ManualOffsetConsumer consumer = new ManualOffsetConsumer("test");
 
     Thread t1 = new Thread(consumer);
     logger.info("starting consumer... : " + consumer);

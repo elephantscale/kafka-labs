@@ -33,8 +33,8 @@ public class ClickstreamProducer {
       // TODO-1 : 
       //     key = clickstream.domain
       //     value = clickstreamJSON
-      String key = "???";
-      String value = "???";  
+      String key = clickstream.domain;
+      String value = clickstreamJSON;  
       
       // TODO-2 : send the clickstreamJSON data as value with DOMAIN as key
       ProducerRecord<String, String> record =
