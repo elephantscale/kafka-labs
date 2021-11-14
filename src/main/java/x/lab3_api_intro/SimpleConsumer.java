@@ -37,13 +37,15 @@ public class SimpleConsumer {
 		boolean keepRunning = true;
 		Duration MillisDuration = Duration.ofMillis(1000);
 		logger.info("listening on test topic");
+		int msgCount = 0;
 		while (keepRunning) {
 			ConsumerRecords<String, String> records = consumer.poll(MillisDuration);
 			if (records.count() == 0)
 				continue;
 			logger.debug("Got " + records.count() + " messages");
 			for (ConsumerRecord<String, String> record : records) {
-				logger.debug("Received message : " + record);
+				msgCount ++;
+				logger.debug(String.format ("Received message [%d] : [%s]", msgCount, record));
 			}
 		}
 		consumer.close();

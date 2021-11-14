@@ -24,21 +24,26 @@ public class SimpleProducer {
     KafkaProducer<String, String> producer = new KafkaProducer<>(props);
 
     String topic = "test";
-    String key = "" + System.currentTimeMillis();
-    String value = "Hello world";
-    ProducerRecord<String, String> record =
-        new ProducerRecord<>(topic, key, value);
     
-    long t1 = System.nanoTime();
-    RecordMetadata meta = producer.send(record).get();
-    long t2 = System.nanoTime();
-    
-    logger.debug(String.format("Sent record (key:%s, value:%s), "
-    		+ "meta (partition=%d, offset=%d, timestamp=%d), "
-    		+ "time took = %.2f ms",
-    		key, value, meta.partition(), meta.offset(), meta.timestamp(),
-    		(t2-t1)/1e6));
+    for (int i = 1; i <= 10; i++) 
+    {
+        String key = "" + System.currentTimeMillis();
+        String value = "Hello world @ " + key;
+        ProducerRecord<String, String> record =
+            new ProducerRecord<>(topic, key, value);
+        
 
+        long t1 = System.nanoTime();
+        RecordMetadata meta = producer.send(record).get();
+        long t2 = System.nanoTime();
+        
+        logger.debug(String.format("Sent record [%d] (key:%s, value:%s), "
+        		+ "meta (partition=%d, offset=%d, timestamp=%d), "
+        		+ "time took = %.2f ms",
+        		i, key, value, meta.partition(), meta.offset(), meta.timestamp(),
+        		(t2-t1)/1e6));
+    	
+    }
 
     producer.close();
 
