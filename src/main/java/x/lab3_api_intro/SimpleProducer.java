@@ -24,10 +24,10 @@ public class SimpleProducer {
     KafkaProducer<String, String> producer = new KafkaProducer<>(props);
 
     String topic = "test";
-    
+    long timeNow = System.currentTimeMillis();
     for (int i = 1; i <= 10; i++) 
     {
-        String key = "" + System.currentTimeMillis();
+        String key = "" + (timeNow + i);
         String value = "Hello world @ " + key;
         ProducerRecord<String, String> record =
             new ProducerRecord<>(topic, key, value);
