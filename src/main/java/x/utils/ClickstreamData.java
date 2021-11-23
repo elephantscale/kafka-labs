@@ -2,7 +2,6 @@ package x.utils;
 
 public class ClickstreamData {
   public long timestamp;
-  public String session;
   public String domain;
   public int cost;
   public String user;
