@@ -2,10 +2,12 @@ package x.lab3_api_intro;
 
 import java.text.NumberFormat;
 import java.util.Properties;
+import java.util.concurrent.ExecutionException;
 
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.clients.producer.RecordMetadata;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,7 +54,6 @@ public class ClickstreamProducer implements Runnable {
 		long start = System.nanoTime();
 		while (this.keepRunning && (numMessages < this.maxMessages)) {
 			numMessages++;
-			// String clickstream = ClickStreamGenerator.getClickstreamAsCsv();
 			String clickstreamJSON = ClickStreamGenerator.getClickstreamAsJSON();
 
 			String key = "" + numMessages;
@@ -66,12 +67,28 @@ public class ClickstreamProducer implements Runnable {
 			 
 			ProducerRecord<String, String> record = new ProducerRecord<>( "???", "???", "???");
 			
-			t1 = System.nanoTime(); 
-			producer.send(record); 
-			t2 = System.nanoTime();
-			 
-			logger.debug("sent : [" + record + "]  in " + formatter.format(t2 - t1) +
-			 " nano secs\n"); // TimeUnit.NANOSECONDS.toMillis(t2 - t1) + " ms");
+			
+			
+			try {
+
+				// Experiment: measure the time taken for both send options
+				
+				t1 = System.nanoTime(); 			
+				// sending without waiting for response
+				producer.send(record); 
+				
+				// sending and waiting for response
+				//RecordMetadata meta = producer.send(record).get();
+				t2 = System.nanoTime();
+				
+				logger.debug(String.format("Sent record [%d] (key:%s, value:%s), "
+		        		+ "time took = %.2f ms",
+		        		numMessages, key, value,	(t2-t1)/1e6));
+				// TimeUnit.NANOSECONDS.toMillis(t2 - t1) + " ms"
+				
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
 
 			try {
 				if (this.frequency > 0)
