@@ -12,94 +12,56 @@ import org.apache.kafka.common.TopicPartition;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ManualOffsetConsumer implements Runnable {
+public class ManualOffsetConsumer {
 
 	private static final Logger logger = LoggerFactory.getLogger(ManualOffsetConsumer.class);
 
-  private final String topic;
-  private final KafkaConsumer<String, String> consumer;
-  private boolean keepRunning = true;
+	public static void main(String[] args) throws Exception {
+		Properties props = new Properties();
+		props.put("bootstrap.servers", "localhost:9092");
+		props.put("group.id", "group_manual_offset");
+		props.put("auto.offset.reset", "earliest");
+		props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
+		props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
 
-  public ManualOffsetConsumer(String topic) {
-    this.topic = topic;
-    Properties props = new Properties();
-    props.put("bootstrap.servers", "localhost:9092");
-    props.put("group.id", "group_manual_offset");
-    props.put("auto.offset.reset", "earliest");
-    props.put("key.deserializer",
-        "org.apache.kafka.common.serialization.StringDeserializer");
-    props.put("value.deserializer",
-        "org.apache.kafka.common.serialization.StringDeserializer");
+		// TODO-1: Set 'enable.auto.commit' to 'false'
+		props.put("enable.auto.commit", "???");
+		KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
+		consumer.subscribe(Arrays.asList("test"));
 
-    // TODO-1: Set 'enable.auto.commit' to 'false'
-    props.put("enable.auto.commit", "???");
-    this.consumer = new KafkaConsumer<>(props);
-    this.consumer.subscribe(Arrays.asList(this.topic));
-  }
+		int numMessages = 0;
+		while (true) {
 
-  @Override
-  public void run() {
-    int numMessages = 0;
-    while (keepRunning) {
+			ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
 
-      ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
+			int count = records.count();
+			if (count == 0)
+				continue;
 
-      int count = records.count() ; 
-      if (count == 0) continue;
-      
-      logger.debug("Got " + count + " messages");
+			logger.debug("Got " + count + " messages");
 
-      for (ConsumerRecord<String, String> record : records) {
-        numMessages++;
-        logger.debug("Received message [" + numMessages + "] : " + record);        
-      }
-      
-      // print offsets
-      Set<TopicPartition> partitions = consumer.assignment();
-      for (TopicPartition p : partitions) {
-    	  long pos = consumer.position(p);
-    	  logger.debug("OFFSET : partition:" + p.partition() + ", offset:" + pos);
-      }
-      
-      
-      /*
-       TODO-2: 
-      		- do a run without calling 'commitSync' 
-      		- run 'ClickStreamProducer' to send some events
-      		- run this code again a couple of times... 
-      		- how many events are you getting?
-      		- can you explain the behavior ?
-      		- now uncomment the following 'commitSync' code and run again
-      		- do a couple of runs, what is the behavior now?
-	*/
-      //      consumer.commitSync();
+			for (ConsumerRecord<String, String> record : records) {
+				numMessages++;
+				logger.debug("Received message [" + numMessages + "] : " + record);
+			}
 
-    }
+			// print offsets
+			Set<TopicPartition> partitions = consumer.assignment();
+			for (TopicPartition p : partitions) {
+				long pos = consumer.position(p);
+				logger.debug("OFFSET : partition:" + p.partition() + ", offset:" + pos);
+			}
 
-    logger.info("Received " + numMessages);
+			/*
+			 * TODO-2: - do a run without calling 'commitSync' - run 'ClickStreamProducer'
+			 * to send some events - run this code again a couple of times... - how many
+			 * events are you getting? - can you explain the behavior ? - now uncomment the
+			 * following 'commitSync' code and run again - do a couple of runs, what is the
+			 * behavior now?
+			 */
+			// consumer.commitSync();
 
-     consumer.close();
-  }
+		}
 
-  public void stop() {
-    this.keepRunning = false;
-    consumer.wakeup();
-  }
-
-  @Override
-  public String toString() {
-    return this.getClass().getName() + " (topic=" + this.topic + ")";
-  }
-
-  public static void main(String[] args) throws Exception {
-    ManualOffsetConsumer consumer = new ManualOffsetConsumer("test");
-
-    Thread t1 = new Thread(consumer);
-    logger.info("starting consumer... : " + consumer);
-    t1.start();
-    t1.join();
-    logger.info("consumer shutdown.");
-
-  }
-
+	}
 }
