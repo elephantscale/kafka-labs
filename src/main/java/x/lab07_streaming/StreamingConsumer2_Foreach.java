@@ -51,7 +51,7 @@ public class StreamingConsumer2_Foreach {
 			public void apply(String key, String value) {
 				counter ++;
 				//# TODO-2 : print out the record (key and value)
-				//logger.debug("FOREACH [" + counter + "]:: key:" + ??? + ", value:" + ??? + "\n");
+				//logger.debug("FOREACH [" + counter + "]:: KEY:" + ??? + ", VALUE:" + ??? + "\n");
 			}
 		});
 

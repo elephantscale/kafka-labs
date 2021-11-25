@@ -20,7 +20,7 @@ import x.utils.MyUtils;
 
 public class ConsumerWithMetrics {
 	private static final Logger logger = LoggerFactory.getLogger(ConsumerWithMetrics.class);
-	
+
 	// TODO-1 : get a meter with name 'consumer.events'
 	private static final Meter meterConsumerEvents = MyMetricsRegistry.metrics.meter("???");
 	private static long eventsReceived = 0;
@@ -41,21 +41,20 @@ public class ConsumerWithMetrics {
 		// For illustrative purposes we disable record caches
 		config.put(StreamsConfig.CACHE_MAX_BYTES_BUFFERING_CONFIG, 0);
 
-
 		final StreamsBuilder builder = new StreamsBuilder();
 
-		 final KStream<String, String> clickstream = builder.stream(MyConfig.TOPIC_CLICKSTREAM);
+		final KStream<String, String> clickstream = builder.stream(MyConfig.TOPIC_CLICKSTREAM);
 		// clickstream.print();
 
 		// process each record and report traffic
 		clickstream.foreach(new ForeachAction<String, String>() {
 			public void apply(String key, String value) {
-				eventsReceived ++;
+				eventsReceived++;
 				logger.debug("received # " + eventsReceived + ",  key:" + key + ", value:" + value);
 
 				// TODO-2 : mark the meter for received events
-				// meterConsumerEvents.???
-				
+				meterConsumerEvents.mark();
+
 				MyUtils.randomDelay(100, 500);
 			}
 		});
