@@ -13,7 +13,7 @@ conf = {
 
 producer = Producer(conf)
 
-topic = "compact5"
+topic = "topic1"
 try:
     for i in range(1, 1000+1):
             idx = random.randint(1,5)
