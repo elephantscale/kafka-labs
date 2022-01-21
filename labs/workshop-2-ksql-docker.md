@@ -2,7 +2,7 @@
 
 [<< back to main index](../README.md)
 
-# Lab 11.2: Kafka Use Case: Click Stream Analysis of data using KSQL (Docker cli)
+# Workshop-2: Kafka Use Case: Click Stream Analysis of data using KSQL (Docker cli)
 
 ### Overview
 The problem statement is very clear, we will try to observe the click stream data using KSQL in command line

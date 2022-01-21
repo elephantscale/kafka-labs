@@ -2,7 +2,7 @@
 
 [<< back to main index](../README.md)
 
-# Lab 11.1: Kafka Use Case: Connecting to MySQL database using Kafka connect
+# Workshop-1: Kafka Use Case: Connecting to MySQL database using Kafka connect
 
 ### Overview
 We will try to connect with MySql Database over Kafka-connect

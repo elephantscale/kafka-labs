@@ -39,7 +39,7 @@ Copy-Paste Shortcuts on Jupyter terminal
 * [5.1 - Manual offset](labs/05.1-manual-offset.md)
 * [5.2 - Seeking Within Partition](labs/05.2-seek.md)
 
-### 6 - Workshop 1 - Domain Count
+### 6 - Practice Lab - Domain Count
 
 * [6.1 - Analyzing clickstream traffic data](labs/06-domain-count.md)
 
@@ -67,10 +67,17 @@ Copy-Paste Shortcuts on Jupyter terminal
 
 * [10.1 - Kafka Connect](labs/10.1-kafka-connect.md)
 
-### 11 - Workshop 2  - Design Exercise (Group Exercise)
+### 11 - Spark and Kafka
 
-* Instructor will provide details
+* [11.1 - Spark + Kafka: batch processing](labs/11.1-spark-kafka-batch-processing.md)
+* [11.2 - Spark + Kafka: stream processing](labs/11.2-spark-kafka-stream-processing.md)
 
-### 12 - Workshop 3 - Implementation Exercise (Group Exercise)
+
+### Workshops
+
+* [Workshop-1: DB Streaming with Kafka](labs/workshop-1-db-streaming-docker.md)
+* [Workshop-2: Clickstream analysis with KSQL](labs/workshop-2-ksql-docker.md)
+
+### Design Exercise (Group Exercise)
 
 * Instructor will provide details
