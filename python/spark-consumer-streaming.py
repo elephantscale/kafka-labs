@@ -49,7 +49,7 @@ query1.awaitTermination()
 
 
 ## ---- TODO-1: extract kafka data into dataframe
-## Fill in cdoe from lab guide
+## Fill in code from lab guide
 
 
 ## ----- end: TODO-1 ------
@@ -57,7 +57,7 @@ query1.awaitTermination()
 
 
 ## ---- TODO-2: extract kafka data into dataframe
-## Fill in cdoe from lab guide
+## Fill in code from lab guide
 
 
 ## ----- end: TODO-2 ------

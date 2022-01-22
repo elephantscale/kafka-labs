@@ -71,6 +71,8 @@ Copy-Paste Shortcuts on Jupyter terminal
 
 * [11.1 - Spark + Kafka: batch processing](labs/11.1-spark-kafka-batch-processing.md)
 * [11.2 - Spark + Kafka: stream processing](labs/11.2-spark-kafka-stream-processing.md)
+* [11.3 - Fraud detection with Spark and Kafka - batch mode](labs/11.3-spark-kafka-fraud-detection-batch.md)
+* [11.4 - Fraud detection with Spark and Kafka - streaming](labs/11.4-spark-kafka-fraud-detection-streaming.md)
 
 
 ### Workshops

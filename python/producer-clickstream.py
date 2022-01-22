@@ -23,8 +23,8 @@ kafka_conf = {
 def get_random_ip_address():
     a = random.randint(1,4)
     b = random.randint(1,4)
-    c = random.randint (0, 10)
-    d = random.randint (0, 10)
+    c = random.randint (0, 9)
+    d = random.randint (0, 9)
     return '{}.{}.{}.{}'.format(a,b,c,d)
 #----------------
 

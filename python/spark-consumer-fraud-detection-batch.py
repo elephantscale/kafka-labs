@@ -3,31 +3,45 @@
 $   ~/apps/spark/bin/spark-submit  --master local[2] \
     --driver-class-path .  \
     --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.0.1 \
-    spark-consumer-batch.py
+    spark-consumer-fraud-detection-batch.py
 """
 
 
 import sys
 from datetime import time
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import from_json, col
+from pyspark.sql.functions import from_json, col, udf
 # from pyspark.sql.functions import from_json, col, min,max,mean,count
-from pyspark.sql.types import StructType, StructField, StringType, IntegerType
+from pyspark.sql.types import StructType, StructField, StringType, IntegerType, BooleanType
+
+
+# Fraud IP ranges
+fraud_ips = (
+        # '3.3',
+        '4.4'
+)
+
+# --------------------------
+def is_fraud_ip(ip):
+        a_b = 'x.y'
+        tokens  = ip.split('.')
+        if len(tokens) == 4:
+                a_b = '{}.{}'.format(tokens[0],  tokens[1])
+        return a_b in fraud_ips
+# --------------------------
+# define a udf
+is_fraud_ip_udf = udf(is_fraud_ip, BooleanType())
+# --------------------------
 
 topic = "clickstream"
 
-## --- Initialize Spark Session
 spark = SparkSession \
     .builder \
     .appName("KafkaStructuredStreaming") \
     .getOrCreate()
-
 spark.sparkContext.setLogLevel("ERROR")
-
 print('### Spark UI available on port : ' + spark.sparkContext.uiWebUrl.split(':')[2])
 
-
-## --- connect to Kafka
 df = spark.read \
     .format("kafka") \
     .option("kafka.bootstrap.servers", "localhost:9092") \
@@ -44,6 +58,7 @@ df.printSchema()
 
 
 
+
 ## ---- TODO-2: extract kafka data into dataframe
 ## Fill in code from lab guide
 
@@ -51,17 +66,12 @@ df.printSchema()
 
 
 
-## ---- TODO-3: Run Spark SQL query to calculate cost per domain
+
+## ---- TODO-3: Fraud detection
 ## Fill in code from lab guide
 
 ## ----- end: TODO-3 ------
 
 
-
-
-## ---- TODO-4: extract kafka data into dataframe
-## Fill in code from lab guide
-
-## ----- end: TODO-4 ------
-
 spark.stop()
+
