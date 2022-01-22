@@ -16,10 +16,10 @@ from pyspark.sql.types import StructType, StructField, StringType, IntegerType, 
 
 
 # Fraud IP ranges
-fraud_ips = (
+fraud_ips = {
         # '3.3',
         '4.4'
-)
+}
 
 # --------------------------
 def is_fraud_ip(ip):

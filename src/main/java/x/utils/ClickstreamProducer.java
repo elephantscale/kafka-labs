@@ -25,7 +25,7 @@ public class ClickstreamProducer {
 
     Gson gson = new Gson();
 
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 20; i++) {
       String clickstreamJSON = ClickStreamGenerator.getClickstreamAsJSON();
       ClickstreamData clickstream =
           gson.fromJson(clickstreamJSON, ClickstreamData.class);

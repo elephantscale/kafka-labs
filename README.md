@@ -52,6 +52,10 @@ Copy-Paste Shortcuts on Jupyter terminal
 * [7.5 - Streams - GroupBy](labs/07.5-streaming-groupby.md)
 * [7.6 - Streams - Window](labs/07.6-streaming-window.md)
 
+### Practice Lab - Fraud Detection
+
+* [Fraud detection](labs/practice-1-fraud-detection.md)
+
 ### 8 - Confluent Platform
 
 * [8.1 - Install Confluent](labs/08.1-install-confluent.md)

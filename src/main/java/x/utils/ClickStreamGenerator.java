@@ -24,12 +24,11 @@ public class ClickStreamGenerator {
 	public static int MAX_CAMPAIGNS = 10;
 	public static int MAX_SESSIONS = 300;
 	public static int MAX_IPS = 100;
-	public static String[] DOMAINS = new String[] { "facebook.com", "google.com", "npr.org", "cnn.com", "foxnews.com",
-			"twitter.com" };
+	public static String[] DOMAINS = new String[] { "facebook.com", "gmail.com", "twitter.com", "youtube.com" };
 	public static String[] ACTIONS = new String[] { "blocked", "viewed", "clicked" };
 
 	static String getRandomIP() {
-		return String.format("%d.%d.%d.%d", rand.nextInt(3)+1, rand.nextInt(3), rand.nextInt(3), rand.nextInt(3));
+		return String.format("%d.%d.%d.%d", rand.nextInt(3)+1, rand.nextInt(3)+1, rand.nextInt(10), rand.nextInt(10));
 	}
 	public static ClickstreamData getClickStreamRecord() {
 		ClickstreamData clickstream = new ClickstreamData();
