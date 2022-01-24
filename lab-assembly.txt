@@ -3,5 +3,6 @@ assets
 labs
 misc
 pom.xml
+python
 run.sh
 src

@@ -78,6 +78,9 @@ Copy-Paste Shortcuts on Jupyter terminal
 * [11.3 - Fraud detection with Spark and Kafka - batch mode](labs/11.3-spark-kafka-fraud-detection-batch.md)
 * [11.4 - Fraud detection with Spark and Kafka - streaming](labs/11.4-spark-kafka-fraud-detection-streaming.md)
 
+### 12 (ADV) - Kafka in Docker
+
+* [Running full kafka stack in docker](https://github.com/elephantscale/kafka-in-docker) - Check out this guide on how to run multiple kafka brokers + zookeeper + kafka manager using Docker
 
 ### Workshops
 
