@@ -41,19 +41,27 @@ public class ClickStreamGenerator {
 		clickstream.action = ACTIONS[rand.nextInt(ACTIONS.length)];
 		return clickstream;
 	}
-
-	public static String getClickstreamAsCsv() {
-
-		ClickstreamData clickstream = getClickStreamRecord();
-
+	
+	public static String getClickstreamAsCsv (ClickstreamData clickstream)
+	{
 		return clickstream.timestamp + "," + clickstream.ip + "," + clickstream.user + "," + clickstream.action + ","
 				+ clickstream.domain + "," + clickstream.campaign + "," + clickstream.cost ;
 	}
 
-	public static String getClickstreamAsJSON() {
+	public static String getClickstreamAsCsv() {
+
 		ClickstreamData clickstream = getClickStreamRecord();
+		return getClickstreamAsCsv(clickstream);
+		
+	}
+
+	public static String getClickstreamAsJSON(ClickstreamData clickstream) {
 		String s = gson.toJson(clickstream);
 		return s;
+	}
+	public static String getClickstreamAsJSON() {
+		ClickstreamData clickstream = getClickStreamRecord();
+		return getClickstreamAsJSON(clickstream);
 	}
 
 	public static void main(String[] args) {

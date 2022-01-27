@@ -28,12 +28,12 @@ we are going scan records and filter-out fraudulent IP address - these IP addres
     - python: `python/producer-clickstream.py`
     - Java: `src/main/java/x/utils/ClickstreamProducer.java`
 * Consumer
-    - consumer: `src/main/java/x/practice_labs/FraudDetection.java`
+    - consumer: `src/main/java/x/practice_labs/FraudDetectionApp.java`
     - Fraud IP Lookup: `src/main/java/x/practice_labs/CacheIPLookup.java`
 
 ## Step-3:  Inspect Consumer
 
-Inspect consumer file : `src/main/java/x/practice_labs/FraudDetection.java`
+Inspect consumer file : `src/main/java/x/practice_labs/FraudDetectionApp.java`
 
 Fix TODO items
 
@@ -46,7 +46,7 @@ or run it command line as follows
 ```bash
 $   cd ~/kafka-labs
 
-$    mvn exec:java  -Dexec.mainClass=x.practice_labs.FraudDetection
+$    mvn exec:java  -Dexec.mainClass=x.practice_labs.FraudDetectionApp
 ```
 
 ## Step-5: Run the Producer

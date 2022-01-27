@@ -56,12 +56,11 @@ query1.awaitTermination()
 
 
 
-## ---- TODO-2: extract kafka data into dataframe
+## ---- TODO-2: Run a SQL query on streaming data!
 ## Fill in code from lab guide
 
 
 ## ----- end: TODO-2 ------
-
 
 
 spark.stop()

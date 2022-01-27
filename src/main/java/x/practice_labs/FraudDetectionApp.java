@@ -18,9 +18,9 @@ import x.utils.ClickstreamData;
 import x.utils.MyConfig;
 
 
-public class FraudDetection {
+public class FraudDetectionApp {
 	
-	private static final Logger logger = LoggerFactory.getLogger(FraudDetection.class);
+	private static final Logger logger = LoggerFactory.getLogger(FraudDetectionApp.class);
 
 	public static void main(String[] args) {
 		Properties config = new Properties();
@@ -45,6 +45,12 @@ public class FraudDetection {
 
 	    // print to console
 		// clickstream.print(Printed.toSysOut());
+	    
+	    // clickstream data will arrive in this format:
+	    // key : twitter.com
+	    // value: {"timestamp": 1642840429496, "ip": "4.4.8.2", "user": "user-70", 
+	    //          "action": "clicked", "domain": "twitter.com", 
+	    //          "campaign": "campaign-99", "cost": 26}
 
 		//# TODO-1 : filter fraudIPs
 	    Gson gson = new Gson();

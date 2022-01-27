@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import x.utils.ClickStreamGenerator;
+import x.utils.ClickstreamData;
 
 public class ClickstreamProducer implements Runnable {
 	private static final Logger logger = LoggerFactory.getLogger(ClickstreamProducer.class);
@@ -54,9 +55,10 @@ public class ClickstreamProducer implements Runnable {
 		long start = System.nanoTime();
 		while (this.keepRunning && (numMessages < this.maxMessages)) {
 			numMessages++;
-			String clickstreamJSON = ClickStreamGenerator.getClickstreamAsJSON();
-
-			String key = "" + numMessages;
+			ClickstreamData clickstream = ClickStreamGenerator.getClickStreamRecord();
+			String clickstreamJSON = ClickStreamGenerator.getClickstreamAsJSON(clickstream);
+			
+			String key = clickstream.domain;
 			String value = clickstreamJSON;
 
 			// TODO-2 : let's construct a record
@@ -65,7 +67,8 @@ public class ClickstreamProducer implements Runnable {
                         //      - second param : key = the key just contructed  (key)
                         //      - third param : value = the value just constructored (value)
 			 
-			ProducerRecord<String, String> record = new ProducerRecord<>( "???", "???", "???");
+			ProducerRecord<String, String> record = null;
+			//record = new ProducerRecord<>( ???, ???, ???);
 			
 			
 			

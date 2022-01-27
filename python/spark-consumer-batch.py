@@ -59,7 +59,7 @@ df.printSchema()
 
 
 
-## ---- TODO-4: extract kafka data into dataframe
+## ---- TODO-4: Run Spark SQL Query to calculste clicks/views/blocks per domain
 ## Fill in code from lab guide
 
 ## ----- end: TODO-4 ------
