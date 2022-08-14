@@ -55,11 +55,11 @@ public class SeekingConsumer {
       consumer.seekToBeginning(Collections.singletonList(partition));
 
       // logger.debug ("seeking to end of partition " + partition);
-      // ???
+      //consumer.seekToEnd(Collections.singletonList(partition));
 
 
       // logger.debug ("seeking to position #5 of " + partition);
-      // ???
+      // consumer.seek(new TopicPartition("test", 0), 5);
 
     }
     consumer.close();

@@ -34,20 +34,29 @@ public class SimpleConsumer {
 		KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
 		consumer.subscribe(Arrays.asList("test")); // subscribe to topics
 
-		boolean keepRunning = true;
-		Duration MillisDuration = Duration.ofMillis(1000);
 		logger.info("listening on test topic");
 		int msgCount = 0;
-		while (keepRunning) {
-			ConsumerRecords<String, String> records = consumer.poll(MillisDuration);
-			if (records.count() == 0)
-				continue;
-			logger.debug("Got " + records.count() + " messages");
-			for (ConsumerRecord<String, String> record : records) {
-				msgCount ++;
-				logger.debug(String.format ("Received message [%d] : [%s]", msgCount, record));
+		
+		try
+		{
+			while (true) {
+				ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(1000));
+				if (records.count() == 0)
+					continue;
+				logger.debug("Got " + records.count() + " messages");
+				for (ConsumerRecord<String, String> record : records) {
+					msgCount ++;
+					logger.debug(String.format ("Received message [%d] : [%s]", msgCount, record));
+				}
 			}
 		}
-		consumer.close();
+		catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		finally {
+			consumer.close();
+		}
+		
+
 	}
 }

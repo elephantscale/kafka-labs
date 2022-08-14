@@ -133,8 +133,10 @@ public class ClickstreamProducer implements Runnable {
 		
 		//producer = 	new ClickstreamProducer(???, ??? , ???);
 		 
-		logger.info("Producer starting.... : " + producer); Thread t1 = new
-		Thread(producer); t1.start(); t1.join(); // wait for thread to complete
+		logger.info("Producer starting.... : " + producer); 
+		Thread t1 = new Thread(producer); 
+		t1.start(); 
+		t1.join(); // wait for thread to complete
 		logger.info("Producer done.");
 	}
 

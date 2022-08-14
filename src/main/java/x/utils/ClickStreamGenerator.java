@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import com.google.gson.Gson;
 
 public class ClickStreamGenerator {
-	private static final Logger logger = LoggerFactory.getLogger(ClickStreamGenerator.class);
+	//private static final Logger logger = LoggerFactory.getLogger(ClickStreamGenerator.class);
 	static Random rand = new Random(100L);
 
 	private static long START_TIME = 1451635200 * 1000L; // 2015-01-01 00:00:00
@@ -66,12 +66,12 @@ public class ClickStreamGenerator {
 
 	public static void main(String[] args) {
 		for (int i = 0; i < 10; i++) {
-			logger.info(getClickstreamAsCsv());
+			System.out.println(getClickstreamAsCsv());
 		}
 		System.out.println("\n\n");
 
 		for (int i = 0; i < 10; i++) {
-			logger.info(getClickstreamAsJSON());
+			System.out.println(getClickstreamAsJSON());
 		}
 	}
 
