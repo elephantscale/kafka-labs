@@ -1,6 +1,6 @@
 <link rel='stylesheet' href='assets/css/main.css'/>
 
-# Introduction to Kafka Labs
+# Kafka Labs
 
 Welcome to Kafka labs bundle.
 
@@ -11,9 +11,9 @@ Copy-Paste Shortcuts on Jupyter terminal
 * On Windows try: `Shift + Insert`  
 * On Windows try: `Shift + Right Click`
 
-## Labs
+## Intro Labs
 
-### 1 - Install Kafka
+### 1 - Setup Kafka
 
 * [1 - Installing Kafka](labs/01-installing-kafka.md)
 
@@ -47,6 +47,9 @@ Copy-Paste Shortcuts on Jupyter terminal
 
 * [7.1 - Streams - Intro](labs/07.1-streaming-intro.md)
 * [7.2 - Streams - Foreach](labs/07.2-streaming-foreach.md)
+
+optional (intermediate)
+
 * [7.3 - Streams - Filter](labs/07.3-streaming-filter.md)
 * [7.4 - Streams - Map](labs/07.4-streaming-map.md)
 * [7.5 - Streams - GroupBy](labs/07.5-streaming-groupby.md)
@@ -55,6 +58,12 @@ Copy-Paste Shortcuts on Jupyter terminal
 ### Practice Lab - Fraud Detection
 
 * [Fraud detection](labs/practice-1-fraud-detection.md)
+
+### Design Exercise 1 (Group Exercise)
+
+* Instructor will provide details
+
+## Intermediate Labs
 
 ### 8 - Confluent Platform
 
@@ -78,15 +87,12 @@ Copy-Paste Shortcuts on Jupyter terminal
 * [11.3 - Fraud detection with Spark and Kafka - batch mode](labs/11.3-spark-kafka-fraud-detection-batch.md)
 * [11.4 - Fraud detection with Spark and Kafka - streaming](labs/11.4-spark-kafka-fraud-detection-streaming.md)
 
-### 12 (ADV) - Kafka in Docker
-
-* [Running full kafka stack in docker](https://github.com/elephantscale/kafka-in-docker) - Check out this guide on how to run multiple kafka brokers + zookeeper + kafka manager using Docker
-
-### Workshops
-
-* [Workshop-1: DB Streaming with Kafka](labs/workshop-1-db-streaming-docker.md)
-* [Workshop-2: Clickstream analysis with KSQL](labs/workshop-2-ksql-docker.md)
-
-### Design Exercise (Group Exercise)
+### Design Exercise 2 (Group Exercise)
 
 * Instructor will provide details
+
+## BONUS Labs
+
+### 12 - Kafka in Docker
+
+* [Running full kafka stack in docker](https://github.com/elephantscale/kafka-in-docker) - Check out this guide on how to run multiple kafka brokers + zookeeper + kafka manager using Docker

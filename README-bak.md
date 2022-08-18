@@ -1,6 +1,6 @@
 <link rel='stylesheet' href='assets/css/main.css'/>
 
-# Introduction to Kafka Labs
+# Kafka Labs
 
 Welcome to Kafka labs bundle.
 
