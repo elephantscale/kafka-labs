@@ -25,21 +25,17 @@ public class ClickstreamProducer {
 
     Gson gson = new Gson();
 
-    for (int i = 0; i < 20; i++) {
+    for (int i = 1; i <= 10; i++) {
       String clickstreamJSON = ClickStreamGenerator.getClickstreamAsJSON();
       ClickstreamData clickstream =
           gson.fromJson(clickstreamJSON, ClickstreamData.class);
       
-      // TODO-1 : 
-      //     key = clickstream.domain
-      //     value = clickstreamJSON
       String key = clickstream.domain;
       String value = clickstreamJSON;  
       
-      // TODO-2 : send the clickstreamJSON data as value with DOMAIN as key
       ProducerRecord<String, String> record =
           new ProducerRecord<>(MyConfig.TOPIC_CLICKSTREAM, key,  value);
-      logger.debug("sending : " + record);
+      logger.debug("sending record # " + i + " : " + record);
       producer.send(record);
 
     }

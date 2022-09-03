@@ -37,20 +37,17 @@ public class StreamingConsumer3_Filter {
 
 		final StreamsBuilder builder = new StreamsBuilder();
 
-		 //# TODO-1 : construct KStream
-	    //#     param 1 : topic name  : "clickstream"
-	    final KStream<String, String> clickstream = builder.stream("???");
+	    final KStream<String, String> clickstream = builder.stream("clickstream");
 
-	    // print to console
-		clickstream.print(Printed.toSysOut());
+	    // debug print to console
+		// clickstream.print(Printed.toSysOut());
 
-		//# TODO-2 : filter clicks only
+		//# TODO-1 : filter clicks only
 		// Hint the pattern you are looking for is : "clicked"
 		final KStream<String, String> actionClickedStream = clickstream
 				.filter((k, v) -> v.contains("???"));
 		
-		// # TODO-3 : print clickstream to console
-		// actionClickedStream.print(???);
+		actionClickedStream.print(Printed.toSysOut());
 
 		// start the stream
 		final KafkaStreams streams = new KafkaStreams(builder.build(), config);

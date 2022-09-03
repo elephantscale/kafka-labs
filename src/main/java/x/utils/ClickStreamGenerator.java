@@ -10,7 +10,8 @@ import com.google.gson.Gson;
 
 public class ClickStreamGenerator {
 	//private static final Logger logger = LoggerFactory.getLogger(ClickStreamGenerator.class);
-	static Random rand = new Random(100L);
+//	static Random rand = new Random(100L);
+	static Random rand = new Random();
 
 	private static long START_TIME = 1451635200 * 1000L; // 2015-01-01 00:00:00
 															// in

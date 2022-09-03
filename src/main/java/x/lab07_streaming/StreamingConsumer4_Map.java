@@ -42,50 +42,53 @@ public class StreamingConsumer4_Map {
 
 		final StreamsBuilder builder = new StreamsBuilder();
 
-	   
-		//# TODO-1 : construct KStream
-	    //#     param 1 : topic name  : "clickstream"
-	    final KStream<String, String> clickstream = builder.stream("???");
-		
-		clickstream.print(Printed.toSysOut());
+		final KStream<String, String> clickstream = builder.stream("clickstream");
 
-		// we are transforming the data using a MAP operation
-		// input::
-		// key=domain,
-		// value =
-		// {"timestamp":1451635200005,"session":"session_251","domain":"facebook.com","cost":91,"user":"user_16","campaign":"campaign_5","ip":"ip_67","action":"clicked"}
-		//
-		// mapped output:
-		// key = action
-		// value = 1 (used for counting / aggregating later)
+		// clickstream.print(Printed.toSysOut());
+
+		/*-
+		we are transforming the data using a MAP operation
+		input::
+			key=domain (String),
+			value = JSON (String)
+		            {"timestamp":1451635200005,"session":"session_251","domain":"facebook.com","cost":91,"user":"user_16","campaign":"campaign_5","ip":"ip_67","action":"clicked"}
+		
+		mapped output:
+		    key = action (String)
+		    value = 1 (Integer) (used for counting / aggregating later)
+		 */
+
 		final Gson gson = new Gson();
 		final KStream<String, Integer> actionStream = clickstream
 				.map(new KeyValueMapper<String, String, KeyValue<String, Integer>>() {
 					public KeyValue<String, Integer> apply(String key, String value) {
 						try {
-							ClickstreamData clickstream = gson.fromJson(value, ClickstreamData.class);
-							logger.debug("map() : got : " + value);
-							
-							//# TODO-2 : extract action from 'clickstream' data (clickstream.action)
+							logger.debug("map() : got key: " + key + ", value: " + value);
+							ClickstreamData clickstreamData = gson.fromJson(value, ClickstreamData.class);
+
 							String action = "???";
-							
-							//# TODO-3 : set action to "unknown" if clickstream.action is null
-							action = "???";
-							
-							//# Hint : to be fool proof the following is recommended
-							/*
-							String action = (clickstream.action != null) && (!clickstream.action.isEmpty())
-									? clickstream.action
-									: "unknown";
-							*/
-							
+
+							/*-
+							  # TODO-1 : extract action from 'clickstreamData' data (clickstream.action)
+							  
+							  # TODO-2 : set action to "unknown" if clickstream.action is null
+							   
+							  Something like this will work:
+							   
+							 		String action = (clickstreamData.action != null) &&
+							 						(!clickstreamData.action.isEmpty()) ? clickstreamData.action : "unknown";
+							 */
+
 							KeyValue<String, Integer> actionKV = null;
-							
-							//# TODO-4 : construct a new KeyValue as follows
-							//    key = action
-							//    value = 1
-							// actionKV = new KeyValue<>(???, ???);
-							
+
+							/*-
+							 # TODO-3 : construct a new KeyValue as follows
+							 			key = action
+										value = 1
+							   like this:
+										actionKV = new KeyValue<>(action, 1);
+							 */
+
 							logger.debug("map() : returning : " + actionKV);
 							return actionKV;
 						} catch (Exception ex) {
@@ -94,9 +97,8 @@ public class StreamingConsumer4_Map {
 						}
 					}
 				});
-		
-		//#  TODO-5 : Print out the action stream
-		// actionStream.print(???);
+
+		actionStream.print(Printed.toSysOut());
 
 		// start the stream
 		final KafkaStreams streams = new KafkaStreams(builder.build(), config);

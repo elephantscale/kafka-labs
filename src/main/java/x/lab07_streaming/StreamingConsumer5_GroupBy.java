@@ -30,14 +30,11 @@ public class StreamingConsumer5_GroupBy {
 	public static void main(String[] args) {
 
 		Properties config = new Properties();
-		// "bootstrap.servers" = "localhost:9092"
 		config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, MyConfig.DEFAULT_BOOTSTRAP_SERVERS);
 		config.put("group.id", "streaming5");
 		config.put(StreamsConfig.APPLICATION_ID_CONFIG, "kafka-streams-groupby");
 		config.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "latest");
 		config.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
-		// config.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG,
-		// Serdes.Integer().getClass().getName());
 		config.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
 		// Records should be flushed every 10 seconds. This is less than the
 		// default
@@ -48,20 +45,21 @@ public class StreamingConsumer5_GroupBy {
 
 		final StreamsBuilder builder = new StreamsBuilder();
 
-		 //# TODO-1 : construct KStream
-	    //#     param 1 : topic name  : "clickstream"
-	    final KStream<String, String> clickstream = builder.stream("???");
-		
+		final KStream<String, String> clickstream = builder.stream("clickstream");
+
 		clickstream.print(Printed.toSysOut());
 
-		// input::
-		// key=domain,
-		// value =
-		// {"timestamp":1451635200005,"session":"session_251","domain":"facebook.com","cost":91,"user":"user_16","campaign":"campaign_5","ip":"ip_67","action":"clicked"}
-		//
-		// mapped output
-		// key = action
-		// value = 1
+		/*-
+		 ==== First transformation is MAP ====
+		 input::
+			key=domain (String),
+			value = JSON (String)
+		            {"timestamp":1451635200005,"session":"session_251","domain":"facebook.com","cost":91,"user":"user_16","campaign":"campaign_5","ip":"ip_67","action":"clicked"}
+		
+		 mapped output:
+		    key = action (String)
+		    value = 1 (Integer) (used for counting / aggregating later)
+		 */
 		final Gson gson = new Gson();
 		final KStream<String, Integer> actionStream = clickstream
 				.map(new KeyValueMapper<String, String, KeyValue<String, Integer>>() {
@@ -84,32 +82,44 @@ public class StreamingConsumer5_GroupBy {
 				});
 		actionStream.print(Printed.toSysOut());
 
-		// Now aggregate and count actions
-		// we have to explicity state the K,V serdes in groupby, as the types are
-		// changing
+		/*-
+		 ==== Now aggregate and count actions ===
+		we have to explicity state the K,V serdes in groupby, as the types are changing
 
-		//# TODO-1 : aggregate
-		//#   param1 : key type :  Serdes.String()
-		//#   param2 : value type :  Serdes.Integer()
-		//groupByKey accepts grouped object with String serd as key and Integer serde as value
-		/*
-		KGroupedStream<String, Integer> grouped = actionStream.groupByKey(Grouped.with(Serdes.String(), Serdes.Integer()));
-		*/
-		
-		//# TODO-2 : count grouped stream
-		//# Hint : grouped.count()
-		
-		/*
-		final KTable<String, Long> actionCount = grouped.count();
-		actionCount.toStream().print(Printed.toSysOut());
-		*/
-
-		//# BONUS lab 1 : 
-		//# lets write the data into another topic
-		//# Hint : param 1 : name of queue : "actionCount"
-		/*
-		actionCount.toStream().to("???", Produced.with(Serdes.String(), Serdes.Long()));
+		# TODO-1 : aggregate
+			param1 : key type : Serdes.String()
+			param2 : value type : Serdes.Integer()
+		 groupByKey accepts grouped object with String serd as key and Integer serde as value
+		 
+		 uncomment the following 2 lines
 		 */
+		
+		 // KGroupedStream<String, Integer> grouped =
+		 // 					actionStream.groupByKey(Grouped.with(Serdes.String(), Serdes.Integer()));
+
+		
+		/*-
+		  # TODO-2 : count grouped stream
+		  Hint : grouped.count()
+		  
+		  uncomment the following 2 lines
+		 */
+
+		 // final KTable<String, Long> actionCount = grouped.count();
+		 // actionCount.toStream().print(Printed.toSysOut());
+
+		/*-
+		 # BONUS lab 1 :
+		 lets write the data into another topic
+		 Hint : param 1 : name of queue : "action-count"
+		 
+		 And use 'consoleConsumer' to monitor the queue output!
+		 
+		 Here is a kafkacat example
+		 	$   kafkacat -q -C -b localhost:9092 -t action-count  -s key=s  -s value=q -f '%k:%s\n'
+		 */
+		 
+		// actionCount.toStream().to("???", Produced.with(Serdes.String(),Serdes.Long()));
 
 		// start the stream
 		final KafkaStreams streams = new KafkaStreams(builder.build(), config);
