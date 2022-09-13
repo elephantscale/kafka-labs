@@ -21,7 +21,8 @@ Copy-Paste Shortcuts on Jupyter terminal
 
 * [2.1 - Kafka Utilities](labs/02.1-kafka-utils.md)
 * [2.2 - Kafkacat](labs/02.2-kafkacat.md)
-* [2.3 - Compacted topics](labs/02.3-log-compaction.md) - Optional
+* [2.3 - Producing with keys](labs/02.3-keys-partitions.md)
+* [2.4 - Compacted topics](labs/02.4-log-compaction.md) - Optional
 
 ### 3 - Kafka API
 
