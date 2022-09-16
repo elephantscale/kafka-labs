@@ -38,19 +38,17 @@ public class StreamingConsumer2_Foreach {
 
 		final StreamsBuilder builder = new StreamsBuilder();
 
-		//# TODO-1 : construct KStream
-		//#     param 1 : topic name  : "clickstream"
-		final KStream<String, String> clickstream = builder.stream("????");
+		final KStream<String, String> clickstream = builder.stream("clickstream");
 
 		// print to console
-		clickstream.print(Printed.toSysOut());
+		// clickstream.print(Printed.toSysOut());
 
 		// process events one by one
 		clickstream.foreach(new ForeachAction<String, String>() {
 			long counter = 0;
 			public void apply(String key, String value) {
 				counter ++;
-				//# TODO-2 : print out the record (key and value)
+				//# TODO-1 : print out the record (key and value)
 				//logger.debug("FOREACH [" + counter + "]:: KEY:" + ??? + ", VALUE:" + ??? + "\n");
 			}
 		});
