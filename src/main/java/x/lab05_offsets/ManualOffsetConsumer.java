@@ -52,12 +52,15 @@ public class ManualOffsetConsumer {
 				logger.debug("OFFSET : partition:" + p.partition() + ", offset:" + pos);
 			}
 
-			/*
-			 * TODO-2: - do a run without calling 'commitSync' - run 'ClickStreamProducer'
-			 * to send some events - run this code again a couple of times... - how many
-			 * events are you getting? - can you explain the behavior ? - now uncomment the
-			 * following 'commitSync' code and run again - do a couple of runs, what is the
-			 * behavior now?
+			/*-
+			 TODO-2: - do a few runs without calling 'commitSync' 
+
+                         Observe the output
+
+                         Then turn on commitsync and do a few runs.
+
+                         Observe the output
+                         
 			 */
 			// consumer.commitSync();
 

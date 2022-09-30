@@ -47,7 +47,7 @@ public class StreamingConsumer5_GroupBy {
 
 		final KStream<String, String> clickstream = builder.stream("clickstream");
 
-		clickstream.print(Printed.toSysOut());
+		// clickstream.print(Printed.toSysOut());
 
 		/*-
 		 ==== First transformation is MAP ====
@@ -80,7 +80,7 @@ public class StreamingConsumer5_GroupBy {
 						}
 					}
 				});
-		actionStream.print(Printed.toSysOut());
+		// actionStream.print(Printed.toSysOut());
 
 		/*-
 		 ==== Now aggregate and count actions ===

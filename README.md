@@ -74,8 +74,9 @@ optional (intermediate)
 
 ### 9 -  Metrics
 
-* [9.1 - Metrics Intro](labs/09.1-metrics-intro.md)
-* [9.2 - Kafka Metrics - traffic stats](labs/09.2-kafka-metrics.md)
+* Optional - [9.1 - Metrics Intro](labs/09.1-metrics-intro.md) - This is an introduction to using Metrics library.  Provided as reference.
+* [9.2 - Kafka Metrics](labs/09.2-kafka-metrics.md)
+* BONUS - [9.3 - Kafka Metrics - traffic stats](labs/09.3-traffic-metrics.md)
 
 ### 10 - Kafka Connect
 
@@ -97,3 +98,14 @@ optional (intermediate)
 ### 12 - Kafka in Docker
 
 * [Running full kafka stack in docker](https://github.com/elephantscale/kafka-in-docker) - Check out this guide on how to run multiple kafka brokers + zookeeper + kafka manager using Docker
+
+## Downloading Your Work from Lab Machine
+
+On Jupyter terminal, execute these commands
+
+```bash
+$   cd ~/dev
+$   zip -r my-kafka-labs.zip kafka-labs
+```
+
+Now right-click on `my-kafka-labs.zip` from Jupyter UI to download.

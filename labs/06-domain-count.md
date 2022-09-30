@@ -15,12 +15,18 @@ Count Domain based stats of clickstream
 ## Step 1 : Create a 'clickstream' topic
 
 ```bash
-    $   ~/apps/kafka/bin/kafka-topics.sh  --bootstrap-server localhost:9092  --create --topic clickstream --replication-factor 1  --partitions 2
+$   ~/apps/kafka/bin/kafka-topics.sh  --bootstrap-server localhost:9092  --create --topic clickstream --replication-factor 1  --partitions 2
 ```
 
 ## Step-2: Listen on `clickstream` topic
 
-We will start a console consumer
+Use Kafkacat to see messages in the topic
+
+```bash
+$    kafkacat -q -C -b localhost:9092 -t clickstream -f 'Partition %t[%p], offset: %o, key: %k, value: %s\n'
+```
+
+Or use console consumer
 
 ```bash
 $   ~/apps/kafka/bin/kafka-console-consumer.sh \

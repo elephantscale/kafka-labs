@@ -24,7 +24,7 @@ public class DomainCountConsumer {
 	public static void main(String[] args) throws Exception {
 		Properties props = new Properties();
 		props.put("bootstrap.servers", "localhost:9092");
-		props.put("group.id", "group1");
+		props.put("group.id", "domain-count");
 		props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
 		props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
 		KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);

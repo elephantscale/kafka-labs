@@ -1,73 +1,78 @@
 package x.lab09_metrics;
 
+import java.util.Arrays;
 import java.util.Properties;
+import java.time.Duration;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
-import org.apache.kafka.common.serialization.Serdes;
-import org.apache.kafka.streams.KafkaStreams;
-import org.apache.kafka.streams.StreamsBuilder;
-import org.apache.kafka.streams.StreamsConfig;
-import org.apache.kafka.streams.kstream.ForeachAction;
-import org.apache.kafka.streams.kstream.KStream;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.apache.kafka.clients.consumer.ConsumerRecords;
+import org.apache.kafka.clients.consumer.KafkaConsumer;
+import org.apache.kafka.common.serialization.StringDeserializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.codahale.metrics.Histogram;
 import com.codahale.metrics.Meter;
+import com.codahale.metrics.Timer;
 
-import x.utils.MyConfig;
 import x.utils.MyMetricsRegistry;
 import x.utils.MyUtils;
 
 public class ConsumerWithMetrics {
 	private static final Logger logger = LoggerFactory.getLogger(ConsumerWithMetrics.class);
 
-	// TODO-1 : get a meter with name 'consumer.events'
-	private static final Meter meterConsumerEvents = MyMetricsRegistry.metrics.meter("???");
-	private static long eventsReceived = 0;
+	private static final Meter meterConsumerEvents = MyMetricsRegistry.metrics.meter("consumer.events");
+	private static final Timer timerConsumer = MyMetricsRegistry.metrics.timer("consumer.processing_time");
+	private static final Histogram timerInKafka = MyMetricsRegistry.metrics.histogram("wait-time-in-kafka");
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
+		Properties props = new Properties();
+		props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+		props.put(ConsumerConfig.GROUP_ID_CONFIG, "metrics-consumer");
+		props.put(ConsumerConfig.CLIENT_ID_CONFIG, "Metrics Consumer");
+		props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+		props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
 
-		Properties config = new Properties();
-		// "bootstrap.servers" = "localhost:9092"
-		config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, MyConfig.DEFAULT_BOOTSTRAP_SERVERS);
-		config.put(StreamsConfig.APPLICATION_ID_CONFIG, "clickstream-traffic-reporter1");
-		config.put(ConsumerConfig.GROUP_ID_CONFIG, "traffic-reporter1");
-		config.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
-		config.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
-		// Records should be flushed every 10 seconds. This is less than the
-		// default
-		// in order to keep this example interactive.
-		config.put(StreamsConfig.COMMIT_INTERVAL_MS_CONFIG, 10 * 1000);
-		// For illustrative purposes we disable record caches
-		config.put(StreamsConfig.CACHE_MAX_BYTES_BUFFERING_CONFIG, 0);
+		KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
+		consumer.subscribe(Arrays.asList("clickstream")); // subscribe to topics
 
-		final StreamsBuilder builder = new StreamsBuilder();
+		logger.info("listening on clickstream topic");
+		int msgCount = 0;
 
-		final KStream<String, String> clickstream = builder.stream(MyConfig.TOPIC_CLICKSTREAM);
-		// clickstream.print();
+		try {
+			while (true) {
+				ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(1000));
+				if (records.count() == 0)
+					continue;
+				for (ConsumerRecord<String, String> record : records) {
+					msgCount++;
 
-		// process each record and report traffic
-		clickstream.foreach(new ForeachAction<String, String>() {
-			public void apply(String key, String value) {
-				eventsReceived++;
-				logger.debug("received # " + eventsReceived + ",  key:" + key + ", value:" + value);
+					// calculate time spent in Kafka
+					long timeArrivedInKafka = record.timestamp();
+					long currentTime = System.currentTimeMillis();
+					long timeSpentInKafka = currentTime - timeArrivedInKafka;
+					timerInKafka.update(timeSpentInKafka);
+					logger.debug(("Kafka arrival time : " + timeArrivedInKafka + ",  currentTime :" + currentTime
+							+ ",  wait time : " + (currentTime - timeArrivedInKafka)));
+					
 
-				// TODO-2 : mark the meter for received events
-				meterConsumerEvents.mark();
+					logger.debug(String.format("Received message [%d] : [%s]", msgCount, record));
 
-				MyUtils.randomDelay(100, 500);
+					// Mark the meter
+					meterConsumerEvents.mark();
+
+					// Measure processing time
+					Timer.Context context = timerConsumer.time();
+					MyUtils.randomDelay(100, 500);
+					context.stop();
+				}
 			}
-		});
-
-		// start the stream
-		final KafkaStreams streams = new KafkaStreams(builder.build(), config);
-		streams.cleanUp();
-		streams.start();
-
-		logger.info("kstreams starting on " + MyConfig.TOPIC_CLICKSTREAM);
-
-		Runtime.getRuntime().addShutdownHook(new Thread(streams::close));
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			consumer.close();
+		}
 
 	}
-
 }
