@@ -10,8 +10,8 @@ import org.slf4j.LoggerFactory;
 
 import x.utils.ClickStreamGenerator;
 
-public class CompressedProducer implements Runnable {
-	private static final Logger logger = LoggerFactory.getLogger(CompressedProducer.class);
+public class BenchmarkCompressionSchemes implements Runnable {
+	private static final Logger logger = LoggerFactory.getLogger(BenchmarkCompressionSchemes.class);
 
 	private final String topic;
 	private final int maxMessages;
@@ -23,7 +23,7 @@ public class CompressedProducer implements Runnable {
 	private final KafkaProducer<String, String> producer;
 
 	// topic, how many messages to send
-	public CompressedProducer(String topic, int maxMessages, String compressionType) {
+	public BenchmarkCompressionSchemes(String topic, int maxMessages, String compressionType) {
 		this.topic = topic;
 		this.maxMessages = maxMessages;
 		this.compressionType = compressionType;
@@ -121,7 +121,7 @@ public class CompressedProducer implements Runnable {
 		// See documentation for values to give to this property
 		// https://kafka.apache.org/documentation/#configuration
 
-		CompressedProducer producer = new CompressedProducer("compression", 100000, "snappy");
+		BenchmarkCompressionSchemes producer = new BenchmarkCompressionSchemes("compression", 100000, "snappy");
 
 		logger.info("Producer starting.... : " + producer);
 		Thread t1 = new Thread(producer);

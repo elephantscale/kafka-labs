@@ -33,7 +33,8 @@ Copy-Paste Shortcuts on Jupyter terminal
 ### 4. Kafka Producer benchmarking
 
 * [4.1 - Kafka Producer benchmarking](labs/04.1-producer-benchmark.md)
-* [4.2 - Kafka Producer  compression benchmarking](labs/04.2-producer-compress.md)
+* [4.2 - Compression in Kafka](labs/04.2-compression.md)
+* [4.3 - Kafka Producer  compression benchmarking](labs/04.3-producer-compress.md)
 
 ### 5 - Offset Management
 

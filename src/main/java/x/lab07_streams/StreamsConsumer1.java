@@ -1,4 +1,4 @@
-package x.lab07_streaming;
+package x.lab07_streams;
 
 import java.util.Properties;
 
@@ -14,8 +14,8 @@ import org.slf4j.LoggerFactory;
 
 import x.utils.MyConfig;
 
-public class StreamingConsumer1 {
-	private static final Logger logger = LoggerFactory.getLogger(StreamingConsumer1.class);
+public class StreamsConsumer1 {
+	private static final Logger logger = LoggerFactory.getLogger(StreamsConsumer1.class);
 	
 
 	public static void main(String[] args) {

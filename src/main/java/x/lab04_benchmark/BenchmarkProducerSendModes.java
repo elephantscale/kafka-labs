@@ -17,8 +17,8 @@ enum SendMode {
 	SYNC, ASYNC, FIRE_AND_FORGET
 }
 
-public class BenchmarkProducer implements Runnable, Callback {
-	private static final Logger logger = LoggerFactory.getLogger(BenchmarkProducer.class);
+public class BenchmarkProducerSendModes implements Runnable, Callback {
+	private static final Logger logger = LoggerFactory.getLogger(BenchmarkProducerSendModes.class);
 
 	private final String topic;
 	private final int maxMessages;
@@ -29,7 +29,7 @@ public class BenchmarkProducer implements Runnable, Callback {
 	private final KafkaProducer<String, String> producer;
 
 	// topic, how many messages to send, and send mode
-	public BenchmarkProducer(String topic, int maxMessages, SendMode sendMode) {
+	public BenchmarkProducerSendModes(String topic, int maxMessages, SendMode sendMode) {
 		this.topic = topic;
 		this.maxMessages = maxMessages;
 		this.sendMode = sendMode;
@@ -111,7 +111,7 @@ public class BenchmarkProducer implements Runnable, Callback {
 
 		for (SendMode sendMode : SendMode.values()) {
 			// TODO : once the code is working, increase the number of events to a million (1000000)
-			BenchmarkProducer producer = new BenchmarkProducer(MyConfig.TOPIC_BENCHMARK, 100000, sendMode);
+			BenchmarkProducerSendModes producer = new BenchmarkProducerSendModes(MyConfig.TOPIC_BENCHMARK, 100000, sendMode);
 			logger.info("== Producer starting.... : " + producer);
 			Thread t1 = new Thread(producer);
 			t1.start();

@@ -1,5 +1,5 @@
 /// Simple Streaming Consumer
-package x.lab07_streaming;
+package x.lab07_streams;
 
 import java.util.Properties;
 
@@ -16,8 +16,8 @@ import org.slf4j.LoggerFactory;
 
 import x.utils.MyConfig;
 
-public class StreamingConsumer2_Foreach {
-	private static final Logger logger = LoggerFactory.getLogger(StreamingConsumer2_Foreach.class);
+public class StreamsConsumer2_Foreach {
+	private static final Logger logger = LoggerFactory.getLogger(StreamsConsumer2_Foreach.class);
 
 	public static void main(String[] args) {
 

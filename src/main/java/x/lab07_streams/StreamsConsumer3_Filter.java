@@ -1,5 +1,5 @@
 /// Filter out the streams
-package x.lab07_streaming;
+package x.lab07_streams;
 
 import java.util.Properties;
 
@@ -13,10 +13,13 @@ import org.apache.kafka.streams.kstream.Printed;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.gson.Gson;
+
+import x.utils.ClickstreamData;
 import x.utils.MyConfig;
 
-public class StreamingConsumer3_Filter {
-	private static final Logger logger = LoggerFactory.getLogger(StreamingConsumer3_Filter.class);
+public class StreamsConsumer3_Filter {
+	private static final Logger logger = LoggerFactory.getLogger(StreamsConsumer3_Filter.class);
 
 	public static void main(String[] args) {
 
@@ -39,13 +42,30 @@ public class StreamingConsumer3_Filter {
 
 	    final KStream<String, String> clickstream = builder.stream("clickstream");
 
-	    // debug print to console
+	    //# debug print to console
 		// clickstream.print(Printed.toSysOut());
 
-		//# TODO-1 : filter clicks only
-		// Hint the pattern you are looking for is : "clicked"
-		final KStream<String, String> actionClickedStream = clickstream
-				.filter((k, v) -> v.contains("???"));
+		final Gson gson = new Gson();
+        // filter clicks only
+        final KStream<String, String> actionClickedStream = clickstream.filter((key, value) -> {
+            // quick fix
+            // return value.contains("clicked");
+
+            // more robust solution: parse JSON data
+            try {
+                ClickstreamData clickstreamData = gson.fromJson(value, ClickstreamData.class);
+                // TODO-1 : check if action.equals("clicked")
+                return ((clickstreamData.action != null) && (clickstreamData.action.equals("???")));
+
+            } catch (Exception e) {
+                return false;
+            }
+
+        });
+        
+        //# another approach
+        // final KStream<String, String> actionClickedStream = clickstream
+        //      .filter((k, v) -> v.contains("???"));
 		
 		actionClickedStream.print(Printed.toSysOut());
 

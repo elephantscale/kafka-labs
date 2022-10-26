@@ -71,7 +71,7 @@ public class SeekingConsumer {
       // logger.debug ("seeking to position #5 of " + partition);
       // consumer.seek(new TopicPartition("test", 0), 5);
       
-      logger.debug ("position " + consumer.position(partition));
+      logger.debug ("current position " + consumer.position(partition));
       for (ConsumerRecord<Integer, String> record : records) {
         read++;
         logger.debug("Received message : " + record);
