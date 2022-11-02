@@ -30,11 +30,11 @@ Copy-Paste Shortcuts on Jupyter terminal
 * [3.2 - Simple Producer and Consumer](labs/03.2-kafka-api.md)
 * [3.3 - Kafka API](labs/03.3-kafka-api.md)
 
-### 4. Kafka Producer benchmarking
+### 4. More Kafka API
 
 * [4.1 - Kafka Producer benchmarking](labs/04.1-producer-benchmark.md)
 * [4.2 - Compression in Kafka](labs/04.2-compression.md)
-* [4.3 - Kafka Producer  compression benchmarking](labs/04.3-producer-compress.md)
+* [4.3 - Kafka compression benchmarking](labs/04.3-producer-compress.md)
 
 ### 5 - Offset Management
 
@@ -106,7 +106,7 @@ On Jupyter terminal, execute these commands
 
 ```bash
 $   cd ~/dev
-$   zip -r my-kafka-labs.zip kafka-labs
+$   zip -x '*.jar' -x '*.git*'  -x '*.ipynb_checkpoints*'  -r my-kafka-labs.zip    kafka-labs
 ```
 
 Now right-click on `my-kafka-labs.zip` from Jupyter UI to download.
