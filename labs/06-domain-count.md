@@ -88,3 +88,20 @@ Domain Count is
   [facebook.com=2, foxnews.com=1]
 ...
 ```
+
+## BONUS: Caclculate click ratio
+
+This is a bonus task for you to try.
+
+Say we saw 10 records from facebook.com.  3 of them were clicks.  That makes the click-ratio = 3 / 10 = 30%
+
+Calculate click ratios for all domains.
+
+And print out the domains with the highest click-ratio.
+
+Hint:
+
+- You will want to keep track of total traffic (which we are doing here)
+- And also keep a click-count (you will need to implement this)
+- You can use another hashmap to keep track of clicks.
+- And print out the ratio

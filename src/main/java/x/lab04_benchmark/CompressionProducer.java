@@ -29,7 +29,7 @@ public class CompressionProducer {
     
     KafkaProducer<String, String> producer = new KafkaProducer<>(props);
 
-    String topic = "test";
+    String topic = "testc";
     long timeNow = System.currentTimeMillis();
     for (int i = 1; i <= 10; i++) 
     {

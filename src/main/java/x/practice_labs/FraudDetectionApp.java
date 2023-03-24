@@ -55,12 +55,17 @@ public class FraudDetectionApp {
                 //# TODO-1 : filter fraudIPs
                 Gson gson = new Gson();
                 final KStream<String, String> fraudStream = clickstream
-                .filter((k, v) -> {
+                .filter((key, value) -> {
                         try {
-                                ClickstreamData clickstreamData =
-                                gson.fromJson(v, ClickstreamData.class);
-                                // TODO-1a: Extract the ip attribute from clickstreamData
+                                // here 'value' is JSON string
+                                // # TODO-1a: Extract the ClickstreamData from JSON String.  Use 'json.fromJson ()'
+                                // # Look at previous labs for sample code
+                                // ClickstreamData clickstreamData =
+                                // gson.???(???, ClickstreamData.class);
+
+                                // TODO-1b: Extract the ip attribute from clickstreamData
                                 String ip = "???";  
+                                
                                 return fraudIPLookup.isFraudIP(ip);
                         } catch (Exception e) {
                                 return false;
