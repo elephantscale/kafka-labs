@@ -2,7 +2,7 @@
 
 [<< back to main index](../README.md)
 
-# Lab 1.1 : Install Kafka
+# Lab 1 : Install Kafka
 
 ### Overview
 

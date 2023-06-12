@@ -57,18 +57,18 @@ public class BenchmarkProducerSendModes implements Runnable, Callback {
 			try {
 
 				switch (this.sendMode) {
-				case FIRE_AND_FORGET:
-					// TODO : send here
-					// producer.send(record);
-					break;
-				case SYNC:
-					// TODO : send here
-					// producer.send(record).get();
-					break;
-				case ASYNC:
-					// TODO : send here
-					// producer.send(record, this);
-					break;
+                    case FIRE_AND_FORGET:
+                        // TODO : send here
+                        // producer.send(record);
+                        break;
+                    case SYNC:
+                        // TODO : send here
+                        // producer.send(record).get();
+                        break;
+                    case ASYNC:
+                        // TODO : send here
+                        // producer.send(record, this);
+                        break;
 				}
 			} catch (Exception e) {
 				e.printStackTrace();

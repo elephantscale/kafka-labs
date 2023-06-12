@@ -34,6 +34,8 @@ public class ClickstreamConsumer {
 		
 		// TODO-2: subscribe to topic "clickstream"
 		consumer.subscribe(Arrays.asList("???"));
+
+		logger.info("Listening on clickstream topic");
 		
 		int numMessages = 0;
 		while (true) {
